@@ -14,6 +14,7 @@ This directory contains comprehensive, human-readable documentation describing t
 
 ### Frontend, Backend & Component Implementation
 - **[Frontend Architecture](frontend.md)**: App Router route topography, **PestControl OS Executive Suite** aesthetic (`rounded-none`, zero emojis, `#00dbe9`), and widescreen modal capabilities.
+- **[UX Research: Customer Personas & Creative Collaborator](ux-research-customer-personas.md)**: UI implementation hypothesis, CX feedback storage, and active creative angle generation.
 - **[Backend Architecture](backend.md)**: Next.js Node/Edge Server Components, `@/lib/supabase/server.ts`, and statistical calculation rules.
 - **[Component Library](components.md)**: Reference guide for core UI components (`AppShell`, `CampaignTable`, widescreen `RecordResultsModal`, `LearningList`).
 - **[Services & Algorithms](services.md)**: Mathematical lift engine, confidence algorithms, **AI Quick-Paste** heuristic parser, and tabular formatters.
