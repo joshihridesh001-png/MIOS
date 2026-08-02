@@ -33,7 +33,8 @@ This directory contains comprehensive, human-readable documentation describing t
 - **[Environment Setup](environment.md)**: `.env.local` specifications, local dev commands (`npm run dev`), and environment difference matrices.
 - **[Dependencies](dependencies.md)**: Comprehensive register of runtime and styling packages (`next`, `react 19`, `@supabase/ssr`, `tailwindcss v4`, `sonner`).
 
-### Engineering History & Technical Debt
+### Engineering History & Governance
+- **[ADR-001: Engineering Governance & Quality Charter](ADR-001-engineering-governance-and-quality-model.md)**: Constitutional quality model (ISO/IEC 25010, SOLID, KISS, YAGNI, SEI CERT) and repository governance rules.
 - **[Decision Log](decision-log.md)**: Immutable record of significant engineering decisions (`DEC-001` to `DEC-004`) with rationale and tradeoffs.
 - **[Changelog](changelog.md)**: Reverse-chronological release history (`v1.2.0` widescreen modal expansion, `v1.1.0` zero-emoji aesthetic migration).
 - **[Known Issues](known-issues.md)**: Current technical limitations and recommended executive workarounds.
