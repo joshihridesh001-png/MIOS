@@ -5,7 +5,7 @@ In conventional SaaS tools, "Buyer Personas" are static documents that do not in
 In MIOS, **Customer Profiles & Buyer Personas** serve as an active, bidirectional intelligence engine:
 1. **Pre-Sale Consumer Psychology**: Why did they contact us? What was their #1 fear and objection? What built trust?
 2. **Post-Job CX & Operational Feedback**: What was their 1–5 CX rating? What will improve our job quality on-site? What Annual Maintenance Contract (AMC) or referral opportunities exist?
-3. **Active Creative Library Collaboration**: Personas systematically analyze customer fears and objections to generate high-converting **Creative Angle Recommendations** (Hook, Emotion, Psychological Principle) that feed directly into `/creatives/new`.
+3. **Active Growth Experiment (LABS) Collaboration**: Personas systematically analyze customer fears and objections to generate high-converting **Growth Hypotheses & Creative Angle Recommendations** (Hook, Emotion, Psychological Principle) that feed directly into `/experiments/new` (`LABS`). Why? Because `creatives` is used to assess the performance of a Creative asset, whereas `experiments` is where new creative angles and hypotheses are systematically tested in the field.
 
 ---
 
@@ -35,7 +35,7 @@ graph TD
 
     subgraph "4. Compounding Organizational Action"
         Learn["[ PROMOTE TO LEARNING ] (/learnings)"]
-        Create["[ BUILD CREATIVE FROM ANGLE ] (/creatives/new)"]
+        Create["[ LAUNCH EXPERIMENT FROM ANGLE ] (/experiments/new)"]
         Ops["[ CX IMPROVEMENT OPPORTUNITIES ] (Operations Feed)"]
     end
 

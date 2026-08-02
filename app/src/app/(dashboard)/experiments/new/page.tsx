@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useState, Suspense } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { createExperiment } from "@/hooks/use-experiments"
 import { experimentTypeLabels, experimentStatusLabels } from "@/lib/constants"
@@ -14,20 +14,25 @@ import { ArrowLeft, FlaskConical, Terminal, CheckCircle2 } from "lucide-react"
 import { toast } from "sonner"
 import type { ExperimentType, ExperimentImpact } from "@/lib/types/database"
 
-export default function NewExperimentPage() {
+function NewExperimentContent() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const initialName = searchParams?.get("name") || ""
+  const initialHypothesis = searchParams?.get("hypothesis") || '$ IF user_intent == "high" THEN inject(urgency_module) WILL increase(ctr) BY 15%'
+  const initialVariant = searchParams?.get("variant") || "Variant B"
+
   const [loading, setLoading] = useState(false)
-  const [name, setName] = useState("")
+  const [name, setName] = useState(initialName)
   const [testCode, setTestCode] = useState("A/B-0x" + Math.floor(Math.random() * 899 + 100).toString(16).toUpperCase())
   const [type, setType] = useState<ExperimentType>("a_b_test")
   const [impact, setImpact] = useState<ExperimentImpact>("high")
-  const [hypothesisQuery, setHypothesisQuery] = useState('$ IF user_intent == "high" THEN inject(urgency_module) WILL increase(ctr) BY 15%')
+  const [hypothesisQuery, setHypothesisQuery] = useState(initialHypothesis)
   const [primaryMetric, setPrimaryMetric] = useState("ctr")
   const [targetLift, setTargetLift] = useState(15.0)
   const [trafficSplit, setTrafficSplit] = useState("50/50")
   const [controlName, setControlName] = useState("Control")
   const [variantAName, setVariantAName] = useState("Variant A")
-  const [variantBName, setVariantBName] = useState("Variant B")
+  const [variantBName, setVariantBName] = useState(initialVariant)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -93,6 +98,11 @@ export default function NewExperimentPage() {
             <h1 className="text-xl sm:text-2xl font-black text-white font-sans uppercase">
               INITIALIZE_NEW_PROTOCOL
             </h1>
+            {initialName && (
+              <p className="text-xs text-[#00dbe9] mt-1 font-mono">
+                ⚡ HYDRATED FROM BUYER PERSONA PSYCHOLOGY RECOMMENDATION
+              </p>
+            )}
           </div>
         </div>
         <span className="text-xs bg-emerald-950/40 border border-emerald-500/40 text-emerald-400 px-2.5 py-1 rounded-sm font-bold">
@@ -271,5 +281,13 @@ export default function NewExperimentPage() {
         </div>
       </form>
     </div>
+  )
+}
+
+export default function NewExperimentPage() {
+  return (
+    <Suspense fallback={<div className="p-12 text-center text-xs text-gray-300 font-mono">[ INITIALIZING LAB PROTOCOL BUILDER... ]</div>}>
+      <NewExperimentContent />
+    </Suspense>
   )
 }

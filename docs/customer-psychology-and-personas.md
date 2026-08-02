@@ -37,7 +37,7 @@ The **Customer Psychology & Buyer Personas Suite** is the institutional intellig
 As articulated by the CEO, the primary strategic objective of tracking customers in MIOS is **"understanding why they bought — compounded learning to further improve our consumer research and buyer psychology."**
 
 1. **Compounding Institutional Memory**: In traditional marketing agencies, why a customer converted is locked in a salesperson's notebook or a technician's memory. When staff leave, that knowledge evaporates. MIOS indexes these reasons into permanent, queryable database columns.
-2. **Eliminating Guesswork in Ad Creation**: By linking `buyer_personas.recommended_creative_angles` directly to the `/creatives/new` builder, creatives are no longer drafted from subjective intuition. Every ad headline and hook is systematically derived from real buyer fears and objections.
+2. **Eliminating Guesswork in Experiment & Ad Hypothesis Creation**: By linking `buyer_personas.recommended_creative_angles` directly to the `/experiments/new` Labs protocol builder, new creative angles and hooks are systematically tested as growth hypotheses rather than drafted from subjective intuition. Once validated in Experiments, winning angles transition to Creatives for ongoing performance assessment.
 3. **Closing the Post-Job CX Feedback Loop**: Post-service survey debriefs flag operational deficiencies (e.g. late arrival, odor complaints) and commercial opportunities (AMC renewals, referral sources). These are surfaced in the executive persona feed to improve job quality.
 
 ---
@@ -70,9 +70,9 @@ As articulated by the CEO, the primary strategic objective of tracking customers
                                                                  |
                                                                  v
                                             +---------------------------------------+
-                                            |  4. ACTIVE CREATIVE COLLABORATOR      |
+                                            |  4. ACTIVE EXPERIMENT COLLABORATOR    |
 |      - Synthesizes Hook & Headline    |
-|      - Hydrates /creatives/new?hook=  |
+|      - Hydrates /experiments/new      |
                                             +---------------------------------------+
 ```
 

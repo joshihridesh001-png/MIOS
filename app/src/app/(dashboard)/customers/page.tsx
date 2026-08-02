@@ -39,7 +39,7 @@ export default function CustomersPage() {
             [ CONSUMER PSYCHOLOGY & BUYER RESEARCH ENGINE ]
           </h1>
           <p className="text-xs text-gray-300 mt-1">
-            Customer attribution, post-job CX telemetry & active creative angle collaborator
+            Customer attribution, post-job CX telemetry & active growth experiment collaborator (LABS)
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -74,7 +74,7 @@ export default function CustomersPage() {
               : 'bg-card/40 text-gray-300 hover:text-white'
           }`}
         >
-          [ BUYER PERSONAS & CREATIVE COLLABORATOR ({personas.length}) ]
+          [ BUYER PERSONAS & EXPERIMENT COLLABORATOR ({personas.length}) ]
         </button>
       </div>
 

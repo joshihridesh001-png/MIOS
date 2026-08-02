@@ -116,14 +116,14 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
         <div className="flex items-center justify-between border-b border-[#00dbe9]/20 pb-2">
           <div>
             <h4 className="text-xs font-bold uppercase text-[#00dbe9] tracking-wider">
-              [ ACTIVE CREATIVE ANGLE COLLABORATOR ]
+              [ ACTIVE GROWTH EXPERIMENT COLLABORATOR (LABS) ]
             </h4>
             <p className="text-[11px] text-gray-300 mt-0.5">
-              Systematic ad angles synthesized from this persona&apos;s fears and objections.
+              Systematic growth hypotheses and ad angle vectors synthesized from buyer fears & objections to test in LABS.
             </p>
           </div>
           <Badge variant="outline" className="rounded-none border-[#00dbe9] text-[#00dbe9] text-[10px]">
-            {angles.length} ANGLES READY
+            {angles.length} HYPOTHESES READY
           </Badge>
         </div>
 
@@ -151,14 +151,14 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
               </div>
               <div>
                 <Link
-                  href={`/creatives/new?hook=${encodeURIComponent(ang.hook)}&headline=${encodeURIComponent(ang.headline)}&angle=${ang.emotion === 'fear' ? 'fear_urgency' : 'authority_guarantee'}`}
+                  href={`/experiments/new?name=${encodeURIComponent('BUYER ANGLE TEST: ' + ang.headline)}&hypothesis=${encodeURIComponent('$ IF buyer_fear == "' + ang.emotion + '" THEN test("' + ang.hook + '") WILL increase(cvr) BY 25%')}&variant=${encodeURIComponent('Angle: ' + ang.headline)}`}
                 >
                   <Button
                     variant="default"
                     size="sm"
                     className="rounded-none bg-[#00dbe9] text-black font-bold uppercase tracking-wider hover:bg-[#00dbe9]/80 text-[11px] whitespace-nowrap"
                   >
-                    [ BUILD CREATIVE ]
+                    [ LAUNCH EXPERIMENT ]
                   </Button>
                 </Link>
               </div>
