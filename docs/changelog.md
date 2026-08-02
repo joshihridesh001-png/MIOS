@@ -7,6 +7,25 @@ This Changelog documents all notable architectural, aesthetic, and functional up
 
 ## 2. Releases & Task History
 
+### [v1.4.0] — 2026-08-03 — Institutional Knowledge Base & Compounding Intel Vault (`/knowledge`)
+- **Files Changed**:
+  - `E:\MIOS\app\src\app\(dashboard)\knowledge\page.tsx` (master institutional intel vault route)
+  - `E:\MIOS\app\src\app\(dashboard)\learnings\page.tsx` (route redirect to `/knowledge`)
+  - `E:\MIOS\app\src\components\knowledge\knowledge-card.tsx` (interactive 3D rule card with real-time confirmation/contradiction scoring)
+  - `E:\MIOS\app\src\components\knowledge\knowledge-form-modal.tsx` (widescreen rule logging modal)
+  - `E:\MIOS\app\src\components\layout\sidebar.tsx` (enabled `/knowledge` route in executive navigation)
+  - `E:\MIOS\app\src\hooks\use-learnings.ts` (added `useAllLearnings()`, `confirmLearning()`, `contradictLearning()`)
+  - `E:\MIOS\app\scripts\seed-knowledge.mjs` (seeded 5 CEO-grade Indian pest control marketing/psychology rules)
+  - Architectural documentation (`docs/knowledge-base-and-institutional-memory.md`, `docs/README.md`, `docs/changelog.md`)
+- **Summary**:
+  - Built the **Institutional Knowledge Base & Intel Vault** (`/knowledge`), making compounding organizational memory a first-class architectural primitive.
+  - Engineered real-time confidence compounding: every click on **`[ CONFIRM ]`** elevates the rule's statistical confidence score via $\min(100, \text{round}(C / (C + X) \times 100))$.
+  - Integrated Unlumen UI hardware-accelerated animations (`AnimateCount`, `AnimatedList`, `TiltCard`, `TextReveal`, `MotionAccordion`) and domain filter tabs (`ALL`, `MARKETING`, `SALES`, `BUYER PSYCHOLOGY`, `FIELD OPERATIONS`, `PRICING`, `COMPETITOR`).
+  - Seeded 5 CEO-grade Indian residential/commercial pest control rules via direct Postgres connection (`seed-knowledge.mjs`).
+- **Breaking Changes**: None.
+
+---
+
 ### [v1.3.0] — 2026-08-03 — Unlumen UI & Anime.js v4 Animation Suite Integration
 - **Files Changed**:
   - `E:\MIOS\app\package.json` (added `animejs` v4.5.0 and `@types/animejs`)

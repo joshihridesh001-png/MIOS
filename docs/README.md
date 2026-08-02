@@ -11,6 +11,7 @@ This directory contains comprehensive, human-readable documentation describing t
 - **[Architecture](architecture.md)**: Executive summary, system topography, RSC/client data flow, and Mermaid architecture diagrams.
 - **[Database Schema](database.md)**: PostgreSQL 15+ ER diagrams, table columns, indexes, `campaigns_with_metrics` SQL views, and Row Level Security (RLS) policies.
 - **[Customer Psychology & Buyer Personas](customer-psychology-and-personas.md)**: Institutional intelligence engine, pre-sale acquisition triggers, post-job CX telemetry, and active creative angle collaborator.
+- **[Institutional Knowledge Base & Intel Vault](knowledge-base-and-institutional-memory.md)**: Compounding confidence algorithms, executive campaign mandates (`>= 80% Confidence`), confirmation compounding loops, and `/knowledge` route topography.
 - **[API & Server Actions](api.md)**: Next.js Server Actions, Supabase RPC hooks, request/response validation, and telemetry payload schemas.
 
 ### Frontend, Backend & Component Implementation

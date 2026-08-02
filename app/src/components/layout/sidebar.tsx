@@ -23,7 +23,7 @@ const NAV_ITEMS = [
   { href: "/creatives", label: "Creative Library", icon: Paintbrush, enabled: true },
   { href: "/experiments", label: "Experiments", icon: FlaskConical, enabled: true },
   { href: "/customers", label: "Customer Profiles", icon: Users, enabled: true },
-  { href: "/knowledge", label: "Knowledge Base", icon: BookOpen, enabled: false },
+  { href: "/knowledge", label: "Knowledge Base", icon: BookOpen, enabled: true },
 ]
 
 interface SidebarProps {
