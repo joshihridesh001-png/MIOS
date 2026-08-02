@@ -22,7 +22,7 @@ const NAV_ITEMS = [
   { href: "/campaigns", label: "Campaigns", icon: Megaphone, enabled: true },
   { href: "/creatives", label: "Creative Library", icon: Paintbrush, enabled: true },
   { href: "/experiments", label: "Experiments", icon: FlaskConical, enabled: true },
-  { href: "/customers", label: "Customer Profiles", icon: Users, enabled: false },
+  { href: "/customers", label: "Customer Profiles", icon: Users, enabled: true },
   { href: "/knowledge", label: "Knowledge Base", icon: BookOpen, enabled: false },
 ]
 

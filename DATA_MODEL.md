@@ -450,7 +450,35 @@ When you open Campaign #27:
 | 4 | `creative_assets` | Media files | ~1,000 |
 | 5 | `campaign_creatives` | Campaign ↔ Creative link | ~600 |
 | 6 | `experiments` | Structured tests | ~50 |
-| 7 | `customers` | Every acquired customer | ~500 |
+| 7 | `customers` | Every acquired customer & psychology | ~500 |
 | 8 | `learnings` | Every insight + confidence | ~300 |
 | 9 | `knowledge_entries` | Curated permanent knowledge | ~50 |
 | 10 | `audit_log` | Full change history | ~5,000 |
+| 11 | `buyer_personas` | Active Creative Angle Collaborator & CX | ~10 |
+
+---
+
+### 11. `buyer_personas` (Active Creative Angle Collaborator & CX Telemetry)
+
+Aggregates customer acquisition triggers, dominant fears, objections, and trust builders by property type, and actively collaborates with the Creatives suite by synthesizing recommended ad angles.
+
+| Column | Type | Notes |
+|--------|------|-------|
+| `id` | `uuid` PK | |
+| `name` | `text` NOT NULL | e.g. "The Frantic Residential Bedbug Buyer" |
+| `property_type` | `enum` | `residential`, `commercial`, `industrial`, `other` |
+| `pest_type` | `text` | e.g. "bed_bugs", "rodents" |
+| `dominant_fears` | `text[]` | Array of recurring buyer anxieties |
+| `dominant_objections` | `text[]` | Array of purchase friction points |
+| `trust_builders` | `text[]` | What converts this persona |
+| `recommended_creative_angles` | `jsonb` | Structured array of `{ hook, headline, emotion, psych_principle, rationale }` |
+| `avg_cx_rating` | `decimal(3,2)` | Average 1-5 CX rating across sample |
+| `top_improvement_opportunities` | `text[]` | Operational & job quality feedback items |
+| `avg_ltv` | `decimal(12,2)` | Average Lifetime Value in INR (₹) |
+| `sample_size` | `integer` | Number of customer records clustered |
+| `is_custom` | `boolean` | True if executives applied manual overrides (Option A + B) |
+| `created_at` | `timestamptz` | |
+| `updated_at` | `timestamptz` | |
+| `created_by` | `uuid` FK | |
+| `updated_by` | `uuid` FK | |
+

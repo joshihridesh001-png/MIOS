@@ -20,7 +20,7 @@ export function AppShell({ user, children }: AppShellProps) {
     { label: "Campaigns", href: "/campaigns", enabled: true },
     { label: "Creative Library", href: "/creatives", enabled: true },
     { label: "Experiments", href: "/experiments", enabled: true },
-    { label: "Customers", href: "/customers", enabled: false },
+    { label: "Customers", href: "/customers", enabled: true },
   ]
 
   return (

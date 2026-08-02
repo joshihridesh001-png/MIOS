@@ -10,6 +10,7 @@ This directory contains comprehensive, human-readable documentation describing t
 ### Core Architecture & Design
 - **[Architecture](architecture.md)**: Executive summary, system topography, RSC/client data flow, and Mermaid architecture diagrams.
 - **[Database Schema](database.md)**: PostgreSQL 15+ ER diagrams, table columns, indexes, `campaigns_with_metrics` SQL views, and Row Level Security (RLS) policies.
+- **[Customer Psychology & Buyer Personas](customer-psychology-and-personas.md)**: Institutional intelligence engine, pre-sale acquisition triggers, post-job CX telemetry, and active creative angle collaborator.
 - **[API & Server Actions](api.md)**: Next.js Server Actions, Supabase RPC hooks, request/response validation, and telemetry payload schemas.
 
 ### Frontend, Backend & Component Implementation

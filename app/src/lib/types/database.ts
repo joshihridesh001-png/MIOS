@@ -176,4 +176,79 @@ export interface ExperimentRow {
 export type ExperimentInsert = Omit<ExperimentRow, 'id' | 'created_at' | 'updated_at' | 'created_by' | 'updated_by'>;
 export type ExperimentUpdate = Partial<ExperimentInsert>;
 
+// ==========================================================
+// 4. CUSTOMER & BUYER PERSONA TYPES (Governed by ADR-001)
+// ==========================================================
 
+export type CustomerPropertyType = 'residential' | 'commercial' | 'industrial' | 'other';
+export type CustomerStatus = 'lead' | 'quoted' | 'won' | 'lost' | 'churned';
+
+export interface CustomerRow {
+  id: string;
+  name: string;
+  phone: string | null;
+  location: string | null;
+  property_type: CustomerPropertyType;
+  lead_source: string | null;
+  campaign_id: string | null;
+  campaign_creative_id: string | null;
+  revenue: number;
+  profit: number;
+  ltv: number;
+  why_contacted: string | null;
+  biggest_fear: string | null;
+  biggest_objection: string | null;
+  why_chose_us: string | null;
+  what_built_trust: string | null;
+  questions_asked: string | null;
+  cx_rating: number | null;
+  job_quality_feedback: string | null;
+  improvement_opportunities: string[];
+  has_review: boolean;
+  has_referral: boolean;
+  amc_opportunity: boolean;
+  status: CustomerStatus;
+  created_at: string;
+  updated_at: string;
+  created_by: string | null;
+  updated_by: string | null;
+}
+
+export interface CustomerWithAttribution extends CustomerRow {
+  campaign_name?: string;
+  creative_name?: string;
+}
+
+export type CustomerInsert = Omit<CustomerRow, 'id' | 'created_at' | 'updated_at' | 'created_by' | 'updated_by'>;
+export type CustomerUpdate = Partial<CustomerInsert>;
+
+export interface RecommendedCreativeAngle {
+  hook: string;
+  headline: string;
+  emotion: string;
+  psych_principle: string;
+  rationale: string;
+}
+
+export interface BuyerPersonaRow {
+  id: string;
+  name: string;
+  property_type: CustomerPropertyType;
+  pest_type: string | null;
+  dominant_fears: string[];
+  dominant_objections: string[];
+  trust_builders: string[];
+  recommended_creative_angles: RecommendedCreativeAngle[];
+  avg_cx_rating: number;
+  top_improvement_opportunities: string[];
+  avg_ltv: number;
+  sample_size: number;
+  is_custom: boolean;
+  created_at: string;
+  updated_at: string;
+  created_by: string | null;
+  updated_by: string | null;
+}
+
+export type BuyerPersonaInsert = Omit<BuyerPersonaRow, 'id' | 'created_at' | 'updated_at' | 'created_by' | 'updated_by'>;
+export type BuyerPersonaUpdate = Partial<BuyerPersonaInsert>;
