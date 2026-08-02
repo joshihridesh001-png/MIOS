@@ -21,7 +21,7 @@ export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
   if (!customers || customers.length === 0) {
     return (
       <div className="p-12 text-center border border-border/50 bg-card/80 backdrop-blur-xl rounded-none">
-        <p className="text-secondary font-mono text-sm uppercase tracking-wider mb-4">
+        <p className="text-gray-300 font-mono text-sm uppercase tracking-wider mb-4">
           [NO CUSTOMER RECORDS DETECTED IN DATABASE]
         </p>
         <Link href="/customers/new">
@@ -37,7 +37,7 @@ export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
     <div className="w-full overflow-x-auto border border-border/50 bg-card/80 backdrop-blur-xl rounded-none">
       <table className="w-full text-left border-collapse font-mono text-sm">
         <thead>
-          <tr className="border-b border-border/50 bg-secondary-fixed/30 text-secondary uppercase text-xs tracking-wider">
+          <tr className="border-b border-border/50 bg-secondary-fixed/30 text-gray-200 font-bold uppercase text-xs tracking-wider">
             <th className="py-3 px-4">Customer Name</th>
             <th className="py-3 px-4">Property</th>
             <th className="py-3 px-4">Attribution</th>
@@ -66,10 +66,10 @@ export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
                     </Badge>
                   )}
                 </td>
-                <td className="py-3 px-4 uppercase text-xs text-secondary">
+                <td className="py-3 px-4 uppercase text-xs text-gray-300">
                   {cust.property_type}
                 </td>
-                <td className="py-3 px-4 text-xs text-secondary">
+                <td className="py-3 px-4 text-xs text-gray-300">
                   {cust.lead_source || 'Direct / Organic'}
                 </td>
                 <td className="py-3 px-4 text-right tabular-nums text-on-background">
@@ -85,7 +85,7 @@ export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
                   <span className={`px-2 py-0.5 text-xs font-bold ${
                     typeof cxScore === 'number' && cxScore >= 4 ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' :
                     typeof cxScore === 'number' && cxScore <= 2 ? 'bg-rose-950 text-rose-400 border border-rose-800' :
-                    'bg-secondary-fixed/50 text-secondary'
+                    'bg-secondary-fixed/50 text-gray-300'
                   }`}>
                     {cxScore} {typeof cxScore === 'number' ? '/5' : ''}
                   </span>

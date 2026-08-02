@@ -104,7 +104,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
             <h3 className="text-sm font-bold uppercase text-[#00dbe9] tracking-wider">
               [ AI QUICK-PASTE: RAW WHATSAPP / CALL / CX SURVEY NOTE PARSER ]
             </h3>
-            <p className="text-xs text-secondary mt-1">
+            <p className="text-xs text-gray-300 mt-1">
               Paste customer WhatsApp chat logs, sales call transcripts, or technician survey notes to auto-extract psychology & CX metrics.
             </p>
           </div>
@@ -132,7 +132,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <Label className="text-xs uppercase text-secondary">Customer Name *</Label>
+            <Label className="text-xs uppercase text-gray-300">Customer Name *</Label>
             <Input
               required
               value={formData.name}
@@ -142,7 +142,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
             />
           </div>
           <div className="space-y-2">
-            <Label className="text-xs uppercase text-secondary">Property Type</Label>
+            <Label className="text-xs uppercase text-gray-300">Property Type</Label>
             <Select
               value={formData.property_type}
               onValueChange={(val) => setFormData({ ...formData, property_type: val as CustomerPropertyType })}
@@ -159,7 +159,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
             </Select>
           </div>
           <div className="space-y-2">
-            <Label className="text-xs uppercase text-secondary">Lead Source / Attribution</Label>
+            <Label className="text-xs uppercase text-gray-300">Lead Source / Attribution</Label>
             <Input
               value={formData.lead_source || ''}
               onChange={(e) => setFormData({ ...formData, lead_source: e.target.value })}
@@ -177,7 +177,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <Label className="text-xs uppercase text-secondary">Total Revenue (₹)</Label>
+            <Label className="text-xs uppercase text-gray-300">Total Revenue (₹)</Label>
             <Input
               type="number"
               value={formData.revenue}
@@ -186,7 +186,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
             />
           </div>
           <div className="space-y-2">
-            <Label className="text-xs uppercase text-secondary">Net Profit (₹)</Label>
+            <Label className="text-xs uppercase text-gray-300">Net Profit (₹)</Label>
             <Input
               type="number"
               value={formData.profit}
@@ -195,7 +195,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
             />
           </div>
           <div className="space-y-2">
-            <Label className="text-xs uppercase text-secondary">Lifetime Value / LTV (₹)</Label>
+            <Label className="text-xs uppercase text-gray-300">Lifetime Value / LTV (₹)</Label>
             <Input
               type="number"
               value={formData.ltv}
@@ -252,7 +252,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
             />
           </div>
           <div className="space-y-2 md:col-span-2">
-            <Label className="text-xs uppercase text-secondary">Job Quality & Operational Feedback</Label>
+            <Label className="text-xs uppercase text-gray-300">Job Quality & Operational Feedback</Label>
             <Textarea
               rows={2}
               value={formData.job_quality_feedback || ''}

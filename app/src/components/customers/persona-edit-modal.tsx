@@ -62,7 +62,7 @@ export function PersonaEditModal({ persona, isOpen, onClose, onSave }: PersonaEd
           <h3 className="text-sm font-bold uppercase text-[#00dbe9]">
             [ EXECUTIVE PERSONA OVERRIDE: {persona.name} ]
           </h3>
-          <button onClick={onClose} className="text-secondary hover:text-white text-lg font-bold">
+          <button onClick={onClose} className="text-gray-300 hover:text-white text-lg font-bold">
             ×
           </button>
         </div>

@@ -36,7 +36,7 @@ export default function CustomerDetailPage() {
 
   if (loading) {
     return (
-      <div className="p-12 text-center font-mono text-xs text-secondary">
+      <div className="p-12 text-center font-mono text-xs text-gray-300">
         [ LOADING CUSTOMER TELEMETRY & PSYCHOLOGY DATA... ]
       </div>
     );
@@ -79,7 +79,7 @@ export default function CustomerDetailPage() {
             {customer.name}
           </h1>
           {customer.phone && (
-            <p className="text-xs text-secondary mt-1">Phone: {customer.phone} | Location: {customer.location || 'N/A'}</p>
+            <p className="text-xs text-gray-300 mt-1">Phone: {customer.phone} | Location: {customer.location || 'N/A'}</p>
           )}
         </div>
         <div className="flex items-center gap-3">
@@ -106,19 +106,19 @@ export default function CustomerDetailPage() {
       {/* 2. Lifetime Economics KPI Bar */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border border-border/50 bg-card/80 p-6 text-center">
         <div>
-          <span className="text-[10px] text-secondary uppercase block">Total Revenue Acquired</span>
+          <span className="text-[10px] text-gray-300 uppercase block">Total Revenue Acquired</span>
           <span className="text-xl font-bold text-on-background tabular-nums">
             {metricFormatters.formatCurrency(customer.revenue || 0)}
           </span>
         </div>
         <div>
-          <span className="text-[10px] text-secondary uppercase block">Net Gross Profit</span>
+          <span className="text-[10px] text-gray-300 uppercase block">Net Gross Profit</span>
           <span className="text-xl font-bold text-emerald-400 tabular-nums">
             {metricFormatters.formatCurrency(customer.profit || 0)}
           </span>
         </div>
         <div>
-          <span className="text-[10px] text-secondary uppercase block">Lifetime Value (LTV)</span>
+          <span className="text-[10px] text-gray-300 uppercase block">Lifetime Value (LTV)</span>
           <span className="text-xl font-bold text-[#00dbe9] tabular-nums">
             {metricFormatters.formatCurrency(customer.ltv || 0)}
           </span>
@@ -128,7 +128,7 @@ export default function CustomerDetailPage() {
       {/* 3. Attribution Chain Card */}
       <div className="border border-border/50 bg-card/80 p-4 flex flex-col md:flex-row md:items-center justify-between text-xs">
         <div>
-          <span className="text-secondary uppercase">Acquisition Source:</span>{' '}
+          <span className="text-gray-300 uppercase">Acquisition Source:</span>{' '}
           <span className="font-bold text-on-background">{customer.lead_source || 'Direct / Unattributed'}</span>
         </div>
         <div className="flex gap-4 mt-2 md:mt-0">
@@ -137,7 +137,7 @@ export default function CustomerDetailPage() {
               [ VIEW ATTRIBUTED CAMPAIGN → ]
             </Link>
           ) : (
-            <span className="text-secondary">[ NO CAMPAIGN ID LINKED ]</span>
+            <span className="text-gray-300">[ NO CAMPAIGN ID LINKED ]</span>
           )}
         </div>
       </div>

@@ -82,5 +82,6 @@ As articulated by the CEO, the primary strategic objective of tracking customers
 
 - **Maintainability**: Pure functional helpers in `@/lib/customer-parser.ts` and `@/lib/persona-engine.ts` have cyclomatic complexity $\le 10$ and are decoupled from React UI components.
 - **Reliability**: All Supabase database mutations handle fallible operations explicitly with typed error boundaries and toast feedback via `sonner`.
+- **Usability (Visual Contrast & Typography)**: Complies with WCAG AA/AAA and executive readability standards by rendering descriptive subtitles, table headers, property labels, and attribution text in bright, high-contrast grey (`text-gray-300` / `text-gray-200`, luminance matched with white foreground text) on deep dark backgrounds (`#000000` / `oklch(0.13 0.02 260)`), eliminating dim or dull unreadable text.
 - **Security (SEI CERT)**: RLS policies are enabled on both `public.customers` and `public.buyer_personas`. Input parsing sanitizes and validates numeric ratings ($1 \le \text{cx\_rating} \le 5$).
 - **Functional Suitability**: Supports **Option A** (statistical aggregation), **Option B** (manual executive overrides via modal), and **Option C** (AI Quick-Paste form entry) simultaneously without mutual exclusion.

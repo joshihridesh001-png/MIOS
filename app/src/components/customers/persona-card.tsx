@@ -30,7 +30,7 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
               {persona.property_type}
             </Badge>
             {persona.pest_type && (
-              <Badge variant="outline" className="rounded-none border-secondary text-secondary uppercase text-xs">
+              <Badge variant="outline" className="rounded-none border-gray-300 text-gray-300 uppercase text-xs">
                 {persona.pest_type}
               </Badge>
             )}
@@ -58,19 +58,19 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
       {/* 2. Statistical Sample & Economics Bar */}
       <div className="grid grid-cols-3 gap-4 border border-border/30 p-4 bg-secondary-fixed/20 text-center">
         <div>
-          <span className="text-[10px] text-secondary uppercase block">Sample Size</span>
+          <span className="text-[10px] text-gray-300 uppercase block">Sample Size</span>
           <span className="text-sm font-bold text-on-background tabular-nums">
             {persona.sample_size} records
           </span>
         </div>
         <div>
-          <span className="text-[10px] text-secondary uppercase block">Average LTV</span>
+          <span className="text-[10px] text-gray-300 uppercase block">Average LTV</span>
           <span className="text-sm font-bold text-[#00dbe9] tabular-nums">
             {metricFormatters.formatCurrency(persona.avg_ltv || 0)}
           </span>
         </div>
         <div>
-          <span className="text-[10px] text-secondary uppercase block">Avg CX Rating</span>
+          <span className="text-[10px] text-gray-300 uppercase block">Avg CX Rating</span>
           <span className="text-sm font-bold text-emerald-400 tabular-nums">
             {persona.avg_cx_rating || '4.80'}/5
           </span>
@@ -118,7 +118,7 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
             <h4 className="text-xs font-bold uppercase text-[#00dbe9] tracking-wider">
               [ ACTIVE CREATIVE ANGLE COLLABORATOR ]
             </h4>
-            <p className="text-[11px] text-secondary mt-0.5">
+            <p className="text-[11px] text-gray-300 mt-0.5">
               Systematic ad angles synthesized from this persona&apos;s fears and objections.
             </p>
           </div>
@@ -135,17 +135,17 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
             >
               <div className="space-y-1 flex-1">
                 <div className="flex items-center gap-2">
-                  <Badge variant="outline" className="rounded-none border-secondary text-secondary text-[10px] uppercase">
+                  <Badge variant="outline" className="rounded-none border-gray-300 text-gray-300 text-[10px] uppercase">
                     {ang.emotion}
                   </Badge>
-                  <span className="text-[10px] text-secondary uppercase font-semibold">
+                  <span className="text-[10px] text-gray-300 uppercase font-semibold">
                     {ang.psych_principle}
                   </span>
                 </div>
                 <p className="text-xs font-bold text-on-background mt-1 font-sans">
                   &ldquo;{ang.hook}&rdquo;
                 </p>
-                <p className="text-[11px] text-secondary font-sans italic">
+                <p className="text-[11px] text-gray-300 font-sans italic">
                   Rationale: {ang.rationale}
                 </p>
               </div>
@@ -169,7 +169,7 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
 
       {/* 5. Operational CX Improvement Feed */}
       <div className="border-t border-border/40 pt-4">
-        <span className="text-[10px] text-secondary uppercase font-bold block mb-2">
+        <span className="text-[10px] text-gray-300 uppercase font-bold block mb-2">
           Top Operational CX Improvement Opportunities (Service & Job Quality)
         </span>
         {persona.top_improvement_opportunities && persona.top_improvement_opportunities.length > 0 ? (
@@ -181,7 +181,7 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
             ))}
           </div>
         ) : (
-          <p className="text-xs text-secondary">No recurring operational complaints or CX issues detected.</p>
+          <p className="text-xs text-gray-300">No recurring operational complaints or CX issues detected.</p>
         )}
       </div>
     </div>

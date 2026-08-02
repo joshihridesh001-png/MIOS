@@ -68,7 +68,7 @@ export function CustomerPsychologyCard({ customer }: CustomerPsychologyCardProps
           <h3 className="text-sm font-bold tracking-wider uppercase text-[#00dbe9]">
             [ PRE-SALE CONSUMER PSYCHOLOGY & POST-JOB CX ]
           </h3>
-          <p className="text-xs text-secondary mt-1">
+          <p className="text-xs text-gray-300 mt-1">
             Buyer trigger analysis, objection handling & quality improvement telemetry
           </p>
         </div>
@@ -89,7 +89,7 @@ export function CustomerPsychologyCard({ customer }: CustomerPsychologyCardProps
           </div>
 
           <div>
-            <span className="text-[10px] text-secondary uppercase block">Why Contacted Us (Trigger)</span>
+            <span className="text-[10px] text-gray-300 uppercase block">Why Contacted Us (Trigger)</span>
             <p className="text-xs text-on-background mt-1 font-sans">
               {customer.why_contacted || 'No trigger recorded'}
             </p>
@@ -126,14 +126,14 @@ export function CustomerPsychologyCard({ customer }: CustomerPsychologyCardProps
             <span className={`px-2 py-0.5 text-xs font-bold ${
               customer.cx_rating && customer.cx_rating >= 4 ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' :
               customer.cx_rating && customer.cx_rating <= 2 ? 'bg-rose-950 text-rose-400 border border-rose-800' :
-              'bg-secondary-fixed text-secondary'
+              'bg-secondary-fixed text-gray-300'
             }`}>
               CX SCORE: {customer.cx_rating || 'N/A'}/5
             </span>
           </div>
 
           <div>
-            <span className="text-[10px] text-secondary uppercase block">Job Quality Feedback</span>
+            <span className="text-[10px] text-gray-300 uppercase block">Job Quality Feedback</span>
             <p className="text-xs text-on-background mt-1 font-sans italic">
               {customer.job_quality_feedback ? `"${customer.job_quality_feedback}"` : 'No technician survey debrief recorded.'}
             </p>
@@ -154,7 +154,7 @@ export function CustomerPsychologyCard({ customer }: CustomerPsychologyCardProps
                 ))}
               </div>
             ) : (
-              <span className="text-xs text-secondary">No operational opportunities flagged.</span>
+              <span className="text-xs text-gray-300">No operational opportunities flagged.</span>
             )}
           </div>
 

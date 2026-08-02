@@ -48,7 +48,7 @@ export default function NewCustomerPage() {
           <h1 className="text-xl font-bold tracking-wider uppercase text-on-background">
             [ ACQUIRE / REGISTER CUSTOMER RECORD ]
           </h1>
-          <p className="text-xs text-secondary mt-1">
+          <p className="text-xs text-gray-300 mt-1">
             Log financial economics, pre-sale psychology & post-job CX survey notes
           </p>
         </div>

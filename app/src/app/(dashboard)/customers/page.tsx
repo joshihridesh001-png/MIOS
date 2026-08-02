@@ -38,7 +38,7 @@ export default function CustomersPage() {
           <h1 className="text-xl font-bold tracking-wider uppercase text-on-background">
             [ CONSUMER PSYCHOLOGY & BUYER RESEARCH ENGINE ]
           </h1>
-          <p className="text-xs text-secondary mt-1">
+          <p className="text-xs text-gray-300 mt-1">
             Customer attribution, post-job CX telemetry & active creative angle collaborator
           </p>
         </div>
@@ -61,7 +61,7 @@ export default function CustomersPage() {
           className={`px-6 py-2 text-xs font-bold uppercase tracking-wider transition-colors ${
             activeTab === 'directory'
               ? 'bg-[#00dbe9] text-black'
-              : 'bg-card/40 text-secondary hover:text-white'
+              : 'bg-card/40 text-gray-300 hover:text-white'
           }`}
         >
           [ CUSTOMER DIRECTORY ({customers.length}) ]
@@ -71,7 +71,7 @@ export default function CustomersPage() {
           className={`px-6 py-2 text-xs font-bold uppercase tracking-wider transition-colors ${
             activeTab === 'personas'
               ? 'bg-[#00dbe9] text-black'
-              : 'bg-card/40 text-secondary hover:text-white'
+              : 'bg-card/40 text-gray-300 hover:text-white'
           }`}
         >
           [ BUYER PERSONAS & CREATIVE COLLABORATOR ({personas.length}) ]
@@ -82,7 +82,7 @@ export default function CustomersPage() {
       {activeTab === 'directory' ? (
         <div className="space-y-4">
           {loadingCust ? (
-            <div className="p-12 text-center text-secondary text-xs">
+            <div className="p-12 text-center text-gray-300 text-xs">
               [ LOADING CUSTOMER TELEMETRY... ]
             </div>
           ) : (
@@ -92,11 +92,11 @@ export default function CustomersPage() {
       ) : (
         <div className="space-y-6">
           {loadingPers ? (
-            <div className="p-12 text-center text-secondary text-xs">
+            <div className="p-12 text-center text-gray-300 text-xs">
               [ SYNTHESIZING BUYER PERSONAS... ]
             </div>
           ) : personas.length === 0 ? (
-            <div className="p-12 text-center border border-border/50 bg-card/80 rounded-none text-secondary text-xs">
+            <div className="p-12 text-center border border-border/50 bg-card/80 rounded-none text-gray-300 text-xs">
               [ NO BUYER PERSONAS FOUND — SEED MIGRATION REQUIRED ]
             </div>
           ) : (

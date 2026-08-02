@@ -46,7 +46,7 @@ export default function EditCustomerPage() {
 
   if (loading) {
     return (
-      <div className="p-12 text-center font-mono text-xs text-secondary">
+      <div className="p-12 text-center font-mono text-xs text-gray-300">
         [ LOADING RECORD FOR EDITING... ]
       </div>
     );
@@ -74,7 +74,7 @@ export default function EditCustomerPage() {
           <h1 className="text-xl font-bold tracking-wider uppercase text-on-background">
             [ EDIT CUSTOMER RECORD: {customer.name} ]
           </h1>
-          <p className="text-xs text-secondary mt-1">
+          <p className="text-xs text-gray-300 mt-1">
             Update financial economics, acquisition triggers & CX survey debriefs
           </p>
         </div>
