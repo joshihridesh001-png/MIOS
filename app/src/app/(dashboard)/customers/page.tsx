@@ -13,6 +13,7 @@ import { PersonaCard } from '@/components/customers/persona-card';
 import { PersonaEditModal } from '@/components/customers/persona-edit-modal';
 import { BuyerPersonaRow, BuyerPersonaUpdate } from '@/lib/types/database';
 import { Button } from '@/components/ui/button';
+import { TextReveal } from '@/components/ui/unlumen';
 
 export default function CustomersPage() {
   const { customers, loading: loadingCust, deleteCustomer } = useCustomers();
@@ -35,8 +36,8 @@ export default function CustomersPage() {
       {/* 1. Header Bar */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border/50 pb-4">
         <div>
-          <h1 className="text-xl font-bold tracking-wider uppercase text-on-background">
-            [ CONSUMER PSYCHOLOGY & BUYER RESEARCH ENGINE ]
+          <h1 className="text-xl font-bold tracking-wider uppercase text-white">
+            <TextReveal text="[ CONSUMER PSYCHOLOGY & BUYER RESEARCH ENGINE ]" />
           </h1>
           <p className="text-xs text-gray-300 mt-1">
             Customer attribution, post-job CX telemetry & active growth experiment collaborator (LABS)

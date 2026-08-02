@@ -1,6 +1,7 @@
 // ==============================================================================
 // MIOS Customer Directory Table (@/components/customers/customer-table.tsx)
 // Governed by ADR-001 (PestControl OS Aesthetic: #000000, rounded-none)
+// Powered by Unlumen UI AnimatedList and AnimateCount
 // ==============================================================================
 
 'use client';
@@ -8,9 +9,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { CustomerRow } from '@/lib/types/database';
-import { metricFormatters } from '@/lib/constants';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { AnimatedList, AnimateCount } from '@/components/ui/unlumen';
 
 interface CustomerTableProps {
   customers: CustomerRow[];
@@ -49,14 +50,14 @@ export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
             <th className="py-3 px-4 text-right">Actions</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-border/30">
+        <AnimatedList as="tbody" className="divide-y divide-border/30" staggerDelay={35} distance={12}>
           {customers.map((cust) => {
             const isAmc = cust.amc_opportunity;
             const cxScore = cust.cx_rating || '-';
 
             return (
-              <tr key={cust.id} className="hover:bg-card/90 transition-colors">
-                <td className="py-3 px-4 font-semibold text-on-background">
+              <tr key={cust.id} className="hover:bg-[#00dbe9]/5 transition-colors">
+                <td className="py-3 px-4 font-semibold text-white">
                   <Link href={`/customers/${cust.id}`} className="hover:text-[#00dbe9] underline decoration-[#00dbe9]/50">
                     {cust.name}
                   </Link>
@@ -72,14 +73,14 @@ export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
                 <td className="py-3 px-4 text-xs text-gray-300">
                   {cust.lead_source || 'Direct / Organic'}
                 </td>
-                <td className="py-3 px-4 text-right tabular-nums text-on-background">
-                  {metricFormatters.formatCurrency(cust.revenue || 0)}
+                <td className="py-3 px-4 text-right tabular-nums text-white font-bold">
+                  <AnimateCount value={cust.revenue || 0} format="currency" />
                 </td>
-                <td className="py-3 px-4 text-right tabular-nums text-emerald-400">
-                  {metricFormatters.formatCurrency(cust.profit || 0)}
+                <td className="py-3 px-4 text-right tabular-nums text-emerald-400 font-bold">
+                  <AnimateCount value={cust.profit || 0} format="currency" />
                 </td>
                 <td className="py-3 px-4 text-right tabular-nums font-bold text-[#00dbe9]">
-                  {metricFormatters.formatCurrency(cust.ltv || 0)}
+                  <AnimateCount value={cust.ltv || 0} format="currency" />
                 </td>
                 <td className="py-3 px-4 text-center">
                   <span className={`px-2 py-0.5 text-xs font-bold ${
@@ -91,13 +92,13 @@ export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
                   </span>
                 </td>
                 <td className="py-3 px-4 text-center uppercase text-xs">
-                  <Badge variant="outline" className="rounded-none border-border text-on-background text-[10px]">
+                  <Badge variant="outline" className="rounded-none border-border text-white text-[10px]">
                     {cust.status}
                   </Badge>
                 </td>
                 <td className="py-3 px-4 text-right space-x-2">
                   <Link href={`/customers/${cust.id}`}>
-                    <Button variant="ghost" size="sm" className="rounded-none text-xs hover:text-[#00dbe9]">
+                    <Button variant="ghost" size="sm" className="rounded-none text-xs text-gray-300 hover:text-[#00dbe9]">
                       [VIEW]
                     </Button>
                   </Link>
@@ -115,7 +116,7 @@ export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
               </tr>
             );
           })}
-        </tbody>
+        </AnimatedList>
       </table>
     </div>
   );

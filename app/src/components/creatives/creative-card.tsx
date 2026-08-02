@@ -16,6 +16,7 @@ import {
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { Flame, TrendingUp, AlertTriangle } from 'lucide-react'
+import { TiltCard } from '@/components/ui/unlumen'
 
 interface CreativeCardProps {
   creative: CreativeWithMetrics
@@ -28,9 +29,9 @@ export function CreativeCard({ creative }: CreativeCardProps) {
   const ctrVal = creative.ctr || 0
 
   return (
-    <div
+    <TiltCard
       onClick={() => router.push(`/creatives/${creative.id}`)}
-      className="group relative cursor-pointer rounded-xl bg-card/80 backdrop-blur-xl border border-border/60 hover:border-emerald-500/50 hover:bg-card/95 transition-all duration-300 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-emerald-950/20 flex flex-col"
+      className="group relative cursor-pointer rounded-none bg-card/90 border border-border/60 hover:border-[#00dbe9]/50 transition-all duration-300 overflow-hidden flex flex-col font-mono"
     >
       {/* Top Banner / Angle & Status */}
       <div className="p-4 border-b border-border/40 flex items-center justify-between gap-2">
@@ -135,6 +136,6 @@ export function CreativeCard({ creative }: CreativeCardProps) {
           </div>
         </div>
       </div>
-    </div>
+    </TiltCard>
   )
 }

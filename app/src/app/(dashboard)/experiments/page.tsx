@@ -22,6 +22,7 @@ import {
   Cpu,
   Layers
 } from "lucide-react"
+import { TextReveal, AnimatedList, TiltCard } from "@/components/ui/unlumen"
 
 export default function ExperimentsLabsPage() {
   const { experiments, loading, error } = useExperiments()
@@ -45,7 +46,7 @@ export default function ExperimentsLabsPage() {
           </div>
           <div className="flex items-center gap-3 mt-1">
             <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white font-sans uppercase">
-              LABS
+              <TextReveal text="LABS" mode="char" />
             </h1>
             <span className="text-xs font-mono bg-zinc-900 border border-zinc-800 text-zinc-400 px-2.5 py-1 rounded-sm">
               [ ALPHA_PROTOCOLS ]
@@ -129,14 +130,14 @@ export default function ExperimentsLabsPage() {
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* LEFT COLUMN (8 cols): Primary Protocols Stream */}
-          <div className="lg:col-span-8 space-y-6">
+          <AnimatedList className="lg:col-span-8 space-y-6" staggerDelay={50}>
             {filtered.map((exp) => {
               const isRunning = exp.status === "running"
               const isCompleted = exp.status === "completed"
               const conf = exp.confidence_score || 0
 
               return (
-                <div
+                <TiltCard
                   key={exp.id}
                   className={cn(
                     "bg-zinc-950/90 border rounded-sm transition-all shadow-xl overflow-hidden",
@@ -275,10 +276,10 @@ export default function ExperimentsLabsPage() {
                       </div>
                     )}
                   </div>
-                </div>
+                </TiltCard>
               )
             })}
-          </div>
+          </AnimatedList>
 
           {/* RIGHT COLUMN (4 cols): Secondary Specimen Feed & Telemetry Ticker */}
           <div className="lg:col-span-4 space-y-6">

@@ -1,103 +1,126 @@
 'use client'
 
 import { CampaignWithMetrics } from '@/lib/types/database'
-import { metricFormatters } from '@/lib/constants'
-import { Card, CardContent } from '@/components/ui/card'
+import { TiltCard, AnimateCount, AnimatedList } from '@/components/ui/unlumen'
 import { cn } from '@/lib/utils'
-import { useEffect, useState } from 'react'
 
 interface CampaignMetricsProps {
   campaign: CampaignWithMetrics
 }
 
-function MetricCard({ 
-  label, 
-  value, 
-  isPositive, 
-  isNegative 
-}: { 
-  label: string; 
-  value: string; 
-  isPositive?: boolean; 
-  isNegative?: boolean 
-}) {
-  const [mounted, setMounted] = useState(false)
-  
-  useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 100)
-    return () => clearTimeout(timer)
-  }, [])
+interface MetricCardProps {
+  label: string
+  value: number
+  format?: 'currency' | 'percent' | 'number'
+  decimals?: number
+  suffix?: string
+  isPositive?: boolean
+  isNegative?: boolean
+}
 
+function MetricCard({
+  label,
+  value,
+  format = 'currency',
+  decimals = 0,
+  suffix = '',
+  isPositive,
+  isNegative,
+}: MetricCardProps) {
   return (
-    <Card className="bg-card/80 backdrop-blur-xl border border-border/50 transition-all hover:bg-card/90">
-      <CardContent className="p-6">
-        <p className="text-sm font-medium text-muted-foreground">{label}</p>
-        <div className={cn(
-          "mt-2 text-2xl font-semibold tracking-tight transition-all duration-700",
-          mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4",
-          isPositive && "text-emerald-500",
-          isNegative && "text-red-500"
-        )}>
-          {value}
-        </div>
-      </CardContent>
-    </Card>
+    <TiltCard className="p-6">
+      <p className="text-sm font-medium text-gray-300 uppercase font-mono tracking-wider">{label}</p>
+      <div
+        className={cn(
+          'mt-2 text-2xl font-bold tracking-tight',
+          isPositive && 'text-emerald-400',
+          isNegative && 'text-red-400',
+          !isPositive && !isNegative && 'text-white'
+        )}
+      >
+        <AnimateCount
+          value={value}
+          format={format}
+          decimals={decimals}
+          suffix={suffix}
+        />
+      </div>
+    </TiltCard>
   )
 }
 
 export function CampaignMetrics({ campaign }: CampaignMetricsProps) {
-  const { formatCurrency, formatPercent, formatRoas } = metricFormatters
-
   const roas = campaign.roas ?? 0
-  
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-      <MetricCard 
-        label="Spend" 
-        value={formatCurrency(campaign.spend)} 
+    <AnimatedList
+      className="grid grid-cols-2 md:grid-cols-3 gap-4"
+      staggerDelay={45}
+      distance={14}
+    >
+      <MetricCard
+        label="Spend"
+        value={campaign.spend ?? 0}
+        format="currency"
       />
-      <MetricCard 
-        label="Revenue" 
-        value={formatCurrency(campaign.revenue)} 
+      <MetricCard
+        label="Revenue"
+        value={campaign.revenue ?? 0}
+        format="currency"
       />
-      <MetricCard 
-        label="Gross Profit" 
-        value={formatCurrency(campaign.gross_profit)}
+      <MetricCard
+        label="Gross Profit"
+        value={campaign.gross_profit ?? 0}
+        format="currency"
         isPositive={(campaign.gross_profit ?? 0) > 0}
         isNegative={(campaign.gross_profit ?? 0) < 0}
       />
-      <MetricCard 
-        label="Net Profit" 
-        value={formatCurrency(campaign.net_profit)}
+      <MetricCard
+        label="Net Profit"
+        value={campaign.net_profit ?? 0}
+        format="currency"
         isPositive={(campaign.net_profit ?? 0) > 0}
         isNegative={(campaign.net_profit ?? 0) < 0}
       />
-      <MetricCard 
-        label="ROAS" 
-        value={formatRoas(campaign.roas)}
+      <MetricCard
+        label="ROAS"
+        value={roas}
+        format="number"
+        decimals={2}
+        suffix="x"
         isPositive={roas > 1}
         isNegative={roas > 0 && roas < 1}
       />
-      <MetricCard 
-        label="Conversion Rate" 
-        value={formatPercent(campaign.conversion_rate)} 
+      <MetricCard
+        label="Conversion Rate"
+        value={campaign.conversion_rate ?? 0}
+        format="percent"
+        decimals={1}
       />
-      <MetricCard 
-        label="CTR" 
-        value={formatPercent(campaign.ctr)} 
+      <MetricCard
+        label="CTR"
+        value={campaign.ctr ?? 0}
+        format="percent"
+        decimals={2}
       />
-      <MetricCard 
-        label="CPC" 
-        value={formatCurrency(campaign.cpc)} 
+      <MetricCard
+        label="CPC"
+        value={campaign.cpc ?? 0}
+        format="currency"
+        decimals={2}
       />
-      <MetricCard 
-        label="CPL" 
-        value={formatCurrency(campaign.cpl)} 
+      <MetricCard
+        label="CPL"
+        value={campaign.cpl ?? 0}
+        format="currency"
+        decimals={2}
       />
-      <MetricCard 
-        label="CAC" 
-        value={formatCurrency(campaign.cac)} 
+      <MetricCard
+        label="CAC"
+        value={campaign.cac ?? 0}
+        format="currency"
+        decimals={2}
       />
-    </div>
+    </AnimatedList>
   )
 }

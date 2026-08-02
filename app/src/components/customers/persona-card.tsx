@@ -11,6 +11,7 @@ import { BuyerPersonaRow } from '@/lib/types/database';
 import { metricFormatters } from '@/lib/constants';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { TiltCard, AnimatedList } from '@/components/ui/unlumen';
 
 interface PersonaCardProps {
   persona: BuyerPersonaRow;
@@ -21,7 +22,7 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
   const angles = persona.recommended_creative_angles || [];
 
   return (
-    <div className="border border-border/60 bg-card/90 backdrop-blur-xl rounded-none p-6 space-y-6 font-mono">
+    <TiltCard className="border border-border/60 bg-card/90 backdrop-blur-xl rounded-none p-6 space-y-6 font-mono">
       {/* 1. Header & Edit Action */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border/40 pb-4">
         <div>
@@ -127,7 +128,7 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
           </Badge>
         </div>
 
-        <div className="space-y-3">
+        <AnimatedList className="space-y-3" staggerDelay={45}>
           {angles.map((ang, idx) => (
             <div
               key={idx}
@@ -164,7 +165,7 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
               </div>
             </div>
           ))}
-        </div>
+        </AnimatedList>
       </div>
 
       {/* 5. Operational CX Improvement Feed */}
@@ -184,6 +185,6 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
           <p className="text-xs text-gray-300">No recurring operational complaints or CX issues detected.</p>
         )}
       </div>
-    </div>
+    </TiltCard>
   );
 }

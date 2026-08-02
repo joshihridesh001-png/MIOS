@@ -42,3 +42,35 @@ All UI components in MIOS follow the **PestControl OS Executive Suite** aestheti
 ### 4.2 `LearningList` (`@/components/learnings/learning-list.tsx`)
 - **Purpose**: Renders immutable, compounding organizational insights attached to campaigns or experiments.
 - **Visuals**: Displays statistical confidence ratings and verified historical lift improvements.
+
+## 5. Unlumen UI & Anime.js v4 Animation Suite
+Located in `@/components/ui/unlumen/`, these components provide high-performance, hardware-accelerated animations inspired by Unlumen UI designs and powered by Anime.js v4 (`animate`, `stagger`).
+
+### 5.1 `AnimateCount` (`@/components/ui/unlumen/animate-count.tsx`)
+- **Purpose**: Smooth numerical count-up animation for financial and conversion metrics.
+- **Props**: `{ value: number; format?: 'currency' | 'percent' | 'number' | 'raw'; decimals?: number; duration?: number; prefix?: string; suffix?: string }`
+- **Behavior**: Uses `outExpo` easing to roll up to target numbers; supports Indian currency formatting (`₹1,00,000`) and percentage signs. Automatically disables animation if `prefers-reduced-motion: reduce` is enabled.
+
+### 5.2 `AnimatedList` (`@/components/ui/unlumen/animated-list.tsx`)
+- **Purpose**: Staggered entrance animations for lists, table rows, and grid cards.
+- **Props**: `{ children: ReactNode; staggerDelay?: number; duration?: number; direction?: 'up' | 'down' | 'left' | 'right'; distance?: number }`
+- **Behavior**: Uses Anime.js v4 `stagger()` to animate children sequentially with configurable directional slide-in and fade-in effects.
+
+### 5.3 `TiltCard` (`@/components/ui/unlumen/tilt-card.tsx`)
+- **Purpose**: Interactive 3D card wrapper with cursor-tracking spotlight glow.
+- **Props**: `{ children: ReactNode; maxTilt?: number; scale?: number; glowColor?: string }`
+- **Behavior**: Tracks mouse position over the card to calculate 3D perspective tilt (`rotateX`, `rotateY`) and renders a radial turquoise spotlight (`rgba(0, 219, 233, 0.18)`). Reverts smoothly on mouse leave.
+
+### 5.4 `TextReveal` (`@/components/ui/unlumen/text-reveal.tsx`)
+- **Purpose**: Cinematic character-by-character or word-by-word blur-fade text reveal for page titles and section headers.
+- **Props**: `{ text: string; mode?: 'word' | 'char'; staggerDelay?: number; duration?: number }`
+- **Behavior**: Splits text into tokens and animates opacity, Y-translation, and blur filters with `staggerDelay`.
+
+### 5.5 `MatrixBackground` (`@/components/ui/unlumen/matrix-background.tsx`)
+- **Purpose**: Subtle cyber-grid canvas background for terminal landing zones and modal backdrops.
+- **Props**: `{ color?: string; spacing?: number; speed?: number; opacity?: number }`
+
+### 5.6 `MotionAccordion` (`@/components/ui/unlumen/motion-accordion.tsx`)
+- **Purpose**: Smooth expandable drawer for FAQs, customer psychology protocols, and collapsible telemetry sections.
+- **Props**: `{ title: ReactNode; children: ReactNode; defaultOpen?: boolean; badgeText?: string }`
+- **Behavior**: Uses `outCubic` easing to smoothly transition height between zero and scrollHeight while rotating the chevron indicator.

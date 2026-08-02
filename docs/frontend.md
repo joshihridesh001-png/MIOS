@@ -26,6 +26,7 @@ MIOS operates under a strict set of visual rules designed for CEO-level speed an
   - `/creatives`: Creative library and `/creatives/new` with **AI Quick-Paste** auto-parser.
   - `/experiments`: Scientific testing protocols and `/experiments/[id]` with **RecordResultsModal** telemetry synchronizer.
   - `/learnings`: Compounding organizational knowledge base.
+  - `/customers`: Persona and customer psychology intelligence.
 
 ## 4. Key Interactive Capabilities
 - **Widescreen Telemetry Modal (`RecordResultsModal`)**:
@@ -38,3 +39,10 @@ MIOS operates under a strict set of visual rules designed for CEO-level speed an
 ## 5. Responsive Design Behavior
 - **Desktop (>= 1024px)**: Full 256px (`w-64`) left navigation sidebar with sticky top header command bar.
 - **Tablet / Mobile (< 1024px)**: Collapsible hamburger menu sheet with horizontal overflow-x scrolling for comparison matrices.
+
+## 6. Animation Engine & Hardware Acceleration (Anime.js v4 & Unlumen UI)
+MIOS implements high-performance animations using **Anime.js v4.5.0** and custom Unlumen UI components (`@/components/ui/unlumen/`):
+- **Named Import Architecture**: In Anime.js v4, all animation functions are imported as named exports (`import { animate, stagger } from 'animejs'`) with TypeScript type verification via `AnimationParams`.
+- **Accessibility & Motion Preference (`prefers-reduced-motion`)**: Every animation hook checks `window.matchMedia('(prefers-reduced-motion: reduce)')`. If enabled, animations immediately settle to their final visual state without motion.
+- **Hardware-Accelerated Properties**: Transitions strictly target GPU-friendly properties (`opacity`, `translateY`, `translateX`, `rotateX`, `rotateY`, `scale`, and `filter: blur()`).
+- **Telemetry Counter Rollup (`AnimateCount`)**: Automatically formats Indian currency (`₹1,00,000`) and percentages while running `outExpo` count-up easing.

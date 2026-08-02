@@ -14,6 +14,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Plus, LayoutGrid, Table as TableIcon, Search, Filter, Sparkles } from 'lucide-react'
+import { TextReveal, AnimatedList } from '@/components/ui/unlumen'
 
 export default function CreativesPage() {
   const { creatives, loading, error, refetch } = useCreatives()
@@ -44,10 +45,10 @@ export default function CreativesPage() {
       {/* Header Bar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground flex items-center gap-2">
-            <span>🎨 Ad Library & Creatives</span>
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-              Slice 2
+          <h1 className="text-xl md:text-2xl font-bold tracking-wider uppercase text-white font-mono flex items-center gap-2">
+            <TextReveal text="[ CREATIVE PERFORMANCE & ASSET LIBRARY ]" />
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-[#00dbe9]/10 text-[#00dbe9] border border-[#00dbe9]/30">
+              SLICE 2
             </span>
           </h1>
           <p className="text-xs md:text-sm text-muted-foreground mt-1">
@@ -169,11 +170,11 @@ export default function CreativesPage() {
           <p className="text-xs text-muted-foreground mt-1">{error.message}</p>
         </div>
       ) : filteredCreatives.length === 0 ? (
-        <div className="text-center py-16 bg-card/40 rounded-xl border border-border/40">
-          <div className="w-12 h-12 mx-auto rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-3">
-            🎨
+        <div className="text-center py-16 bg-card/40 rounded-none border border-border/40 font-mono">
+          <div className="w-12 h-12 mx-auto rounded-none bg-[#00dbe9]/10 flex items-center justify-center text-[#00dbe9] font-bold text-xs mb-3 border border-[#00dbe9]/30">
+            [0]
           </div>
-          <h3 className="text-base font-semibold text-foreground">No creatives found</h3>
+          <h3 className="text-base font-semibold text-foreground uppercase tracking-wider">[ NO CREATIVES LOGGED ]</h3>
           <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
             {searchQuery || formatFilter !== 'all' || angleFilter !== 'all' || statusFilter !== 'all'
               ? 'No creatives match your filter criteria. Try clearing filters.'
@@ -187,11 +188,11 @@ export default function CreativesPage() {
           </Link>
         </div>
       ) : viewMode === 'grid' ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <AnimatedList className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={50}>
           {filteredCreatives.map((creative) => (
             <CreativeCard key={creative.id} creative={creative} />
           ))}
-        </div>
+        </AnimatedList>
       ) : (
         <CreativeTable creatives={filteredCreatives} />
       )}
