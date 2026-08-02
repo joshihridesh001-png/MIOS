@@ -16,11 +16,12 @@ export function AppShell({ user, children }: AppShellProps) {
   const pathname = usePathname()
 
   const topNav = [
-    { label: "Overview", href: "/dashboard", enabled: false },
+    { label: "Overview", href: "/dashboard", enabled: true },
     { label: "Campaigns", href: "/campaigns", enabled: true },
     { label: "Creative Library", href: "/creatives", enabled: true },
     { label: "Experiments", href: "/experiments", enabled: true },
     { label: "Customers", href: "/customers", enabled: true },
+    { label: "Intel Vault", href: "/knowledge", enabled: true },
   ]
 
   return (
@@ -28,7 +29,7 @@ export function AppShell({ user, children }: AppShellProps) {
       {/* Top Executive Suite Navigation (Desktop & Tablet) */}
       <header className="h-14 border-b border-zinc-800 bg-black/95 backdrop-blur-md px-4 md:px-6 flex items-center justify-between shrink-0 select-none z-30">
         <div className="flex items-center gap-6">
-          <Link href="/campaigns" className="flex items-center gap-2 text-white hover:text-[#00dbe9] transition-colors">
+          <Link href="/dashboard" className="flex items-center gap-2 text-white hover:text-[#00dbe9] transition-colors">
             <span className="font-bold text-sm md:text-base tracking-tight">PestControl OS</span>
             <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase border border-zinc-800 px-1.5 py-0.5">
               CEO DASHBOARD

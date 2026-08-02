@@ -8,6 +8,7 @@ This directory contains comprehensive, human-readable documentation describing t
 ## Documentation Sitemap
 
 ### Core Architecture & Design
+- **[Executive Command Center Dashboard](executive-command-center-dashboard.md)**: Synthesis command console (`/dashboard`), telemetry period/channel filters, benchmark breach alerts, and 4-pillar intelligence pipelines.
 - **[Architecture](architecture.md)**: Executive summary, system topography, RSC/client data flow, and Mermaid architecture diagrams.
 - **[Database Schema](database.md)**: PostgreSQL 15+ ER diagrams, table columns, indexes, `campaigns_with_metrics` SQL views, and Row Level Security (RLS) policies.
 - **[Customer Psychology & Buyer Personas](customer-psychology-and-personas.md)**: Institutional intelligence engine, pre-sale acquisition triggers, post-job CX telemetry, and active creative angle collaborator.

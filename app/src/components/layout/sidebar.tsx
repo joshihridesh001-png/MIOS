@@ -18,7 +18,7 @@ import { createClient } from "@/lib/supabase/client"
 import { toast } from "sonner"
 
 const NAV_ITEMS = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, enabled: false },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, enabled: true },
   { href: "/campaigns", label: "Campaigns", icon: Megaphone, enabled: true },
   { href: "/creatives", label: "Creative Library", icon: Paintbrush, enabled: true },
   { href: "/experiments", label: "Experiments", icon: FlaskConical, enabled: true },

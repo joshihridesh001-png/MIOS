@@ -7,6 +7,24 @@ This Changelog documents all notable architectural, aesthetic, and functional up
 
 ## 2. Releases & Task History
 
+### [v1.5.0] — 2026-08-03 — The Executive Command Center Dashboard (`/dashboard`)
+- **Files Changed**:
+  - `E:\MIOS\app\src\app\(dashboard)\dashboard\page.tsx` (master executive command center route)
+  - `E:\MIOS\app\src\app\page.tsx` (updated root URL `/` redirect to target `/dashboard`)
+  - `E:\MIOS\app\src\components\dashboard\dashboard-header.tsx` (period telemetry filter and channel selector toolbar)
+  - `E:\MIOS\app\src\components\dashboard\benchmark-alerts.tsx` (real-time ROAS/Profit rule breach warnings and celebration alerts)
+  - `E:\MIOS\app\src\components\dashboard\dashboard-kpis.tsx` (4x2 grid of hardware-accelerated financial and conversion cards)
+  - `E:\MIOS\app\src\components\dashboard\pipeline-grid.tsx` (4-pillar interactive intelligence preview across Campaigns, Creatives, LABS, and Intel Vault)
+  - `E:\MIOS\app\src\components\layout\sidebar.tsx` & `app-shell.tsx` (enabled `/dashboard` in desktop and mobile executive navigation)
+  - `E:\MIOS\app\src\hooks\use-dashboard.ts` (multi-table aggregation hook with blended financial ratios and alert engine)
+  - Architectural documentation (`docs/executive-command-center-dashboard.md`, `docs/README.md`, `docs/changelog.md`)
+- **Summary**:
+  - Built the **Executive Command Center Dashboard (`/dashboard`)** as the unified top-level command cockpit for Marketing Intelligence OS (MIOS).
+  - Implemented real-time **Period & Channel Telemetry Filtering** (`ALL TIME`, `30D`, `7D`, `MTD`, across `META ADS`, `GOOGLE ADS`, `WHATSAPP`, `OFFLINE`).
+  - Implemented **Benchmark Breach Alerts** highlighting campaigns below minimum target (`ROAS < 1.50×`, negative net profit, `CAC > ₹2,000`) and celebration badges for high performers (`ROAS >= 3.00×`).
+  - Integrated Unlumen UI & Anime.js v4.5.0 hardware-accelerated animations (`TextReveal`, `AnimateCount`, `TiltCard`, `AnimatedList`, `MotionAccordion`) to synthesize financial returns and executive diagnostics.
+- **Breaking Changes**: None.
+
 ### [v1.4.0] — 2026-08-03 — Institutional Knowledge Base & Compounding Intel Vault (`/knowledge`)
 - **Files Changed**:
   - `E:\MIOS\app\src\app\(dashboard)\knowledge\page.tsx` (master institutional intel vault route)
