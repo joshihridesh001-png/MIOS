@@ -40,7 +40,7 @@ export default function LoginPage() {
       return
     }
 
-    router.push("/campaigns")
+    router.push("/dashboard")
     router.refresh()
   }
 

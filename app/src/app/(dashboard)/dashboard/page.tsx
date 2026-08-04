@@ -42,10 +42,10 @@ const EXECUTIVE_DIAGNOSTICS: DiagnosticItem[] = [
     content: (
       <div className="space-y-2 text-xs font-sans text-zinc-300 leading-relaxed">
         <p>
-          Across Indian residential and commercial pest control telemetry, <strong className="text-emerald-400">&quot;Odourless Chemical Guarantee&quot;</strong> and <strong className="text-emerald-400">&quot;180-Day Re-Infestation Warranty&quot;</strong> convert at 2.3× higher ROAS than generic price-discount offers.
+          Across enterprise residential and B2B commercial marketing telemetry, <strong className="text-emerald-400">&quot;100% Performance Guarantee&quot;</strong> and <strong className="text-emerald-400">&quot;180-Day Retention Warranty&quot;</strong> convert at 2.3× higher ROAS than generic price-discount offers.
         </p>
         <p>
-          <strong className="text-white font-mono uppercase">Action Mandate:</strong> Rotate out all price-discount creatives in favor of botanical safety and guarantee-led hooks in the Creative Library.
+          <strong className="text-white font-mono uppercase">Action Mandate:</strong> Rotate out all price-discount creatives in favor of trust-verification and guarantee-led hooks in the Creative Library.
         </p>
       </div>
     ),
@@ -70,10 +70,10 @@ const EXECUTIVE_DIAGNOSTICS: DiagnosticItem[] = [
     content: (
       <div className="space-y-2 text-xs font-sans text-zinc-300 leading-relaxed">
         <p>
-          Commercial warehouse termite AMC contracts generate an average ticket size of ₹45,000 with 78% annual renewal. Scaling Google Ads search intent campaigns for commercial termite keywords offers the highest net profit potential.
+          Enterprise annual marketing intelligence contracts generate an average ticket size of ₹45,000 with 78% annual renewal. Scaling Google Ads search intent campaigns for high-intent enterprise keywords offers the highest net profit potential.
         </p>
         <p>
-          <strong className="text-white font-mono uppercase">Action Mandate:</strong> Reallocate 25% of top-of-funnel display budget into high-intent commercial termite search campaigns.
+          <strong className="text-white font-mono uppercase">Action Mandate:</strong> Reallocate 25% of top-of-funnel display budget into high-intent enterprise search campaigns.
         </p>
       </div>
     ),

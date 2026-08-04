@@ -60,11 +60,11 @@ export function Sidebar({ className, user }: SidebarProps) {
         <div className="px-2 pt-2">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0">
-              <span className="font-mono text-sm font-bold text-[#00dbe9]">P</span>
+              <span className="font-mono text-sm font-bold text-[#00dbe9]">M</span>
             </div>
             <div>
               <div className="text-sm font-bold tracking-tight text-white leading-none">
-                PestControl OS
+                Marketing Intelligence
               </div>
               <div className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase mt-1">
                 CEO DASHBOARD

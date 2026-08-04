@@ -30,7 +30,7 @@ export function AppShell({ user, children }: AppShellProps) {
       <header className="h-14 border-b border-zinc-800 bg-black/95 backdrop-blur-md px-4 md:px-6 flex items-center justify-between shrink-0 select-none z-30">
         <div className="flex items-center gap-6">
           <Link href="/dashboard" className="flex items-center gap-2 text-white hover:text-[#00dbe9] transition-colors">
-            <span className="font-bold text-sm md:text-base tracking-tight">PestControl OS</span>
+            <span className="font-bold text-sm md:text-base tracking-tight">Marketing Intelligence</span>
             <span className="text-[10px] font-mono tracking-widest text-zinc-500 uppercase border border-zinc-800 px-1.5 py-0.5">
               CEO DASHBOARD
             </span>
@@ -93,7 +93,7 @@ export function AppShell({ user, children }: AppShellProps) {
           <footer className="h-7 border-t border-zinc-800 bg-black px-4 flex items-center justify-between font-mono text-[10px] text-zinc-500 shrink-0 select-none">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00dbe9]" />
-              <span className="text-zinc-400 font-semibold uppercase tracking-wider">PESTCONTROL MARKETING OS</span>
+              <span className="text-zinc-400 font-semibold uppercase tracking-wider">MARKETING INTELLIGENCE OS</span>
               <span className="hidden sm:inline text-zinc-700">|</span>
               <span className="hidden sm:inline">ALL PROTOCOLS ACTIVE</span>
             </div>

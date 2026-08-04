@@ -27,7 +27,7 @@ export function CreativePreviewBox({ creative }: CreativePreviewBoxProps) {
           </div>
           <div>
             <div className="flex items-center gap-1.5 font-semibold text-sm text-zinc-100">
-              <span>MIOS Pest Control</span>
+              <span>Marketing Intelligence OS</span>
               <span className="text-emerald-400">✓</span>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-zinc-400">
@@ -46,7 +46,7 @@ export function CreativePreviewBox({ creative }: CreativePreviewBoxProps) {
 
       {/* Primary Text (Body Copy) */}
       <div className="p-4 text-sm text-zinc-200 whitespace-pre-wrap leading-relaxed">
-        {creative.primary_text || 'Protect your home with certified pest management solutions. Odorless treatments with long-term warranty.'}
+        {creative.primary_text || 'Scale your enterprise growth with data-driven marketing intelligence and high-confidence consumer psychology insights.'}
       </div>
 
       {/* Visual Asset Area */}
@@ -63,10 +63,10 @@ export function CreativePreviewBox({ creative }: CreativePreviewBoxProps) {
               {creativeFormatIcons[creative.format || 'image'] || '🖼️'}
             </div>
             <div className="font-bold text-lg text-zinc-100">
-              {creative.headline || creative.name || '15% OFF Annual Termite Protection'}
+              {creative.headline || creative.name || 'Scale Growth with Data-Driven Buyer Psychology'}
             </div>
             <div className="text-xs text-zinc-400 px-4">
-              {creativeFormatLabels[creative.format || 'image']} • Visual preview placeholder
+              {creativeFormatLabels[creative.format || 'image']} • Live Visual Asset Preview
             </div>
           </div>
         )}
@@ -81,10 +81,10 @@ export function CreativePreviewBox({ creative }: CreativePreviewBoxProps) {
       <div className="p-3.5 bg-zinc-950/80 flex items-center justify-between gap-3 border-b border-zinc-800">
         <div className="flex-1 min-w-0">
           <div className="text-[11px] uppercase tracking-wider text-zinc-400 font-semibold truncate">
-            MIOSPESTCONTROL.IN
+            MARKETING-INTELLIGENCE.COM
           </div>
           <div className="text-sm font-bold text-zinc-100 truncate">
-            {creative.headline || creative.name || '15% OFF Annual Termite Protection'}
+            {creative.headline || creative.name || 'Scale Growth with Data-Driven Buyer Psychology'}
           </div>
         </div>
 

@@ -13,10 +13,10 @@ interface QuickPasteCardProps {
   onApplyParsedData: (data: Partial<CampaignRow>) => void
 }
 
-const EXAMPLE_META_ADS_TEXT = `Campaign Name: Summer Termite Special
+const EXAMPLE_META_ADS_TEXT = `Campaign Name: Q3 Enterprise Growth Special
 Platform: Meta Ads
 Location: Bangalore
-Pest Type: Termite
+Pest Type: Enterprise B2B
 Spend: Rs. 45,000
 Revenue: Rs. 3,50,000
 COGS: Rs. 70,000
@@ -25,9 +25,9 @@ Clicks: 6,200
 Inquiries: 310
 Qualified Leads: 120
 Customers Won: 35
-What worked: Video carousel ads with pricing discount overlay had 45% higher CTR
+What worked: Video carousel ads with performance guarantee overlay had 45% higher CTR
 What failed: Single static image ad underperformed after day 4
-Hypothesis: Offering an instant 15% discount on annual termite contracts will drive high-intent homeowner inquiries`
+Hypothesis: Offering an instant audit and 180-day retention warranty will drive high-intent executive inquiries`
 
 export function QuickPasteCard({ onApplyParsedData }: QuickPasteCardProps) {
   const [text, setText] = useState('')

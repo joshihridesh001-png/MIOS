@@ -141,7 +141,7 @@ export function KnowledgeFormModal({
             <Textarea
               value={insight}
               onChange={(e) => setInsight(e.target.value)}
-              placeholder="e.g., Calling residential pest leads within 5 minutes of WhatsApp inquiry increases quote booking rate by 38%..."
+              placeholder="e.g., Calling enterprise B2B inbound leads within 5 minutes of WhatsApp inquiry increases demo booking rate by 38%..."
               rows={4}
               className="rounded-none bg-black border-zinc-800 text-sm font-sans placeholder:text-zinc-600 focus-visible:ring-[#00dbe9]"
               required

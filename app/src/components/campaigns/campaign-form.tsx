@@ -177,9 +177,10 @@ export function CampaignForm({ initialData = {}, onSubmit, loading }: CampaignFo
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="pest_type">Pest Type</Label>
+            <Label htmlFor="pest_type">Market Segment / Category</Label>
             <Input 
               id="pest_type" 
+              placeholder="e.g. Enterprise B2B, SaaS, D2C Growth"
               value={formData.pest_type || ''} 
               onChange={(e) => handleChange('pest_type', e.target.value)} 
             />

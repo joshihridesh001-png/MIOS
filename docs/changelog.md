@@ -7,6 +7,22 @@ This Changelog documents all notable architectural, aesthetic, and functional up
 
 ## 2. Releases & Task History
 
+### [v1.6.0] — 2026-08-04 — Production & Deployment Readiness: Marketing Intelligence OS Branding & Zero Placeholder Enforcement
+- **Files Changed**:
+  - `E:\MIOS\app\src\components\layout\app-shell.tsx` & `sidebar.tsx` (updated master branding from PestControl OS to Marketing Intelligence OS)
+  - `E:\MIOS\app\src\components\creatives\creative-preview-box.tsx` (replaced legacy niche copy and placeholder indicators with enterprise Marketing Intelligence copy)
+  - `E:\MIOS\app\src\app\(dashboard)\dashboard\page.tsx` (standardized executive diagnostic action mandates for enterprise B2B and D2C marketing intelligence)
+  - `E:\MIOS\app\src\components\campaigns\campaign-form.tsx` & `quick-paste-card.tsx` (labeled category field as `Market Segment / Category` and updated sample AI Quick-Paste telemetry to Enterprise B2B B2C copy)
+  - `E:\MIOS\app\src\app\(dashboard)\campaigns\[id]\page.tsx` (updated details label to `Segment / Vertical`)
+  - `E:\MIOS\app\src\components\knowledge\knowledge-form-modal.tsx` (updated insight placeholder examples to Enterprise B2B B2C copy)
+  - `E:\MIOS\app\src\app\(auth)\login\page.tsx` (updated login success redirect directly to `/dashboard`)
+  - Documentation (`docs/README.md`, `docs/changelog.md`)
+- **Summary**:
+  - Executed a repository-wide production readiness pass, eliminating all remaining legacy niche branding (`PestControl OS`, `Pest Control`, `Termite`) and placeholder text across all UI components, sample texts, and headers/footers.
+  - Standardized the platform identity as **Marketing Intelligence OS (MIOS)** across desktop/mobile navigation, creative preview boxes, form labels, and executive AI diagnostics.
+  - Verified static Next.js production build (`npm run build`) — `16/16` routes compiled cleanly with zero TypeScript errors.
+- **Breaking Changes**: None.
+
 ### [v1.5.0] — 2026-08-03 — The Executive Command Center Dashboard (`/dashboard`)
 - **Files Changed**:
   - `E:\MIOS\app\src\app\(dashboard)\dashboard\page.tsx` (master executive command center route)
