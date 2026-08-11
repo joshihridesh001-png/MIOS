@@ -57,7 +57,7 @@ function NewExperimentContent() {
         sample_size: 0,
         runtime_hours: 0.0,
         confidence_score: 0,
-        decision_STRATEGY_notes: [
+        decision_protocol_notes: [
           "> STRATEGY initialized in active test stream.",
           "> Monitoring statistical divergence across primary vectors."
         ],

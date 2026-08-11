@@ -175,7 +175,7 @@ export function RecordResultsModal({
       // Append new DATA log to decision STRATEGY stream
       const timestamp = new Date().toISOString().slice(0, 16).replace("T", " ")
       const logEntry = `> [SYNC ${timestamp}] Recorded metrics — Control (${cMetrics.cvr}% CVR, ${cMetrics.conversions} conv) | Variant A (${aMetrics.cvr}% CVR, ${aMetrics.conversions} conv) | Variant B (${bMetrics.cvr}% CVR, ${bMetrics.conversions} conv). Lift: +${liftNum}% [Confidence: ${confNum}%]`
-      const updatedNotes = [logEntry, ...(experiment.decision_STRATEGY_notes || [])]
+      const updatedNotes = [logEntry, ...(experiment.decision_protocol_notes || [])]
 
       await updateExperiment(experiment.id, {
         control_name: controlName,
@@ -187,7 +187,7 @@ export function RecordResultsModal({
         actual_lift: liftNum,
         confidence_score: confNum,
         winner_variant: winner,
-        decision_STRATEGY_notes: updatedNotes,
+        decision_protocol_notes: updatedNotes,
       })
 
       toast.success("STRATEGY data recorded and synchronized")
