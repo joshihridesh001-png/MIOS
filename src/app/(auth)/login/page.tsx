@@ -46,7 +46,7 @@ export default function LoginPage() {
   }
 
   return (
-    <Card className="w-full bg-card border border-border shadow-sm border-none p-8">
+    <Card className="w-full relative overflow-hidden bg-card border border-border shadow-sm p-8">
       <div className="absolute top-0 left-0 w-full h-1 bg-primary" />
       <CardHeader className="space-y-3 pb-6 text-center">
         <div className="mx-auto w-16 h-16 bg-muted border border-border rounded-2xl flex items-center justify-center mb-4">
