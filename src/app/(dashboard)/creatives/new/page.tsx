@@ -48,7 +48,7 @@ function NewCreativeContent() {
         </Link>
         <div>
           <h1 className="text-xl md:text-2xl font-bold tracking-tight text-foreground uppercase">
-            [ CREATE AD CREATIVE ASSET ]
+            CREATE AD CREATIVE ASSET
           </h1>
           {initialHook && (
             <p className="text-xs text-primary mt-1">
@@ -73,7 +73,7 @@ function NewCreativeContent() {
 
 export default function NewCreativePage() {
   return (
-    <Suspense fallback={<div className="p-12 text-center text-xs text-secondary">[ LOADING CREATIVE BUILDER... ]</div>}>
+    <Suspense fallback={<div className="p-12 text-center text-xs text-secondary">LOADING CREATIVE BUILDER... </div>}>
       <NewCreativeContent />
     </Suspense>
   )

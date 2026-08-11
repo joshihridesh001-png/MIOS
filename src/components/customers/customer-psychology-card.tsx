@@ -61,11 +61,11 @@ export function CustomerPsychologyCard({ customer }: CustomerPsychologyCardProps
   };
 
   return (
-    <div className="neo-flat border-none p-4 rounded-xl p-6 space-y-6 font-sans font-bold">
+    <div className="bg-card border border-border shadow-sm border-none p-4 rounded-xl p-6 space-y-6 font-sans font-bold">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border/40 pb-4">
         <div>
           <h3 className="text-sm font-bold tracking-wider uppercase text-primary">
-            [ PRE-SALE CONSUMER PSYCHOLOGY & POST-JOB CX ]
+            PRE-SALE CONSUMER PSYCHOLOGY & POST-JOB CX
           </h3>
           <p className="text-xs text-muted-foreground mt-1">
             Buyer trigger analysis, objection handling & quality improvement DATA
@@ -76,7 +76,7 @@ export function CustomerPsychologyCard({ customer }: CustomerPsychologyCardProps
           disabled={promoting}
           className="rounded-xl bg-primary text-primary-foreground font-bold uppercase tracking-wider hover:bg-primary/80 text-xs px-4"
         >
-          {promoting ? '[ PROMOTING... ]' : '[ PROMOTE TO LEARNING ]'}
+          {promoting ? 'PROMOTING...' : 'PROMOTE TO LEARNING'}
         </Button>
       </div>
 

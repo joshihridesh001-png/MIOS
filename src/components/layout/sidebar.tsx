@@ -81,8 +81,8 @@ export function Sidebar({ className, user }: SidebarProps) {
                 className={cn(
                   "flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 font-bold group",
                   isActive
-                    ? "neo-pressed text-primary"
-                    : "text-foreground hover:neo-flat"
+                    ? "bg-accent text-accent-foreground text-primary"
+                    : "text-foreground hover:bg-card border border-border shadow-sm"
                 )}
               >
                 <Icon
@@ -93,7 +93,7 @@ export function Sidebar({ className, user }: SidebarProps) {
                 />
                 <span className="truncate">{item.label}</span>
                 {isActive && (
-                  <div className="ml-auto w-2 h-2 rounded-full bg-primary shrink-0 neo-convex" />
+                  <div className="ml-auto w-2 h-2 rounded-full bg-primary shrink-0 bg-muted border border-border" />
                 )}
               </Link>
             )
@@ -106,15 +106,15 @@ export function Sidebar({ className, user }: SidebarProps) {
         <button
           type="button"
           onClick={handleSyncData}
-          className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl neo-interactive neo-flat text-foreground hover:text-primary font-bold tracking-wide uppercase transition-all"
+          className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl hover:bg-accent hover:text-accent-foreground transition-colors bg-card border border-border shadow-sm text-foreground hover:text-primary font-bold tracking-wide uppercase transition-all"
         >
           <ArrowsClockwise weight="duotone" className="w-4 h-4 text-primary" />
           <span>SYNC DATA</span>
         </button>
 
         {/* Executive Profile Card */}
-        <div className="flex items-center gap-3 p-3 rounded-3xl neo-flat">
-          <div className="w-10 h-10 neo-convex rounded-2xl flex items-center justify-center shrink-0">
+        <div className="flex items-center gap-3 p-3 rounded-3xl bg-card border border-border shadow-sm">
+          <div className="w-10 h-10 bg-muted border border-border rounded-2xl flex items-center justify-center shrink-0">
             <span className="font-bold text-primary">
               {user?.full_name ? user.full_name.slice(0, 2).toUpperCase() : "JD"}
             </span>
@@ -127,13 +127,13 @@ export function Sidebar({ className, user }: SidebarProps) {
               {user?.role?.replace("_", " ") || "CEO"}
             </div>
           </div>
-          <Shield className="w-5 h-5 text-primary ml-auto shrink-0 drop-shadow-md" />
+          <Shield className="w-5 h-5 text-primary ml-auto shrink-0 shadow-sm" />
         </div>
 
         <button
           type="button"
           onClick={handleSignOut}
-          className="w-full flex items-center justify-center gap-2 py-3 px-4 text-muted-foreground hover:text-destructive neo-interactive hover:neo-pressed rounded-2xl transition-all text-sm tracking-widest font-bold uppercase"
+          className="w-full flex items-center justify-center gap-2 py-3 px-4 text-muted-foreground hover:text-destructive hover:bg-accent hover:text-accent-foreground transition-colors hover:bg-accent text-accent-foreground rounded-2xl transition-all text-sm tracking-widest font-bold uppercase"
         >
           <SignOut weight="duotone" className="w-4 h-4" />
           <span>SIGN OUT</span>

@@ -65,7 +65,7 @@ export function CreativeQuickPaste({ onApplyParsedData }: CreativeQuickPasteProp
   }
 
   return (
-    <Card className="mb-6 bg-gradient-to-br from-emerald-950/40 via-card/80 to-card/60 border-emerald-500/30 backdrop-blur-xl shadow-lg">
+    <Card className="mb-6 bg-card /40 via-card/80 to-card/60 border-emerald-500/30 backdrop-blur-xl shadow-lg">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-base font-semibold text-emerald-400 flex items-center gap-2">

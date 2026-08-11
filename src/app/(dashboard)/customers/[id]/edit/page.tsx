@@ -46,7 +46,7 @@ export default function EditCustomerPage() {
   if (loading) {
     return (
       <div className="p-12 text-center font-sans font-bold text-xs text-muted-foreground">
-        [ LOADING RECORD FOR EDITING... ]
+        LOADING RECORD FOR EDITING...
       </div>
     );
   }

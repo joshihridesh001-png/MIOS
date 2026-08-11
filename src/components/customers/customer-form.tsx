@@ -101,7 +101,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
         <div className="flex items-center justify-between border-b border-border/40 pb-3">
           <div>
             <h3 className="text-sm font-bold uppercase text-primary tracking-wider">
-              [ AI QUICK-PASTE: RAW WHATSAPP / CALL / CX SURVEY NOTE PARSER ]
+              AI QUICK-PASTE: RAW WHATSAPP / CALL / CX SURVEY NOTE PARSER
             </h3>
             <p className="text-xs text-muted-foreground mt-1">
               Paste customer WhatsApp chat logs, sales call transcripts, or technician survey notes to auto-extract psychology & CX metrics.
@@ -112,7 +112,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
             onClick={handleQuickPasteParse}
             className="rounded-xl bg-primary text-primary-foreground font-bold uppercase tracking-wider hover:bg-primary/80 text-xs px-4"
           >
-            [ AI QUICK-PASTE PARSE ]
+            AI QUICK-PASTE PARSE
           </Button>
         </div>
         <Textarea
@@ -299,7 +299,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
           disabled={loading}
           className="rounded-xl bg-primary text-primary-foreground font-bold uppercase tracking-wider hover:bg-primary/80 px-8"
         >
-          {loading ? '[ SAVING... ]' : '[ COMMIT CUSTOMER RECORD ]'}
+          {loading ? 'SAVING...' : 'COMMIT CUSTOMER RECORD'}
         </Button>
       </div>
     </form>

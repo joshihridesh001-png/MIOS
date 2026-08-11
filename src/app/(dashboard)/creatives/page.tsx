@@ -46,7 +46,7 @@ export default function CreativesPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-xl md:text-2xl font-bold tracking-wider uppercase text-foreground font-sans font-bold flex items-center gap-2">
-            <TextReveal text="[ CREATIVE PERFORMANCE & ASSET LIBRARY ]" />
+            <TextReveal text="CREATIVE PERFORMANCE & ASSET LIBRARY" />
             <span className="text-[10px] font-sans font-bold px-2 py-0.5 rounded-xl bg-primary/10 text-primary border border-primary/30">
               SLICE 2
             </span>
@@ -174,7 +174,7 @@ export default function CreativesPage() {
           <div className="w-12 h-12 mx-auto rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-xs mb-3 border border-primary/30">
             [0]
           </div>
-          <h3 className="text-base font-semibold text-foreground uppercase tracking-wider">[ NO CREATIVES LOGGED ]</h3>
+          <h3 className="text-base font-semibold text-foreground uppercase tracking-wider">NO CREATIVES LOGGED </h3>
           <p className="text-xs text-muted-foreground mt-1 max-w-sm mx-auto">
             {searchQuery || formatFilter !== 'all' || angleFilter !== 'all' || statusFilter !== 'all'
               ? 'No creatives match your filter criteria. Try clearing filters.'

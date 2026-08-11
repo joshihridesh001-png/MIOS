@@ -22,7 +22,7 @@ export function CreativePreviewBox({ creative }: CreativePreviewBoxProps) {
       {/* Social Feed Header */}
       <div className="p-4 flex items-center justify-between border-b border-border/80">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-foreground font-bold text-lg shadow-md">
+          <div className="w-10 h-10 rounded-full bg-card   flex items-center justify-center text-foreground font-bold text-lg shadow-md">
             M
           </div>
           <div>
@@ -50,7 +50,7 @@ export function CreativePreviewBox({ creative }: CreativePreviewBoxProps) {
       </div>
 
       {/* Visual Asset Area */}
-      <div className="relative w-full aspect-[4/3] bg-gradient-to-br from-zinc-800 via-zinc-900 to-black flex flex-col items-center justify-center p-6 border-y border-border">
+      <div className="relative w-full aspect-[4/3] bg-card  via-zinc-900 to-black flex flex-col items-center justify-center p-6 border-y border-border">
         {creative.asset_url ? (
           <img
             src={creative.asset_url}

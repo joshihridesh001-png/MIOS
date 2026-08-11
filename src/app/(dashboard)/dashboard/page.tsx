@@ -104,14 +104,14 @@ export default function DashboardPage() {
         onPlatformFilterChange={setPlatformFilter}
       />
 
-      {/* 2. Realtime Benchmark Breaches & Scale Opportunities */}
+      {/* 2. Alerts */}
       <BenchmarkAlerts alerts={alerts} />
 
       {/* 3. Executive Financial & Conversion KPIs */}
       {loading ? (
-        <div className="p-12 text-center neo-flat border-none">
+        <div className="p-12 text-center bg-card border border-border shadow-sm border-none">
           <div className="font-sans font-bold text-xs uppercase text-primary animate-pulse">
-            [ SYNCHRONIZING REALTIME MARKETING DATA... ]
+            SYNCHRONIZING REALTIME MARKETING DATA...
           </div>
         </div>
       ) : (
@@ -124,12 +124,12 @@ export default function DashboardPage() {
           <div className="flex items-center gap-2">
             <Cpu weight="duotone" className="w-4 h-4 text-primary" />
             <span className="text-xs font-bold text-foreground">
-              [ REALTIME ENTERPRISE INTELLIGENCE PIPELINES ]
+              REALTIME ENTERPRISE INTELLIGENCE PIPELINES
             </span>
           </div>
           <Badge
             variant="outline"
-            className="rounded-xl font-sans font-bold text-[10px] uppercase neo-pressed border-none text-muted-foreground"
+            className="rounded-xl font-sans font-bold text-[10px] uppercase bg-accent text-accent-foreground border-none text-muted-foreground"
           >
             4 PILLARS ACTIVE
           </Badge>
@@ -148,11 +148,11 @@ export default function DashboardPage() {
         <div className="flex items-center gap-2">
           <TerminalWindow weight="duotone" className="w-4 h-4 text-primary" />
           <span className="text-xs font-bold text-foreground">
-            [ EXECUTIVE DIAGNOSTICS & DATA SYNTHESIS ]
+            EXECUTIVE DIAGNOSTICS & DATA SYNTHESIS
           </span>
         </div>
 
-        <div className="neo-flat border-none p-4 space-y-3">
+        <div className="bg-card border border-border shadow-sm border-none p-4 space-y-3">
           {EXECUTIVE_DIAGNOSTICS.map((item, idx) => (
             <MotionAccordion
               key={item.id}

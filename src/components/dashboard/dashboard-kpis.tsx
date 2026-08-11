@@ -42,7 +42,7 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
       {/* 1. Total Revenue Generated */}
       <div className="h-full">
         <TiltCard className="h-full">
-        <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
+        <div className="p-5 bg-card border border-border shadow-sm border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-muted-foreground font-bold">
@@ -67,7 +67,7 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
       {/* 2. Net Profit */}
       <div className="h-full">
         <TiltCard className="h-full">
-        <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
+        <div className="p-5 bg-card border border-border shadow-sm border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-muted-foreground font-bold">
@@ -107,7 +107,7 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
       {/* 3. Blended ROAS */}
       <div className="h-full">
         <TiltCard className="h-full">
-        <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
+        <div className="p-5 bg-card border border-border shadow-sm border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-muted-foreground font-bold">
@@ -143,7 +143,7 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
       {/* 4. Total Marketing Spend */}
       <div className="h-full">
         <TiltCard className="h-full">
-        <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
+        <div className="p-5 bg-card border border-border shadow-sm border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-muted-foreground font-bold">
@@ -168,7 +168,7 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
       {/* 5. Customers Won & Conversion Rate */}
       <div className="h-full">
         <TiltCard className="h-full">
-        <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
+        <div className="p-5 bg-card border border-border shadow-sm border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-muted-foreground font-bold">
@@ -198,7 +198,7 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
       {/* 6. Active Experiments (LABS) */}
       <div className="h-full">
         <TiltCard className="h-full">
-        <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
+        <div className="p-5 bg-card border border-border shadow-sm border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-muted-foreground font-bold">
@@ -223,7 +223,7 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
       {/* 7. Verified Institutional Rules (/knowledge) */}
       <div className="h-full">
         <TiltCard className="h-full">
-        <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
+        <div className="p-5 bg-card border border-border shadow-sm border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-muted-foreground font-bold">
@@ -251,7 +251,7 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
       {/* 8. Post-Job CX Rating Score */}
       <div className="h-full">
         <TiltCard className="h-full">
-        <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
+        <div className="p-5 bg-card border border-border shadow-sm border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-muted-foreground font-bold">

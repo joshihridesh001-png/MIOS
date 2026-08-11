@@ -96,3 +96,10 @@
 ## Pending Decisions
 
 _None at this time._
+
+### Architectural Decision Record: Anti-Vibecoding Enforcement
+
+- **Date:** 2026-08-11
+- **Decision:** Removed all theatrical command-center styling (neumorphism, gradients, dramatic text) and enforced ANTI_VIBECODING_STANDARDS.md as the active standard.
+- **Visuals:** Gradients are strictly prohibited. Solid accent colors are allowed for status indicators. Glows and glass effects are minimized for a calm, professional appearance.
+- **Tone:** Labels and UI text must use standard SaaS terminology (e.g. Dashboard, Alerts, Recommendations) instead of faux-military/hacker jargon.

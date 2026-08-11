@@ -36,7 +36,7 @@ export default function CustomersPage() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border/50 pb-4">
         <div>
           <h1 className="text-xl font-bold tracking-wider uppercase text-foreground">
-            <TextReveal text="[ CONSUMER PSYCHOLOGY & BUYER RESEARCH ENGINE ]" />
+            <TextReveal text="CONSUMER PSYCHOLOGY & BUYER RESEARCH ENGINE" />
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
             Customer attribution, post-job CX DATA & active growth experiment collaborator (LABS)
@@ -83,7 +83,7 @@ export default function CustomersPage() {
         <div className="space-y-4">
           {loadingCust ? (
             <div className="p-12 text-center text-muted-foreground text-xs">
-              [ LOADING CUSTOMER DATA... ]
+              LOADING CUSTOMER DATA...
             </div>
           ) : (
             <CustomerTable customers={customers} onDelete={handleDelete} />
@@ -93,7 +93,7 @@ export default function CustomersPage() {
         <div className="space-y-6">
           {loadingPers ? (
             <div className="p-12 text-center text-muted-foreground text-xs">
-              [ SYNTHESIZING BUYER PERSONAS... ]
+              SYNTHESIZING BUYER PERSONAS...
             </div>
           ) : personas.length === 0 ? (
             <div className="p-12 text-center border border-border/50 bg-card/80 rounded-xl text-muted-foreground text-xs">

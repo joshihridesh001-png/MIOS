@@ -39,7 +39,7 @@ export function PipelineGrid({
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {/* Pillar 1: Top Performing Campaigns */}
       <TiltCard className="h-full">
-        <div className="p-5 neo-flat border-none rounded-2xl hover:border-border transition-colors h-full flex flex-col justify-between">
+        <div className="p-5 bg-card border border-border shadow-sm border-none rounded-2xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-border">
               <div className="flex items-center gap-2">
@@ -52,7 +52,7 @@ export function PipelineGrid({
                 href="/campaigns"
                 className="text-[10px] font-sans font-bold text-muted-foreground font-bold hover:text-primary flex items-center gap-0.5 uppercase"
               >
-                <span>[ ALL ]</span>
+                <span>ALL </span>
                 <ArrowUpRight className="w-3 h-3" />
               </Link>
             </div>
@@ -65,7 +65,7 @@ export function PipelineGrid({
             >
               {topCampaigns.length === 0 ? (
                 <p className="text-xs font-sans font-bold text-zinc-600 uppercase py-4 text-center">
-                  [ NO CAMPAIGNS IN WINDOW ]
+                  NO CAMPAIGNS IN WINDOW
                 </p>
               ) : (
                 topCampaigns.map((camp) => (
@@ -106,7 +106,7 @@ export function PipelineGrid({
 
       {/* Pillar 2: Active A/B Experiments (LABS) */}
       <TiltCard className="h-full">
-        <div className="p-5 neo-flat border-none rounded-2xl hover:border-border transition-colors h-full flex flex-col justify-between">
+        <div className="p-5 bg-card border border-border shadow-sm border-none rounded-2xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-border">
               <div className="flex items-center gap-2">
@@ -119,7 +119,7 @@ export function PipelineGrid({
                 href="/experiments"
                 className="text-[10px] font-sans font-bold text-muted-foreground font-bold hover:text-purple-400 flex items-center gap-0.5 uppercase"
               >
-                <span>[ LABS ]</span>
+                <span>LABS </span>
                 <ArrowUpRight className="w-3 h-3" />
               </Link>
             </div>
@@ -132,7 +132,7 @@ export function PipelineGrid({
             >
               {activeExperiments.length === 0 ? (
                 <p className="text-xs font-sans font-bold text-zinc-600 uppercase py-4 text-center">
-                  [ NO EXPERIMENTS IN LABS ]
+                  NO EXPERIMENTS IN LABS
                 </p>
               ) : (
                 activeExperiments.map((exp) => (
@@ -177,7 +177,7 @@ export function PipelineGrid({
 
       {/* Pillar 3: Verified Rules (/knowledge) */}
       <TiltCard className="h-full">
-        <div className="p-5 neo-flat border-none rounded-2xl hover:border-border transition-colors h-full flex flex-col justify-between">
+        <div className="p-5 bg-card border border-border shadow-sm border-none rounded-2xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-border">
               <div className="flex items-center gap-2">
@@ -190,7 +190,7 @@ export function PipelineGrid({
                 href="/knowledge"
                 className="text-[10px] font-sans font-bold text-muted-foreground font-bold hover:text-primary flex items-center gap-0.5 uppercase"
               >
-                <span>[ VAULT ]</span>
+                <span>VAULT </span>
                 <ArrowUpRight className="w-3 h-3" />
               </Link>
             </div>
@@ -203,7 +203,7 @@ export function PipelineGrid({
             >
               {topRules.length === 0 ? (
                 <p className="text-xs font-sans font-bold text-zinc-600 uppercase py-4 text-center">
-                  [ VAULT EMPTY ]
+                  VAULT EMPTY
                 </p>
               ) : (
                 topRules.map((rule) => (
@@ -236,7 +236,7 @@ export function PipelineGrid({
               href="/knowledge"
               className="text-[10px] font-sans font-bold uppercase text-primary hover:underline"
             >
-              [ OPEN KNOWLEDGE VAULT ]
+              OPEN KNOWLEDGE VAULT
             </Link>
           </div>
         </div>
@@ -244,7 +244,7 @@ export function PipelineGrid({
 
       {/* Pillar 4: Customer Psychology Profiles (/customers) */}
       <TiltCard className="h-full">
-        <div className="p-5 neo-flat border-none rounded-2xl hover:border-border transition-colors h-full flex flex-col justify-between">
+        <div className="p-5 bg-card border border-border shadow-sm border-none rounded-2xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-border">
               <div className="flex items-center gap-2">
@@ -257,7 +257,7 @@ export function PipelineGrid({
                 href="/customers"
                 className="text-[10px] font-sans font-bold text-muted-foreground font-bold hover:text-amber-400 flex items-center gap-0.5 uppercase"
               >
-                <span>[ PERSONAS ]</span>
+                <span>PERSONAS </span>
                 <ArrowUpRight className="w-3 h-3" />
               </Link>
             </div>
@@ -270,7 +270,7 @@ export function PipelineGrid({
             >
               {recentCustomers.length === 0 ? (
                 <p className="text-xs font-sans font-bold text-zinc-600 uppercase py-4 text-center">
-                  [ NO CUSTOMER DATA ]
+                  NO CUSTOMER DATA
                 </p>
               ) : (
                 recentCustomers.map((cust) => (

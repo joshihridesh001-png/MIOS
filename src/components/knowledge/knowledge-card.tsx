@@ -149,7 +149,7 @@ export function KnowledgeCard({
                 className="h-7 px-2.5 rounded-xl font-sans font-bold text-[10px] tracking-wider border-border bg-muted/60 hover:bg-primary/10 hover:border-[#00dbe9] hover:text-[#00dbe9] transition-all"
               >
                 <Check weight="duotone" className="w-3 h-3 mr-1" />
-                [ CONFIRM ]
+                CONFIRM
               </Button>
               <Button
                 variant="outline"
@@ -158,7 +158,7 @@ export function KnowledgeCard({
                 className="h-7 px-2.5 rounded-xl font-sans font-bold text-[10px] tracking-wider border-border bg-muted/40 text-muted-foreground hover:bg-rose-500/10 hover:border-rose-500/50 hover:text-rose-400 transition-all"
               >
                 <X weight="duotone" className="w-3 h-3 mr-1" />
-                [ CONTRADICT ]
+                CONTRADICT
               </Button>
             </div>
 
@@ -167,7 +167,7 @@ export function KnowledgeCard({
                 onClick={() => onDelete(learning.id)}
                 className="text-[10px] font-sans font-bold uppercase text-zinc-600 hover:text-rose-500 transition-colors px-2 py-1"
               >
-                [ REMOVE ]
+                REMOVE
               </button>
             )}
           </div>

@@ -5,15 +5,15 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-full border border-transparent font-medium whitespace-nowrap outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 neo-interactive",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-full border border-transparent font-medium whitespace-nowrap outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 hover:bg-accent hover:text-accent-foreground transition-colors",
   {
     variants: {
       variant: {
         default: "neo-primary text-primary-foreground font-bold",
-        outline: "neo-flat text-foreground hover:text-primary",
+        outline: "bg-card border border-border shadow-sm text-foreground hover:text-primary",
         secondary: "neo-secondary text-secondary-foreground font-bold",
-        ghost: "hover:neo-flat text-foreground",
-        destructive: "neo-flat bg-destructive/10 text-destructive font-bold hover:bg-destructive/20",
+        ghost: "hover:bg-card border border-border shadow-sm text-foreground",
+        destructive: "bg-card border border-border shadow-sm bg-destructive/10 text-destructive font-bold hover:bg-destructive/20",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {

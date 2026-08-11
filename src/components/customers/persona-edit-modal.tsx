@@ -104,14 +104,14 @@ export function PersonaEditModal({ persona, isOpen, onClose, onSave }: PersonaEd
               onClick={onClose}
               className="rounded-xl text-xs uppercase"
             >
-              [ CANCEL ]
+              CANCEL
             </Button>
             <Button
               type="submit"
               disabled={saving}
               className="rounded-xl bg-primary text-primary-foreground font-bold uppercase hover:bg-primary/80 text-xs px-6"
             >
-              {saving ? '[ SAVING... ]' : '[ APPLY OVERRIDES ]'}
+              {saving ? 'SAVING...' : 'APPLY OVERRIDES'}
             </Button>
           </div>
         </form>

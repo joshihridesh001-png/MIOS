@@ -62,7 +62,7 @@ export function DashboardHeader({
         </div>
 
         <TextReveal
-          text="[ MIOS DASHBOARD ]"
+          text="Dashboard"
           mode="word"
           staggerDelay={40}
           className="text-2xl md:text-3xl font-bold uppercase tracking-tight text-foreground"
@@ -74,7 +74,7 @@ export function DashboardHeader({
       </div>
 
       {/* Date & Platform Filters Toolbar */}
-      <div className="flex flex-wrap items-center gap-3 neo-flat p-2 border-none rounded-2xl">
+      <div className="flex flex-wrap items-center gap-3 bg-card border border-border shadow-sm p-2 border-none rounded-2xl">
         <div className="flex items-center gap-1.5">
           <span className="text-[10px] font-bold text-muted-foreground uppercase">
             PERIOD:
@@ -86,7 +86,7 @@ export function DashboardHeader({
                 onClick={() => onDateFilterChange(opt.value)}
                 className={`px-2.5 py-1 text-xs font-sans font-bold uppercase transition-all ${
                   dateFilter === opt.value
-                    ? 'bg-primary text-primary-foreground font-bold neo-pressed rounded-xl'
+                    ? 'bg-primary text-primary-foreground font-bold bg-accent text-accent-foreground rounded-xl'
                     : 'bg-transparent text-muted-foreground hover:text-foreground font-bold hover:bg-muted rounded-xl'
                 }`}
               >
@@ -106,10 +106,10 @@ export function DashboardHeader({
             value={platformFilter}
             onValueChange={(v) => onPlatformFilterChange(v as PlatformFilter)}
           >
-            <SelectTrigger className="w-36 h-8 neo-pressed border-none font-bold text-xs uppercase text-foreground rounded-xl">
+            <SelectTrigger className="w-36 h-8 bg-accent text-accent-foreground border-none font-bold text-xs uppercase text-foreground rounded-xl">
               <SelectValue placeholder="Platform" />
             </SelectTrigger>
-            <SelectContent className="neo-flat border-none rounded-xl">
+            <SelectContent className="bg-card border border-border shadow-sm border-none rounded-xl">
               {PLATFORM_OPTIONS.map((p) => (
                 <SelectItem
                   key={p.value}

@@ -71,15 +71,15 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
   if (loading) {
     return (
       <div className="space-y-6 max-w-7xl mx-auto animate-pulse">
-        <div className="h-12 w-64 neo-flat rounded-xl" />
-        <div className="h-96 neo-flat/60 rounded-xl" />
+        <div className="h-12 w-64 bg-card border border-border shadow-sm rounded-xl" />
+        <div className="h-96 bg-card border border-border shadow-sm/60 rounded-xl" />
       </div>
     )
   }
 
   if (error || !experiment) {
     return (
-      <div className="p-8 text-center neo-flat border-none rounded-xl">
+      <div className="p-8 text-center bg-card border border-border shadow-sm border-none rounded-xl">
         <p className="text-red-400 font-medium text-sm">
           {error ? error.message : "Experiment not found."}
         </p>
@@ -114,7 +114,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
         <div className="flex items-center gap-3">
           <Link
             href="/experiments"
-            className="p-2 neo-flat border-none hover:bg-zinc-800 text-muted-foreground hover:text-foreground rounded-xl transition-colors"
+            className="p-2 bg-card border border-border shadow-sm border-none hover:bg-zinc-800 text-muted-foreground hover:text-foreground rounded-xl transition-colors"
           >
             <ArrowLeft weight="duotone" className="w-4 h-4" />
           </Link>
@@ -156,7 +156,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
             size="sm"
             onClick={handleToggleStatus}
             disabled={statusLoading}
-            className="text-xs h-9 px-4 neo-flat border-border hover:bg-zinc-800 text-foreground font-medium rounded-xl"
+            className="text-xs h-9 px-4 bg-card border border-border shadow-sm border-border hover:bg-zinc-800 text-foreground font-medium rounded-xl"
           >
             {isRunning ? (
               <>
@@ -203,7 +203,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
           )}
 
           {/* Hypothesis */}
-          <div className="p-5 neo-flat border-none rounded-xl">
+          <div className="p-5 bg-card border border-border shadow-sm border-none rounded-xl">
             <div className="flex items-center justify-between border-b border-border pb-3 mb-4">
               <span className="text-sm font-semibold text-foreground">Hypothesis & Configuration</span>
               <span className="text-xs font-medium text-muted-foreground">Primary Metric: <span className="text-emerald-500 font-bold uppercase">{experiment.primary_metric}</span></span>
@@ -232,7 +232,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
           </div>
 
           {/* Side-by-side Metrics Comparison */}
-          <div className="p-5 neo-flat border-none rounded-xl">
+          <div className="p-5 bg-card border border-border shadow-sm border-none rounded-xl">
             <div className="flex items-center justify-between border-b border-border pb-3 mb-4">
               <span className="text-sm font-semibold text-foreground">Variant Performance</span>
             </div>
@@ -246,7 +246,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                       90-Day Best
                       {baselineLoading && <span className="ml-2 animate-pulse">...</span>}
                     </th>
-                    <th className="py-3 px-4 font-medium neo-flat/30">Control</th>
+                    <th className="py-3 px-4 font-medium bg-card border border-border shadow-sm/30">Control</th>
                     <th className="py-3 px-4 font-medium border-l border-border">Variant A</th>
                     {experiment.variant_b_name && (
                       <th className="py-3 px-4 font-medium border-l border-border">Variant B</th>
@@ -254,10 +254,10 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-zinc-800/50">
-                  <tr className="hover:neo-flat/30">
+                  <tr className="hover:bg-card border border-border shadow-sm/30">
                     <td className="py-3 px-4 font-medium text-muted-foreground">Name</td>
                     <td className="py-3 px-4 text-emerald-400/70 bg-emerald-950/10 border-r border-border text-xs">Historical Baseline</td>
-                    <td className="py-3 px-4 text-foreground neo-flat/30">{experiment.control_name || "Control"}</td>
+                    <td className="py-3 px-4 text-foreground bg-card border border-border shadow-sm/30">{experiment.control_name || "Control"}</td>
                     <td className="py-3 px-4 text-foreground border-l border-border">{experiment.variant_a_name || "Variant A"}</td>
                     {experiment.variant_b_name && (
                       <td className="py-3 px-4 text-foreground border-l border-border">{experiment.variant_b_name}</td>
@@ -265,34 +265,34 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                   </tr>
                   
                   {/* Base Metrics */}
-                  <tr className="hover:neo-flat/30">
+                  <tr className="hover:bg-card border border-border shadow-sm/30">
                     <td className="py-3 px-4 font-medium text-muted-foreground">Spend</td>
                     <td className="py-3 px-4 text-emerald-400 bg-emerald-950/10 border-r border-border font-sans font-bold">
                       {baseline ? `$${baseline.spend.toLocaleString()}` : '-'}
                     </td>
-                    <td className="py-3 px-4 text-foreground neo-flat/30 font-sans font-bold">${experiment.control_spend?.toLocaleString() || 0}</td>
+                    <td className="py-3 px-4 text-foreground bg-card border border-border shadow-sm/30 font-sans font-bold">${experiment.control_spend?.toLocaleString() || 0}</td>
                     <td className="py-3 px-4 text-foreground border-l border-border font-sans font-bold">${experiment.variant_a_spend?.toLocaleString() || 0}</td>
                     {experiment.variant_b_name && (
                       <td className="py-3 px-4 text-foreground border-l border-border font-sans font-bold">${experiment.variant_b_spend?.toLocaleString() || 0}</td>
                     )}
                   </tr>
-                  <tr className="hover:neo-flat/30">
+                  <tr className="hover:bg-card border border-border shadow-sm/30">
                     <td className="py-3 px-4 font-medium text-muted-foreground">Impressions</td>
                     <td className="py-3 px-4 text-emerald-400 bg-emerald-950/10 border-r border-border font-sans font-bold">
                       {baseline ? baseline.impressions.toLocaleString() : '-'}
                     </td>
-                    <td className="py-3 px-4 text-foreground neo-flat/30 font-sans font-bold">{experiment.control_impressions?.toLocaleString() || 0}</td>
+                    <td className="py-3 px-4 text-foreground bg-card border border-border shadow-sm/30 font-sans font-bold">{experiment.control_impressions?.toLocaleString() || 0}</td>
                     <td className="py-3 px-4 text-foreground border-l border-border font-sans font-bold">{experiment.variant_a_impressions?.toLocaleString() || 0}</td>
                     {experiment.variant_b_name && (
                       <td className="py-3 px-4 text-foreground border-l border-border font-sans font-bold">{experiment.variant_b_impressions?.toLocaleString() || 0}</td>
                     )}
                   </tr>
-                  <tr className="hover:neo-flat/30">
+                  <tr className="hover:bg-card border border-border shadow-sm/30">
                     <td className="py-3 px-4 font-medium text-muted-foreground">Conversions</td>
                     <td className="py-3 px-4 text-emerald-400 bg-emerald-950/10 border-r border-border font-sans font-bold">
                       {baseline ? Math.round((baseline.cvr / 100) * (baseline.impressions * (baseline.ctr / 100))).toLocaleString() || '-' : '-'}
                     </td>
-                    <td className="py-3 px-4 text-foreground neo-flat/30 font-sans font-bold">{experiment.control_conversions?.toLocaleString() || 0}</td>
+                    <td className="py-3 px-4 text-foreground bg-card border border-border shadow-sm/30 font-sans font-bold">{experiment.control_conversions?.toLocaleString() || 0}</td>
                     <td className="py-3 px-4 text-foreground border-l border-border font-sans font-bold">{experiment.variant_a_conversions?.toLocaleString() || 0}</td>
                     {experiment.variant_b_name && (
                       <td className="py-3 px-4 text-foreground border-l border-border font-sans font-bold">{experiment.variant_b_conversions?.toLocaleString() || 0}</td>
@@ -300,17 +300,17 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                   </tr>
 
                   {/* Calculated Rates */}
-                  <tr className="border-t border-border neo-flat/50">
+                  <tr className="border-t border-border bg-card border border-border shadow-sm/50">
                     <td colSpan={5} className="py-1 px-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
                       Calculated Rates
                     </td>
                   </tr>
-                  <tr className="hover:neo-flat/30">
+                  <tr className="hover:bg-card border border-border shadow-sm/30">
                     <td className="py-3 px-4 font-medium text-foreground">CTR</td>
                     <td className="py-3 px-4 text-emerald-400 font-bold bg-emerald-950/20 border-r border-border">
                       {baseline ? `${baseline.ctr}%` : '-'}
                     </td>
-                    <td className="py-3 px-4 text-foreground neo-flat/30">
+                    <td className="py-3 px-4 text-foreground bg-card border border-border shadow-sm/30">
                       {experiment.control_impressions ? ((experiment.control_clicks / experiment.control_impressions) * 100).toFixed(2) : 0}%
                     </td>
                     <td className="py-3 px-4 text-foreground border-l border-border">
@@ -322,12 +322,12 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                       </td>
                     )}
                   </tr>
-                  <tr className="hover:neo-flat/30">
+                  <tr className="hover:bg-card border border-border shadow-sm/30">
                     <td className="py-3 px-4 font-medium text-foreground">CVR</td>
                     <td className="py-3 px-4 text-emerald-400 font-bold bg-emerald-950/20 border-r border-border">
                       {baseline ? `${baseline.cvr}%` : '-'}
                     </td>
-                    <td className="py-3 px-4 text-foreground neo-flat/30">
+                    <td className="py-3 px-4 text-foreground bg-card border border-border shadow-sm/30">
                       {experiment.control_clicks ? ((experiment.control_conversions / experiment.control_clicks) * 100).toFixed(2) : 0}%
                     </td>
                     <td className="py-3 px-4 text-foreground border-l border-border">
@@ -339,12 +339,12 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                       </td>
                     )}
                   </tr>
-                  <tr className="hover:neo-flat/30">
+                  <tr className="hover:bg-card border border-border shadow-sm/30">
                     <td className="py-3 px-4 font-medium text-foreground">CPA</td>
                     <td className="py-3 px-4 text-emerald-400 font-bold bg-emerald-950/20 border-r border-border">
                       {baseline ? `$${baseline.cpa}` : '-'}
                     </td>
-                    <td className="py-3 px-4 text-foreground neo-flat/30">
+                    <td className="py-3 px-4 text-foreground bg-card border border-border shadow-sm/30">
                       ${experiment.control_conversions ? (experiment.control_spend / experiment.control_conversions).toFixed(2) : 0}
                     </td>
                     <td className="py-3 px-4 text-foreground border-l border-border">
@@ -360,14 +360,14 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
               </table>
             </div>
             {!hasVariants && (
-              <div className="mt-4 p-3 neo-flat border-none rounded-xl text-sm text-muted-foreground text-center">
+              <div className="mt-4 p-3 bg-card border border-border shadow-sm border-none rounded-xl text-sm text-muted-foreground text-center">
                 Add results using the Update Data button to see variant comparisons.
               </div>
             )}
           </div>
 
           {/* Decision Notes */}
-          <div className="p-5 neo-flat border-none rounded-xl">
+          <div className="p-5 bg-card border border-border shadow-sm border-none rounded-xl">
             <div className="text-sm font-semibold text-foreground border-b border-border pb-3 mb-4">
               Decision Log
             </div>
@@ -383,7 +383,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                         "text-sm p-3 rounded-xl border",
                         isAlert ? "bg-red-950/20 border-red-900/50 text-red-400" 
                         : isSuccess ? "bg-emerald-950/20 border-emerald-900/50 text-emerald-400" 
-                        : "neo-flat/50 border-border text-foreground"
+                        : "bg-card border border-border shadow-sm/50 border-border text-foreground"
                       )}
                     >
                       {note.replace(/^([!>]\s*)/, "")}
@@ -392,7 +392,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                 })}
               </div>
             ) : (
-              <div className="p-4 text-center text-sm text-muted-foreground neo-flat/30 border-none rounded-xl">
+              <div className="p-4 text-center text-sm text-muted-foreground bg-card border border-border shadow-sm/30 border-none rounded-xl">
                 No decision notes recorded yet.
               </div>
             )}
@@ -402,7 +402,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
         {/* Right Column (1/3) */}
         <div className="space-y-6">
           {/* Confidence Meter Card */}
-          <div className="p-5 neo-flat border-none rounded-xl">
+          <div className="p-5 bg-card border border-border shadow-sm border-none rounded-xl">
             <div className="flex items-center justify-between border-b border-border pb-3 mb-4">
               <span className="text-sm font-semibold text-foreground">Confidence Metric</span>
               <span className={cn(
@@ -414,7 +414,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
             </div>
 
             <div className="space-y-4">
-              <div className="w-full h-2 neo-flat rounded-full overflow-hidden">
+              <div className="w-full h-2 bg-card border border-border shadow-sm rounded-full overflow-hidden">
                 <div
                   className={cn(
                     "h-full rounded-full transition-all",
@@ -439,7 +439,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
           </div>
 
           {/* DATA Summary Card */}
-          <div className="p-5 neo-flat border-none rounded-xl">
+          <div className="p-5 bg-card border border-border shadow-sm border-none rounded-xl">
             <div className="text-sm font-semibold text-foreground border-b border-border pb-3 mb-4">
               Experiment Data
             </div>

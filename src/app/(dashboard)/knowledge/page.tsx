@@ -87,7 +87,7 @@ export default function KnowledgeBasePage() {
           </div>
 
           <TextReveal
-            text="[ INSTITUTIONAL KNOWLEDGE BASE & INTEL VAULT ]"
+            text="INSTITUTIONAL KNOWLEDGE BASE & INTEL VAULT"
             mode="word"
             staggerDelay={40}
             className="text-2xl md:text-3xl font-sans font-bold uppercase tracking-tight text-foreground font-bold"
@@ -203,13 +203,13 @@ export default function KnowledgeBasePage() {
       {loading ? (
         <div className="p-12 text-center border border-border bg-background">
           <div className="font-sans font-bold text-xs uppercase text-primary animate-pulse">
-            [ SYNCHRONIZING INSTITUTIONAL KNOWLEDGE BASE... ]
+            SYNCHRONIZING INSTITUTIONAL KNOWLEDGE BASE...
           </div>
         </div>
       ) : filteredLearnings.length === 0 ? (
         <div className="p-16 text-center border border-border bg-background space-y-4">
           <div className="font-bold font-sans text-sm uppercase text-muted-foreground">
-            [ NO RULES MATCHING SPECIFIED FILTER IN VAULT ]
+            NO RULES MATCHING SPECIFIED FILTER IN VAULT
           </div>
           <p className="text-xs text-zinc-600 font-sans max-w-md mx-auto">
             Log your first marketing rule, customer psychology trigger, or operational STRATEGY to start compounding institutional intelligence.

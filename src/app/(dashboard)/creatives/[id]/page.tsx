@@ -245,10 +245,10 @@ export default function CreativeDetailPage({ params }: CreativeDetailPageProps) 
                   className={cn(
                     'h-full rounded-full transition-all duration-700',
                     isFatigued
-                      ? 'bg-gradient-to-r from-red-500 to-rose-600'
+                      ? 'bg-card  '
                       : isTesting
-                      ? 'bg-gradient-to-r from-amber-500 to-orange-500'
-                      : 'bg-gradient-to-r from-emerald-500 to-teal-400'
+                      ? 'bg-card  '
+                      : 'bg-card  '
                   )}
                   style={{ width: `${Math.min(fatigueScore, 100)}%` }}
                 />

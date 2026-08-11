@@ -42,7 +42,7 @@ export function Header({ user }: HeaderProps) {
         </Sheet>
         
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 bg-gradient-to-br from-emerald-500 to-teal-600 rounded flex items-center justify-center">
+          <div className="w-6 h-6 bg-card   rounded flex items-center justify-center">
             <span className="text-xs font-bold text-foreground">M</span>
           </div>
           <span className="text-lg font-bold text-foreground">MIOS</span>

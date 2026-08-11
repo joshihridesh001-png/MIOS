@@ -20,7 +20,7 @@ interface CustomerTableProps {
 export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
   if (!customers || customers.length === 0) {
     return (
-      <div className="p-12 text-center neo-flat border-none p-4 rounded-xl">
+      <div className="p-12 text-center bg-card border border-border shadow-sm border-none p-4 rounded-xl">
         <p className="text-muted-foreground font-bold font-sans text-sm uppercase tracking-wider mb-4">
           [NO CUSTOMER RECORDS DETECTED IN DATABASE]
         </p>
@@ -34,7 +34,7 @@ export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
   }
 
   return (
-    <div className="w-full overflow-x-auto neo-flat border-none p-4 rounded-xl">
+    <div className="w-full overflow-x-auto bg-card border border-border shadow-sm border-none p-4 rounded-xl">
       <table className="w-full text-left border-collapse font-bold font-sans text-sm">
         <thead>
           <tr className="border-b border-border/50 bg-secondary-fixed/30 text-foreground font-bold uppercase text-xs tracking-wider">

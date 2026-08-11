@@ -17,12 +17,12 @@ export function ThemeToggle() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" size="icon" className="neo-flat rounded-full" />}>
+      <DropdownMenuTrigger render={<Button variant="outline" size="icon" className="bg-card border border-border shadow-sm rounded-full" />}>
           <Sun weight="duotone" className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon weight="duotone" className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="neo-flat border-none rounded-2xl p-2 min-w-[120px]">
+      <DropdownMenuContent align="end" className="bg-card border border-border shadow-sm border-none rounded-2xl p-2 min-w-[120px]">
         <DropdownMenuItem onClick={() => setTheme("light")} className="rounded-xl font-bold cursor-pointer hover:bg-muted focus:bg-muted">
           Light
         </DropdownMenuItem>

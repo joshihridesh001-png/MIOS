@@ -36,7 +36,7 @@ export default function CustomerDetailPage() {
   if (loading) {
     return (
       <div className="p-12 text-center font-sans font-bold text-xs text-muted-foreground">
-        [ LOADING CUSTOMER DATA & PSYCHOLOGY DATA... ]
+        LOADING CUSTOMER DATA & PSYCHOLOGY DATA...
       </div>
     );
   }
@@ -84,7 +84,7 @@ export default function CustomerDetailPage() {
         <div className="flex items-center gap-3">
           <Link href={`/customers/${customer.id}/edit`}>
             <Button variant="outline" className="rounded-xl border-border text-xs uppercase hover:text-[#00dbe9]">
-              [ EDIT RECORD ]
+              EDIT RECORD
             </Button>
           </Link>
           <Button
@@ -92,7 +92,7 @@ export default function CustomerDetailPage() {
             variant="outline"
             className="rounded-xl border-rose-900/50 text-rose-500 hover:bg-rose-950/20 text-xs uppercase"
           >
-            [ DELETE ]
+            DELETE
           </Button>
           <Link href="/customers">
             <Button variant="outline" className="rounded-xl border-border text-xs uppercase">
@@ -136,7 +136,7 @@ export default function CustomerDetailPage() {
               [ VIEW ATTRIBUTED CAMPAIGN → ]
             </Link>
           ) : (
-            <span className="text-muted-foreground">[ NO CAMPAIGN ID LINKED ]</span>
+            <span className="text-muted-foreground">NO CAMPAIGN ID LINKED </span>
           )}
         </div>
       </div>

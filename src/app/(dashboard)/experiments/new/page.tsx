@@ -303,7 +303,7 @@ function NewExperimentContent() {
 
 export default function NewExperimentPage() {
   return (
-    <Suspense fallback={<div className="p-12 text-center text-xs text-muted-foreground font-sans font-bold">[ INITIALIZING LAB STRATEGY BUILDER... ]</div>}>
+    <Suspense fallback={<div className="p-12 text-center text-xs text-muted-foreground font-sans font-bold">INITIALIZING LAB STRATEGY BUILDER... </div>}>
       <NewExperimentContent />
     </Suspense>
   )

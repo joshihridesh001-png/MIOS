@@ -71,10 +71,10 @@ export default function ResetPasswordPage() {
 
   return (
     <Card className="w-full bg-card/80 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden rounded-2xl relative">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500" />
+      <div className="absolute top-0 left-0 w-full h-1 bg-card  via-teal-500 " />
       <CardHeader className="space-y-3 pb-6 text-center">
         <div className="mx-auto w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10 shadow-inner mb-2">
-          <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-white/60">M</span>
+          <span className="text-2xl font-bold bg-clip-text text-transparent bg-card from-white to-white/60">M</span>
         </div>
         <CardTitle className="text-3xl font-bold tracking-tight text-foreground">New Password</CardTitle>
         <CardDescription className="text-muted-foreground font-medium">Please enter your new password.</CardDescription>

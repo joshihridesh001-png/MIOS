@@ -50,7 +50,7 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
             variant="outline"
             className="rounded-xl border-border hover:border-[#00dbe9] hover:text-[#00dbe9] text-xs font-bold uppercase"
           >
-            [ EDIT PERSONA ]
+            EDIT PERSONA
           </Button>
         )}
       </div>
@@ -116,7 +116,7 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
         <div className="flex items-center justify-between border-b border-primary/20 pb-2">
           <div>
             <h4 className="text-xs font-bold uppercase text-primary tracking-wider">
-              [ ACTIVE GROWTH EXPERIMENT COLLABORATOR (LABS) ]
+              ACTIVE GROWTH EXPERIMENT COLLABORATOR (LABS)
             </h4>
             <p className="text-[11px] text-muted-foreground mt-0.5">
               Systematic growth hypotheses and ad angle vectors synthesized from buyer fears & objections to test in LABS.
@@ -158,7 +158,7 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
                     size="sm"
                     className="rounded-xl bg-primary text-primary-foreground font-bold uppercase tracking-wider hover:bg-primary/80 text-[11px] whitespace-nowrap"
                   >
-                    [ LAUNCH EXPERIMENT ]
+                    LAUNCH EXPERIMENT
                   </Button>
                 </Link>
               </div>

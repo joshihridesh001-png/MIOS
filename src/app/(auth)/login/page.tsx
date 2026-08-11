@@ -46,10 +46,10 @@ export default function LoginPage() {
   }
 
   return (
-    <Card className="w-full neo-flat border-none p-8">
+    <Card className="w-full bg-card border border-border shadow-sm border-none p-8">
       <div className="absolute top-0 left-0 w-full h-1 bg-primary" />
       <CardHeader className="space-y-3 pb-6 text-center">
-        <div className="mx-auto w-16 h-16 neo-convex rounded-2xl flex items-center justify-center mb-4">
+        <div className="mx-auto w-16 h-16 bg-muted border border-border rounded-2xl flex items-center justify-center mb-4">
           <span className="text-3xl font-bold text-primary">M</span>
         </div>
         <CardTitle className="text-3xl font-bold tracking-tight text-foreground">MIOS</CardTitle>
@@ -72,7 +72,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="neo-pressed border-none text-foreground focus-visible:ring-primary h-12"
+              className="bg-accent text-accent-foreground border-none text-foreground focus-visible:ring-primary h-12"
             />
           </div>
           
@@ -89,13 +89,13 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="neo-pressed border-none text-foreground focus-visible:ring-primary h-12"
+              className="bg-accent text-accent-foreground border-none text-foreground focus-visible:ring-primary h-12"
             />
           </div>
           
           <Button 
             type="submit" 
-            className="w-full neo-primary text-primary-foreground font-bold neo-interactive py-6 rounded-xl" 
+            className="w-full neo-primary text-primary-foreground font-bold hover:bg-accent hover:text-accent-foreground transition-colors py-6 rounded-xl" 
             disabled={isLoading}
           >
             {isLoading ? <CircleNotch weight="duotone" className="w-4 h-4 mr-2 animate-spin" /> : null}

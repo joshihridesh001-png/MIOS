@@ -19,12 +19,12 @@ interface BenchmarkAlertsProps {
 export function BenchmarkAlerts({ alerts }: BenchmarkAlertsProps) {
   if (alerts.length === 0) {
     return (
-      <div className="p-4 neo-flat border-none rounded-2xl flex items-center justify-between text-xs font-bold uppercase text-muted-foreground">
+      <div className="p-4 bg-card border border-border shadow-sm border-none rounded-2xl flex items-center justify-between text-xs font-bold uppercase text-muted-foreground">
         <div className="flex items-center gap-2">
           <Trophy weight="duotone" className="w-4 h-4 text-primary" />
-          <span>[ ALL CAMPAIGN DATA COMPLIANT WITH EXECUTIVE BENCHMARKS ]</span>
+          <span>ALL CAMPAIGN DATA COMPLIANT WITH EXECUTIVE BENCHMARKS </span>
         </div>
-        <span className="text-primary">[ ZERO ALERTS ]</span>
+        <span className="text-primary">ZERO ALERTS </span>
       </div>
     );
   }
@@ -33,11 +33,11 @@ export function BenchmarkAlerts({ alerts }: BenchmarkAlertsProps) {
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-          [ REALTIME BENCHMARK BREACHES & SCALE OPPORTUNITIES ]
+          Alerts
         </span>
         <Badge
           variant="outline"
-          className="rounded-xl font-sans font-bold text-[10px] uppercase neo-pressed border-none text-muted-foreground"
+          className="rounded-xl font-sans font-bold text-[10px] uppercase bg-accent text-accent-foreground border-none text-muted-foreground"
         >
           {alerts.length} ACTIVE SIGNAL{alerts.length === 1 ? '' : 'S'}
         </Badge>
@@ -54,7 +54,7 @@ export function BenchmarkAlerts({ alerts }: BenchmarkAlertsProps) {
           return (
             <div
               key={alert.id}
-              className={`p-4 border-none neo-flat rounded-2xl flex flex-col justify-between ${
+              className={`p-4 border-none bg-card border border-border shadow-sm rounded-2xl flex flex-col justify-between ${
                 isWarning
                   ? 'bg-rose-500/10 border-rose-500/40 hover:border-rose-500'
                   : 'bg-primary/10 border-primary/40 hover:border-[#00dbe9]'
@@ -106,7 +106,7 @@ export function BenchmarkAlerts({ alerts }: BenchmarkAlertsProps) {
                           : 'border-primary/50 text-primary hover:bg-[#00dbe9] hover:text-black font-bold'
                       }`}
                     >
-                      <span>[ AUDIT CAMPAIGN ]</span>
+                      <span>Review campaign</span>
                       <ArrowRight weight="duotone" className="w-3 h-3 ml-1" />
                     </Button>
                   </Link>

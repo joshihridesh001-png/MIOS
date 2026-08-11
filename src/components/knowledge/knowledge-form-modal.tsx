@@ -199,14 +199,14 @@ export function KnowledgeFormModal({
               onClick={() => onOpenChange(false)}
               className="rounded-xl border-border font-sans font-bold text-xs uppercase hover:bg-zinc-900"
             >
-              [ CANCEL ]
+              CANCEL
             </Button>
             <Button
               type="submit"
               disabled={submitting}
               className="rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold font-sans text-xs uppercase tracking-wider font-bold"
             >
-              {submitting ? '[ LOGGING... ]' : '[ + COMMIT RULE TO VAULT ]'}
+              {submitting ? 'LOGGING...' : '[ + COMMIT RULE TO VAULT ]'}
             </Button>
           </div>
         </form>

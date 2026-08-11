@@ -91,8 +91,8 @@ export function CreativeCard({ creative }: CreativeCardProps) {
               className={cn(
                 'h-full rounded-full transition-all duration-500',
                 isFatigued
-                  ? 'bg-gradient-to-r from-red-500 to-rose-600'
-                  : 'bg-gradient-to-r from-emerald-500 to-amber-500'
+                  ? 'bg-card  '
+                  : 'bg-card  '
               )}
               style={{ width: `${Math.min(creative.fatigue_score || 0, 100)}%` }}
             />

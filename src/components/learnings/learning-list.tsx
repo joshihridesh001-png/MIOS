@@ -121,7 +121,7 @@ export function LearningList({ campaignId, sourceId, sourceType = 'campaign', ti
           {learnings.map((learning) => (
             <Card 
               key={learning.id} 
-              className="group overflow-hidden border-emerald-500/10 bg-gradient-to-r from-background to-emerald-500-[0.02] hover:shadow-md hover:border-emerald-500/30 transition-all duration-300"
+              className="group overflow-hidden border-emerald-500/10 bg-card from-background -[0.02] hover:shadow-md hover:border-emerald-500/30 transition-all duration-300"
             >
               <CardContent className="p-5">
                 <div className="flex justify-between items-start gap-4">
