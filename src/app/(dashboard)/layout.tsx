@@ -19,15 +19,18 @@ export default async function DashboardLayout({ children }: { children: ReactNod
     .eq("id", user.id)
     .single()
 
-  // Use the profile if found, otherwise create a fallback from the auth user
-  const userData = profile || {
+  // If the DB profile was created via a trigger but full_name is null, fall back to auth data
+  const finalFullName = profile?.full_name || user.user_metadata?.full_name || user.email?.split("@")[0] || "User"
+  const finalRole = profile?.role || "user"
+
+  const userData = {
     id: user.id,
-    full_name: user.user_metadata?.full_name || user.email?.split("@")[0] || "User",
-    role: "user",
-    avatar_url: user.user_metadata?.avatar_url
+    full_name: finalFullName,
+    role: finalRole,
+    avatar_url: profile?.avatar_url || user.user_metadata?.avatar_url
   }
 
-  const upperName = (userData.full_name || "").toUpperCase()
+  const upperName = finalFullName.toUpperCase()
   if (upperName.includes("SWARIT")) {
     userData.role = "CTO"
   } else if (upperName.includes("RIYA")) {
