@@ -42,4 +42,4 @@ graph LR
 
 ## 4. Error Logging & Auditability
 - Database write errors (e.g., RLS violations, unique constraint errors) are intercepted in Server Actions and converted into sanitized client error messages.
-- Modifications to experiments automatically append timestamped audit strings (`> [SYNC YYYY-MM-DD HH:MM] ...`) into the `decision_protocol_notes` array.
+- Modifications to experiments automatically append timestamped audit strings (`> [SYNC YYYY-MM-DD HH:MM] ...`) into the `decision_Strategy_notes` array.

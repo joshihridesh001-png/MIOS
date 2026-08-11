@@ -36,8 +36,8 @@ graph TD
 - **Cache Invalidation**: Invokes `refetch()` or Next.js `router.refresh()` after successful create, update, or delete operations.
 
 ### 3.2 `useExperiments()` / `useExperiment(id)`
-- **Responsibility**: Manages experimental matrices, traffic split ratios, and telemetry updates.
-- **Optimistic Calculator State**: Inside `RecordResultsModal`, typing numbers into Control or Variant inputs immediately updates the calculated lift and confidence preview without triggering network calls until "SAVE PROTOCOL DATA" is pressed.
+- **Responsibility**: Manages experimental matrices, traffic split ratios, and Metrics updates.
+- **Optimistic Calculator State**: Inside `RecordResultsModal`, typing numbers into Control or Variant inputs immediately updates the calculated lift and confidence preview without triggering network calls until "SAVE Strategy DATA" is pressed.
 
 ### 3.3 `useCreatives()`
 - **Responsibility**: Manages creative assets and AI Quick-Paste string transformations.

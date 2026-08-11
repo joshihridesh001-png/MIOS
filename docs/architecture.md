@@ -3,7 +3,7 @@
 ## 1. Executive Summary & Purpose
 Marketing Intelligence OS (MIOS) is an enterprise-grade, internal operating system designed to transform ephemeral marketing campaign performance into permanent, compounding organizational knowledge.
 Unlike traditional dashboards that only display historical metrics, MIOS enforces an engineering-driven feedback loop:
-`Hypothesis -> Campaign Execution -> Observed Telemetry -> Statistical Validation -> Persistent Organizational Learning`
+`Hypothesis -> Campaign Execution -> Observed Metrics -> Statistical Validation -> Persistent Organizational Learning`
 
 ## 2. High-Level Architectural Design
 MIOS uses a modern serverless, edge-optimized architecture built around Next.js App Router (React Server Components + Client Components) and Supabase (PostgreSQL, Row Level Security, and real-time subscription pipelines).
@@ -11,9 +11,9 @@ MIOS uses a modern serverless, edge-optimized architecture built around Next.js 
 ```mermaid
 graph TD
     subgraph "Client Tier (Web Browser)"
-        UI["PestControl OS Executive Suite (0px Borders, Monospace, #00dbe9)"]
+        UI["MIOS Executive Suite (0px Borders, Monospace, #00dbe9)"]
         Forms["Client Forms & Quick-Paste AI Parser"]
-        Modals["Live Telemetry Modal (RecordResultsModal)"]
+        Modals["Live Metrics Modal (RecordResultsModal)"]
     end
 
     subgraph "Next.js 16 App Router (Node / Edge Tier)"
@@ -40,7 +40,7 @@ graph TD
 
 ## 3. Core Design Principles & Tradeoffs
 1. **Server-First Data Fetching vs. Client Reactivity**:
-   - *Decision*: Core page layouts and initial data reads are handled via React Server Components (`@/lib/supabase/server.ts`), while interactive mutations (crud, telemetry recording, live calculators) use Client Components (`'use client'`) with optimistic updates.
+   - *Decision*: Core page layouts and initial data reads are handled via React Server Components (`@/lib/supabase/server.ts`), while interactive mutations (crud, Metrics recording, live calculators) use Client Components (`'use client'`) with optimistic updates.
    - *Why*: Minimizes client JavaScript bundle size and eliminates waterfall network requests while preserving instantaneous UX feedback for data entry.
 2. **Zero-Emoji Executive Aesthetics**:
    - *Decision*: Strict adherence to a 0px border-radius (`rounded-none`), deep `#000000` dark mode palette, `#00dbe9` neon turquoise accent indicators, and monospace uppercase typography.
@@ -52,9 +52,9 @@ graph TD
 ## 4. Module Responsibilities & System Topography
 - `@/app/(auth)`: Authentication boundaries, login card, and session initialization.
 - `@/app/(dashboard)`: Authenticated shell layout containing vertical slices:
-  - `/campaigns`: Campaign registry, performance telemetry, and hypothesis tracking.
+  - `/campaigns`: Campaign registry, performance Metrics, and hypothesis tracking.
   - `/creatives`: Creative asset library with AI Quick-Paste performance parsing.
-  - `/experiments`: Scientific testing protocols (A/B, Multivariate), traffic split matrices, and live telemetry entry.
+  - `/experiments`: Scientific testing Strategys (A/B, Multivariate), traffic split matrices, and live Metrics entry.
   - `/learnings`: Compounding organizational knowledge base derived from validated experiments.
 - `@/components/layout`: AppShell, Executive Navigation Sidebar, and status command headers.
 - `@/lib/supabase`: Typed client (`client.ts`) and server (`server.ts`) Supabase SDK instantiations.
@@ -76,7 +76,7 @@ sequenceDiagram
     Server->>DB: Query `experiment_rows` + RLS Policy
     DB-->>Server: Return Validated Experiment Matrix
     Server-->>App: Rendered HTML + RSC State
-    CEO->>App: Open "RECORD RESULTS" Modal & Save Telemetry
+    CEO->>App: Open "RECORD RESULTS" Modal & Save Metrics
     App->>DB: RPC / Table UPDATE (CTR, CVR, Lift, Confidence)
     DB-->>App: Return Updated Record + Trigger Re-fetch
     App-->>CEO: Toast Confirmation & Synchronized UI

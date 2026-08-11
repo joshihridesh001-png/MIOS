@@ -11,7 +11,7 @@ NEXT_PUBLIC_SUPABASE_URL=https://<project-id>.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 # Application Settings
-NEXT_PUBLIC_APP_URL=https://mios.pestcontrol.os
+NEXT_PUBLIC_APP_URL=https://mios.MIOS.os
 ```
 
 ## 3. Build & Production Verification Workflow

@@ -38,4 +38,4 @@ By isolating these rules from individual UI components, MIOS ensures that financ
 
 ## 5. Failure Cases & Edge Condition Handling
 - **Division by Zero Protection**: All ratio calculators wrap denominators in `NULLIF(val, 0)` in SQL or conditional `if (val === 0) return 0` in TypeScript to prevent `NaN` or `Infinity` exceptions.
-- **Null Telemetry Handling**: Empty metric vectors default to `{ ctr: 0, cvr: 0, conversions: 0 }` during calculations.
+- **Null Metrics Handling**: Empty metric vectors default to `{ ctr: 0, cvr: 0, conversions: 0 }` during calculations.

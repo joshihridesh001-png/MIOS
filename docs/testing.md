@@ -16,7 +16,7 @@ npm run build
 ```
 - **Success Criteria**: `✓ Compiled successfully` with zero type mismatch errors or broken RSC boundaries.
 
-## 3. Mathematical Verification Protocol (Lift & Significance)
+## 3. Mathematical Verification Strategy (Lift & Significance)
 When modifying `RecordResultsModal` or statistical helpers, verify these test cases:
 
 | Control CVR | Variant CVR | Expected Lift (%) | Conversions | Expected Confidence Tier |

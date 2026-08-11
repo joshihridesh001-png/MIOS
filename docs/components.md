@@ -1,7 +1,7 @@
 # Marketing Intelligence OS (MIOS) — Component Library Reference
 
 ## 1. Executive Summary & Design System
-All UI components in MIOS follow the **PestControl OS Executive Suite** aesthetic:
+All UI components in MIOS follow the **MIOS Executive Suite** aesthetic:
 - **0px Corner Radius**: Every card, modal, input, button, and table uses `rounded-none`.
 - **Zero Emojis**: Crisp monospace uppercase tags (`META`, `GOOG`, `IMG`, `VID`, `SYNC`, `[ COMPLETED ]`).
 - **High-Contrast Palette**: `#000000` / `#0e0e0e` dark surfaces with `#00dbe9` neon turquoise accent indicators.
@@ -28,15 +28,15 @@ All UI components in MIOS follow the **PestControl OS Executive Suite** aestheti
 - **Purpose**: Form for creating/editing marketing assets.
 - **Key Feature**: Embeds an **AI Quick-Paste** window that automatically extracts CTR, CPC, Spend, and Conversions from raw clipboard text pasted from Ads Manager.
 
-## 4. Scientific Testing & Telemetry Components
+## 4. Scientific Testing & Metrics Components
 
 ### 4.1 `RecordResultsModal` (`@/components/experiments/record-results-modal.tsx`)
-- **Purpose**: Interactive widescreen sheet (`!max-w-6xl sm:!max-w-6xl !w-[94vw] sm:!w-[94vw]`) for recording live experiment telemetry.
+- **Purpose**: Interactive widescreen sheet (`!max-w-6xl sm:!max-w-6xl !w-[94vw] sm:!w-[94vw]`) for recording live experiment Metrics.
 - **Props**: `{ experiment: ExperimentRow; open: boolean; onOpenChange: (open: boolean) => void; onSuccess?: () => void }`
 - **Key Capabilities**:
   - Displays a spacious 3-column grid (`Control Baseline`, `Variant A`, `Variant B`) with tall `h-10 text-sm` inputs.
   - Contains a **`RE-CALCULATE LIFT`** button that dynamically calculates lift %, determines `winner_variant`, and estimates sample size confidence %.
-  - Appends timestamped sync notes (`> [SYNC YYYY-MM-DD HH:MM] ...`) into the experiment's decision protocol stream.
+  - Appends timestamped sync notes (`> [SYNC YYYY-MM-DD HH:MM] ...`) into the experiment's decision Strategy stream.
 - **Why Widescreen (`1152px` max width)**: Eliminates cramped input boxes and text wrapping by overriding shadcn's default `sm:max-w-sm` responsive constraint.
 
 ### 4.2 `LearningList` (`@/components/learnings/learning-list.tsx`)
@@ -71,6 +71,6 @@ Located in `@/components/ui/unlumen/`, these components provide high-performance
 - **Props**: `{ color?: string; spacing?: number; speed?: number; opacity?: number }`
 
 ### 5.6 `MotionAccordion` (`@/components/ui/unlumen/motion-accordion.tsx`)
-- **Purpose**: Smooth expandable drawer for FAQs, customer psychology protocols, and collapsible telemetry sections.
+- **Purpose**: Smooth expandable drawer for FAQs, customer psychology Strategys, and collapsible Metrics sections.
 - **Props**: `{ title: ReactNode; children: ReactNode; defaultOpen?: boolean; badgeText?: string }`
 - **Behavior**: Uses `outCubic` easing to smoothly transition height between zero and scrollHeight while rotating the chevron indicator.

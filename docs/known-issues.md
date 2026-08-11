@@ -14,9 +14,9 @@ This document catalogs current known technical limitations, edge cases, and reco
 
 ---
 
-### [KI-002] Mobile Viewport Horizontal Scrolling on Widescreen Telemetry Modal
+### [KI-002] Mobile Viewport Horizontal Scrolling on Widescreen Metrics Modal
 - **Description**: On mobile or narrow tablet viewports (< 640px), the widescreen `RecordResultsModal` (`!w-[94vw]`) requires horizontal scrolling to inspect all three columns (`Control`, `Variant A`, `Variant B`).
-- **Workaround**: Rotate mobile device to landscape or perform telemetry data entry on desktop executive viewports (>= 1024px).
+- **Workaround**: Rotate mobile device to landscape or perform Metrics data entry on desktop executive viewports (>= 1024px).
 - **Status**: By Design (widescreen comparison matrix prioritizes desktop CEO workflow).
 
 ---

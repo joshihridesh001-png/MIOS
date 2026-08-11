@@ -6,11 +6,11 @@ This guarantees that even if a client-side route is bypassed, the database engin
 
 ## 2. Role Hierarchy & Permissions Matrix
 
-| Role | Read Campaigns | Create/Edit Campaigns | Create/Edit Experiments | Record Telemetry | Administer Users |
+| Role | Read Campaigns | Create/Edit Campaigns | Create/Edit Experiments | Record Metrics | Administer Users |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **CEO** (`CEO@Hridesh`) | ✅ Full Access | ✅ Full Access | ✅ Full Access | ✅ Full Access | ✅ Full Access |
 | **ADMIN** | ✅ Full Access | ✅ Full Access | ✅ Full Access | ✅ Full Access | ❌ Restricted |
-| **ANALYST** | ✅ Full Access | ❌ Read Only | ❌ Read Only | ✅ Record Telemetry | ❌ Restricted |
+| **ANALYST** | ✅ Full Access | ❌ Read Only | ❌ Read Only | ✅ Record Metrics | ❌ Restricted |
 
 ## 3. Row Level Security (RLS) Policies
 All primary tables (`campaigns`, `creatives`, `experiments`, `learnings`) implement explicit RLS policies:
@@ -39,4 +39,4 @@ USING (
 ## 4. Enforcement Points
 1. **Database Layer (Primary Defense)**: RLS policies execute on every query via `auth.uid()`.
 2. **Server Actions (Secondary Guard)**: Next.js Server Actions verify user session identity and role before executing mutations.
-3. **UI Layer (UX Guard)**: Buttons such as "TERMINATE PROTOCOL" or "RECORD RESULTS" are conditionally disabled or hidden for non-authorized roles to prevent unnecessary error prompts.
+3. **UI Layer (UX Guard)**: Buttons such as "TERMINATE Strategy" or "RECORD RESULTS" are conditionally disabled or hidden for non-authorized roles to prevent unnecessary error prompts.

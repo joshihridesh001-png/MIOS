@@ -47,4 +47,4 @@ npm run build
 | :--- | :--- | :--- |
 | **Error Traces** | Rich client-side error overlays for rapid debugging. | Sanitized toast alerts; detailed stack traces logged to server console. |
 | **Caching** | Aggressive RSC revalidation for live code editing. | Optimized server caching with `revalidatePath` invalidation triggers. |
-| **API Base URL** | `http://localhost:3000` | Hosted edge URL (e.g., `https://mios.pestcontrol.os`) |
+| **API Base URL** | `http://localhost:3000` | Hosted edge URL (e.g., `https://mios.MIOS.os`) |

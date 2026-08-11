@@ -24,7 +24,7 @@ graph LR
 
     Meta -->|Copy-Paste or Webhook| QuickPaste
     Google -->|Copy-Paste or Webhook| QuickPaste
-    WA -->|Telemetry Metrics| API
+    WA -->|Metrics Metrics| API
     QuickPaste -->|Structured Metric Payload| API
     API -->|Authenticated Database Write| Supabase
 ```

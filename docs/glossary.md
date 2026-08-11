@@ -31,7 +31,7 @@ This Glossary defines essential marketing, mathematical, and software engineerin
 ## 4. Engineering & System Terms
 
 - **AI Quick-Paste**: The heuristic parsing engine that converts unstructured ad platform clipboard text into structured numeric form fields.
-- **PestControl OS**: The executive zero-emoji, 0px border-radius (`rounded-none`), high-contrast dark industrial design system used across MIOS.
+- **MIOS**: The executive zero-emoji, 0px border-radius (`rounded-none`), high-contrast dark industrial design system used across MIOS.
 - **RBAC (Role-Based Access Control)**: Authorization model assigning permissions by user profile role (`CEO`, `ADMIN`, `ANALYST`).
 - **RLS (Row Level Security)**: PostgreSQL database-level security policy that filters row access based on the authenticated user session (`auth.uid()`).
 - **RSC (React Server Components)**: Next.js components that render exclusively on the Node/Edge server, emitting HTML and zero client JavaScript unless wrapped in `'use client'`.

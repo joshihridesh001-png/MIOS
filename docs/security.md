@@ -1,7 +1,7 @@
 # Marketing Intelligence OS (MIOS) — Security Architecture & Threat Mitigation
 
 ## 1. Executive Summary & Security Posture
-MIOS is an internal operating system handling confidential executive financial metrics, marketing spend, and proprietary testing protocols.
+MIOS is an internal operating system handling confidential executive financial metrics, marketing spend, and proprietary testing Strategys.
 The security architecture enforces layered defense: secure session authentication, database-enforced Row Level Security (RLS), and zero-trust API validation.
 
 ## 2. Threat Vector Analysis & Mitigations

@@ -63,7 +63,7 @@ erDiagram
         jsonb control_metrics
         jsonb variant_a_metrics
         jsonb variant_b_metrics
-        text[] decision_protocol_notes
+        text[] decision_Strategy_notes
         timestamp created_at
     }
 
@@ -86,7 +86,7 @@ erDiagram
 
 ### 3.2 `campaigns`
 - **Purpose**: Stores marketing campaign records, targeting parameters, financial spend, revenue, COGS, and reflection summaries.
-- **Why**: Acts as the root entity for all marketing telemetry and ROI calculations.
+- **Why**: Acts as the root entity for all marketing Metrics and ROI calculations.
 - **Indexes**: `idx_campaigns_status_platform` on `(status, platform)`, `idx_campaigns_owner` on `(owner_id)`.
 
 ### 3.3 `creatives`
@@ -95,11 +95,11 @@ erDiagram
 - **Foreign Keys**: `campaign_id REFERENCES campaigns(id) ON DELETE SET NULL`.
 
 ### 3.4 `experiments`
-- **Purpose**: Manages structured A/B and Multivariate scientific testing protocols, including traffic split, runtime hours, and statistical comparison matrices.
+- **Purpose**: Manages structured A/B and Multivariate scientific testing Strategys, including traffic split, runtime hours, and statistical comparison matrices.
 - **Why**: Transforms marketing guesses into testable hypotheses with strict confidence thresholds.
 - **Key Columns**:
-  - `control_metrics`, `variant_a_metrics`, `variant_b_metrics` (`jsonb`): Stores `{ ctr, cvr, conversions }` objects for live telemetry recording.
-  - `decision_protocol_notes` (`text[]`): Timestamped telemetry logs and executive sync notes.
+  - `control_metrics`, `variant_a_metrics`, `variant_b_metrics` (`jsonb`): Stores `{ ctr, cvr, conversions }` objects for live Metrics recording.
+  - `decision_Strategy_notes` (`text[]`): Timestamped Metrics logs and executive sync notes.
 
 ### 3.5 `learnings`
 - **Purpose**: Stores compounding, immutable organizational insights derived from verified experiments and high-performing campaigns.

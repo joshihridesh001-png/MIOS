@@ -281,7 +281,7 @@ Structured hypothesis testing, linked to campaigns.
 | `confidence_score` | `decimal` | Calculated confidence (0-100) |
 | `target_confidence` | `decimal` | Required confidence threshold (default 80) |
 | `minimum_lift` | `decimal` | Required lift to be considered successful |
-| `decision_protocol_notes` | `text[]` | Array of log messages regarding decisions |
+| `decision_Strategy_notes` | `text[]` | Array of log messages regarding decisions |
 | **Control Metrics** | | |
 | `control_name` | `text` | Name of the control group |
 | `control_spend` | `decimal` | |
@@ -487,7 +487,7 @@ When you open Campaign #27:
 
 ---
 
-### 11. `buyer_personas` (Active Creative Angle Collaborator & CX Telemetry)
+### 11. `buyer_personas` (Active Creative Angle Collaborator & CX Metrics)
 
 Aggregates customer acquisition triggers, dominant fears, objections, and trust builders by property type, and actively collaborates with the Creatives suite by synthesizing recommended ad angles.
 

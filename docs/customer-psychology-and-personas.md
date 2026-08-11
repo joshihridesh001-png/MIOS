@@ -1,6 +1,6 @@
 # MIOS Customer Psychology & Buyer Personas Suite (Engineering Documentation)
 
-**Governance**: Governed by `ADR-001` (ISO/IEC 25010 Quality Model, SEI CERT Secure Coding, SOLID, YAGNI, KISS)  
+**Governance**: Governed by `ANTI_VIBECODING_STANDARDS.md` (ISO/IEC 25010 Quality Model, SEI CERT Secure Coding, SOLID, YAGNI, KISS)  
 **Status**: ACTIVE / PRODUCTION READY  
 **Primary Architect**: MIOS Senior Engineering Team  
 
@@ -12,7 +12,7 @@ The **Customer Psychology & Buyer Personas Suite** is the institutional intellig
 
 ### Key Components Built
 1. **Database Schema (`004_customers_and_personas.sql`)**:
-   - `public.customers`: Stores individual customer financial economics (INR ₹ Revenue, Profit, LTV), attribution chain (`campaign_id`, `campaign_creative_id`), pre-sale psychology (`why_contacted`, `biggest_fear`, `biggest_objection`, `why_chose_us`, `what_built_trust`), and post-job CX telemetry (`cx_rating`, `job_quality_feedback`, `improvement_opportunities`, `amc_opportunity`).
+   - `public.customers`: Stores individual customer financial economics (INR ₹ Revenue, Profit, LTV), attribution chain (`campaign_id`, `campaign_creative_id`), pre-sale psychology (`why_contacted`, `biggest_fear`, `biggest_objection`, `why_chose_us`, `what_built_trust`), and post-job CX Metrics (`cx_rating`, `job_quality_feedback`, `improvement_opportunities`, `amc_opportunity`).
    - `public.buyer_personas`: Aggregated and customizable buyer persona clusters (`dominant_fears`, `dominant_objections`, `trust_builders`, `recommended_creative_angles`, `avg_ltv`, `avg_cx_rating`, `sample_size`, `is_custom`).
 2. **AI Quick-Paste Parser (`@/lib/customer-parser.ts`)**:
    - Heuristic natural language parsing engine that allows executives to paste unstructured WhatsApp chat logs, sales call notes, or post-job technician survey debriefs directly into the UI.
@@ -22,12 +22,12 @@ The **Customer Psychology & Buyer Personas Suite** is the institutional intellig
    - Provides a 1-click **`[ BUILD CREATIVE FROM ANGLE ]`** button that hydrates query parameters into `/creatives/new?hook=...&headline=...&angle=...`, closing the loop between consumer research and ad production.
 4. **Executive UI Components (`@/components/customers/`)**:
    - `<CustomerTable />`: High-density directory showing INR (₹) economics, LTV, CX score badges, and AMC flags.
-   - `<CustomerPsychologyCard />`: Dual-column matrix displaying Pre-Sale Acquisition Triggers and Post-Job CX Telemetry, featuring a **`[ PROMOTE TO LEARNING ]`** button that promotes verified customer insights into the organization-wide `learnings` table.
+   - `<CustomerPsychologyCard />`: Dual-column matrix displaying Pre-Sale Acquisition Triggers and Post-Job CX Metrics, featuring a **`[ PROMOTE TO LEARNING ]`** button that promotes verified customer insights into the organization-wide `learnings` table.
    - `<PersonaCard />` & `<PersonaEditModal />`: Executive view and editor supporting **Option A** (Automatic Statistical Clustering) and **Option B** (Manual Executive Overrides).
 5. **App Router Pages (`app/src/app/(dashboard)/customers/`)**:
    - `/customers`: Main suite directory with executive tab switcher (`[ CUSTOMER DIRECTORY ]` vs `[ BUYER PERSONAS & CREATIVE COLLABORATOR ]`).
    - `/customers/new`: Acquisition form with embedded AI Quick-Paste Parser Box.
-   - `/customers/[id]`: Detailed customer telemetry view with 1-click learning promotion.
+   - `/customers/[id]`: Detailed customer Metrics view with 1-click learning promotion.
    - `/customers/[id]/edit`: Full edit capability for existing records.
 
 ---
@@ -37,7 +37,7 @@ The **Customer Psychology & Buyer Personas Suite** is the institutional intellig
 As articulated by the CEO, the primary strategic objective of tracking customers in MIOS is **"understanding why they bought — compounded learning to further improve our consumer research and buyer psychology."**
 
 1. **Compounding Institutional Memory**: In traditional marketing agencies, why a customer converted is locked in a salesperson's notebook or a technician's memory. When staff leave, that knowledge evaporates. MIOS indexes these reasons into permanent, queryable database columns.
-2. **Eliminating Guesswork in Experiment & Ad Hypothesis Creation**: By linking `buyer_personas.recommended_creative_angles` directly to the `/experiments/new` Labs protocol builder, new creative angles and hooks are systematically tested as growth hypotheses rather than drafted from subjective intuition. Once validated in Experiments, winning angles transition to Creatives for ongoing performance assessment.
+2. **Eliminating Guesswork in Experiment & Ad Hypothesis Creation**: By linking `buyer_personas.recommended_creative_angles` directly to the `/experiments/new` Labs Strategy builder, new creative angles and hooks are systematically tested as growth hypotheses rather than drafted from subjective intuition. Once validated in Experiments, winning angles transition to Creatives for ongoing performance assessment.
 3. **Closing the Post-Job CX Feedback Loop**: Post-service survey debriefs flag operational deficiencies (e.g. late arrival, odor complaints) and commercial opportunities (AMC renewals, referral sources). These are surfaced in the executive persona feed to improve job quality.
 
 ---
@@ -46,7 +46,7 @@ As articulated by the CEO, the primary strategic objective of tracking customers
 
 ```
 +-----------------------------------------------------------------------------------+
-|  1. RAW TELEMETRY INPUT                                                           |
+|  1. RAW Metrics INPUT                                                           |
 |     - WhatsApp Chat Logs / Call Transcripts / Post-Job Survey Notes                |
 |     - AI Quick-Paste Parser (@/lib/customer-parser.ts)                            |
 +-----------------------------------------------------------------------------------+

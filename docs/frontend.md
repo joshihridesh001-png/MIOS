@@ -1,7 +1,7 @@
 # Marketing Intelligence OS (MIOS) — Frontend Architecture & Executive Suite Design
 
 ## 1. Executive Summary & Purpose
-The frontend of MIOS is engineered to feel like an authentic, high-speed executive terminal ("PestControl OS | CEO Dashboard") rather than a generic SaaS web app.
+The frontend of MIOS is engineered to feel like an authentic, high-speed executive terminal ("MIOS | CEO Dashboard") rather than a generic SaaS web app.
 Built with Next.js 16 (App Router), React 19, Tailwind CSS v4, and shadcn/ui, the UI enforces strict aesthetic and functional standards.
 
 ## 2. Design System & Aesthetic Mandates
@@ -24,12 +24,12 @@ MIOS operates under a strict set of visual rules designed for CEO-level speed an
 - `/(dashboard)`: Master shell wrapped in `AppShell` with fixed left `Sidebar`:
   - `/campaigns`: Master campaigns list and `/campaigns/[id]` deep performance analysis.
   - `/creatives`: Creative library and `/creatives/new` with **AI Quick-Paste** auto-parser.
-  - `/experiments`: Scientific testing protocols and `/experiments/[id]` with **RecordResultsModal** telemetry synchronizer.
+  - `/experiments`: Scientific testing Strategys and `/experiments/[id]` with **RecordResultsModal** Metrics synchronizer.
   - `/learnings`: Compounding organizational knowledge base.
   - `/customers`: Persona and customer psychology intelligence.
 
 ## 4. Key Interactive Capabilities
-- **Widescreen Telemetry Modal (`RecordResultsModal`)**:
+- **Widescreen Metrics Modal (`RecordResultsModal`)**:
   - Uses `!max-w-6xl sm:!max-w-6xl !w-[94vw] sm:!w-[94vw]` to override default shadcn dialog constraints (`sm:max-w-sm`).
   - Provides a 3-column widescreen grid (`Control Baseline`, `Variant A`, `Variant B`) for live input of CTR, CVR, and Conversions.
   - Includes a real-time **`RE-CALCULATE LIFT`** engine that derives actual lift %, detects winner vectors, and estimates sample size confidence.
@@ -45,4 +45,4 @@ MIOS implements high-performance animations using **Anime.js v4.5.0** and custom
 - **Named Import Architecture**: In Anime.js v4, all animation functions are imported as named exports (`import { animate, stagger } from 'animejs'`) with TypeScript type verification via `AnimationParams`.
 - **Accessibility & Motion Preference (`prefers-reduced-motion`)**: Every animation hook checks `window.matchMedia('(prefers-reduced-motion: reduce)')`. If enabled, animations immediately settle to their final visual state without motion.
 - **Hardware-Accelerated Properties**: Transitions strictly target GPU-friendly properties (`opacity`, `translateY`, `translateX`, `rotateX`, `rotateY`, `scale`, and `filter: blur()`).
-- **Telemetry Counter Rollup (`AnimateCount`)**: Automatically formats Indian currency (`₹1,00,000`) and percentages while running `outExpo` count-up easing.
+- **Metrics Counter Rollup (`AnimateCount`)**: Automatically formats Indian currency (`₹1,00,000`) and percentages while running `outExpo` count-up easing.

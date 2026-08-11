@@ -1,10 +1,10 @@
 # Marketing Intelligence OS (MIOS) — Engineering & Coding Standards
 
 ## 1. Executive Summary & Core Engineering Rules
-All code contributed to MIOS must conform to strict TypeScript, React 19, and **PestControl OS Executive Suite** design standards.
+All code contributed to MIOS must conform to strict TypeScript, React 19, and **MIOS Executive Suite** design standards.
 Clean engineering, predictable naming, and rigorous documentation are mandatory for all pull requests.
 
-## 2. Visual & Aesthetic Standards (PestControl OS Mandate)
+## 2. Visual & Aesthetic Standards (MIOS Mandate)
 1. **Zero-Emoji Policy**:
    - ❌ **Forbidden**: `🚀 Active`, `📈 +33%`, `🔥 High Confidence`, `⚠️ Warning`
    - ✅ **Required**: `[ ACTIVE ]`, `+33.0% LIFT`, `HIGH CONFIDENCE (94%)`, `[ SYNC WARNING ]`

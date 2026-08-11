@@ -26,11 +26,11 @@ All data fetching and mutation requests must include an authenticated Supabase J
 - `deleteCampaign(id: string)`
   - **Method**: `DELETE FROM campaigns WHERE id = :id`
 
-### 3.2 Experiment & Telemetry Operations (`use-experiments.ts`)
+### 3.2 Experiment & Metrics Operations (`use-experiments.ts`)
 - `useExperiments()` / `useExperiment(id: string)`
   - **Method**: Query `experiments` table with JSONB metric vectors.
 - `updateExperiment(id: string, payload: Partial<ExperimentRow>)`
-  - **Purpose**: Persists real-time statistical lift, confidence score, winner variant, and decision protocol stream logs.
+  - **Purpose**: Persists real-time statistical lift, confidence score, winner variant, and decision Strategy stream logs.
   - **Payload Structure**:
     ```json
     {
@@ -39,7 +39,7 @@ All data fetching and mutation requests must include an authenticated Supabase J
       "variant_b_metrics": { "ctr": 2.1, "cvr": 1.5, "conversions": 110 },
       "actual_lift": 33.3,
       "confidence_score": 94,
-      "decision_protocol_notes": [
+      "decision_Strategy_notes": [
         "> [SYNC 2026-08-02 14:30] Recorded metrics — Control (1.8% CVR) | Variant A (2.4% CVR) | Variant B (1.5% CVR). Lift: +33.3% [Confidence: 94%]"
       ]
     }
@@ -54,6 +54,6 @@ All data fetching and mutation requests must include an authenticated Supabase J
 
 ## 4. Error Handling & Validation Standard
 - All mutations use try/catch blocks that surface human-readable errors via `sonner` toast alerts:
-  - *Success*: `toast.success("Protocol status updated: [ COMPLETED ]")`
+  - *Success*: `toast.success("Strategy status updated: [ COMPLETED ]")`
   - *Failure*: `toast.error("Failed to update: Insufficient RLS permissions")`
 - Server-side exceptions are logged to the system audit stream and never expose raw SQL stack traces to the browser.
