@@ -266,20 +266,49 @@ Structured hypothesis testing, linked to campaigns.
 | Column | Type | Notes |
 |--------|------|-------|
 | `id` | `uuid` PK | |
-| `campaign_id` | `uuid` FK → `campaigns.id` | Nullable (experiments can be independent) |
-| `question` | `text` NOT NULL | "Do fear hooks outperform educational hooks?" |
-| `hypothesis` | `text` | "Fear will generate +20% CTR" |
-| `variable_tested` | `text` | "Creative hook type" |
-| `control_label` | `text` | "Educational hook" |
-| `variant_label` | `text` | "Fear hook" |
-| `control_campaign_creative_id` | `uuid` FK → `campaign_creatives.id` | Optional |
-| `variant_campaign_creative_id` | `uuid` FK → `campaign_creatives.id` | Optional |
-| `expected_outcome` | `text` | "+20% CTR on fear" |
-| `actual_result` | `text` | "Fear won by +35% CTR" |
-| `decision` | `text` | "Scale fear hooks across all pest types" |
-| `status` | `enum` | `planned`, `running`, `completed`, `inconclusive` |
-| `confidence` | `enum` | `low`, `medium`, `high` |
-| `next_experiment` | `text` | Follow-up test idea |
+| `name` | `text` NOT NULL | E.g. "Pricing Strategy Test A/B" |
+| `test_code` | `text` | Unique ID like "EXP-042" |
+| `type` | `enum` | `a_b_test`, `multivariate`, `landing_page`, `pricing`, `offer`, `audience` |
+| `status` | `enum` | `queued`, `running`, `completed`, `aborted` |
+| `impact` | `enum` | `low`, `medium`, `high` |
+| `hypothesis_query` | `text` | The core hypothesis being tested |
+| `primary_metric` | `text` | e.g. "ctr", "cvr", "cac" |
+| `target_lift` | `decimal` | Expected percentage lift |
+| `actual_lift` | `decimal` | Measured lift |
+| `traffic_split` | `text` | e.g. "50/50" |
+| `sample_size` | `integer` | Total interactions |
+| `runtime_hours` | `integer` | Total active hours |
+| `confidence_score` | `decimal` | Calculated confidence (0-100) |
+| `target_confidence` | `decimal` | Required confidence threshold (default 80) |
+| `minimum_lift` | `decimal` | Required lift to be considered successful |
+| `decision_protocol_notes` | `text[]` | Array of log messages regarding decisions |
+| **Control Metrics** | | |
+| `control_name` | `text` | Name of the control group |
+| `control_spend` | `decimal` | |
+| `control_impressions` | `integer` | |
+| `control_clicks` | `integer` | |
+| `control_conversions` | `integer` | |
+| `control_customers` | `integer` | |
+| `control_revenue` | `decimal` | |
+| **Variant A Metrics** | | |
+| `variant_a_name` | `text` | Name of variant A |
+| `variant_a_spend` | `decimal` | |
+| `variant_a_impressions` | `integer` | |
+| `variant_a_clicks` | `integer` | |
+| `variant_a_conversions` | `integer` | |
+| `variant_a_customers` | `integer` | |
+| `variant_a_revenue` | `decimal` | |
+| **Variant B Metrics** | | |
+| `variant_b_name` | `text` | Name of variant B |
+| `variant_b_spend` | `decimal` | |
+| `variant_b_impressions` | `integer` | |
+| `variant_b_clicks` | `integer` | |
+| `variant_b_conversions` | `integer` | |
+| `variant_b_customers` | `integer` | |
+| `variant_b_revenue` | `decimal` | |
+| `winner_variant` | `text` | "control", "variant_a", "variant_b" |
+| `campaign_id` | `uuid` FK | Link to parent campaign |
+| `creative_id` | `uuid` FK | Link to parent creative |
 | **Audit** | | |
 | `created_at` | `timestamptz` | |
 | `updated_at` | `timestamptz` | |

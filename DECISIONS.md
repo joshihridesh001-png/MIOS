@@ -73,8 +73,26 @@
 - **Rationale:** Per PRD requirements. Modern, well-supported, fast to ship.
 - **Status:** ✅ Locked
 
+### DEC-012: Anti-Vibecoding UI Standards
+- **Date:** 2026-08-10
+- **Decision:** Strict ban on purely aesthetic "cyberpunk" or terminal-inspired UI decorations. UI must reflect a clinical, B2B executive suite tool.
+- **Rationale:** Ensures authority, trust, and usability for C-suite decision-makers. See `ANTI_VIBECODING_STANDARDS.md`.
+- **Status:** ❌ Deprecated (Superseded by DEC-014)
+
+### DEC-014: Neumorphic (Soft UI) Design System
+- **Date:** 2026-08-10
+- **Decision:** Pivot the entire application to a Light Mode Neumorphic aesthetic.
+- **Rationale:** Requested by CTO. Replaces dark mode severity with soft, tactile pastel colors (sage green, lavender) and prominent 3D extruded/inset shadowing on interactive elements (buttons, inputs) for a modern, physical feel.
+- **Status:** ✅ Locked
+
+### DEC-013: Demo Mode Architecture
+- **Date:** 2026-08-10
+- **Decision:** Demo Mode blocks all mutating database queries at the Supabase client wrapper level when `NEXT_PUBLIC_DEMO_MODE=true`.
+- **Rationale:** Prevents accidental data corruption during sales calls or public demonstrations while allowing full read-only exploration of the UI.
+- **Status:** ✅ Locked
+
 ---
 
 ## Pending Decisions
 
-_None at this time. Awaiting first vertical slice proposal._
+_None at this time._
