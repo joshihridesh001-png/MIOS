@@ -37,7 +37,7 @@ function NewExperimentContent() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!name.trim()) {
-      toast.error("PROTOCOL NAME IS REQUIRED")
+      toast.error("STRATEGY NAME IS REQUIRED")
       return
     }
 
@@ -57,8 +57,8 @@ function NewExperimentContent() {
         sample_size: 0,
         runtime_hours: 0.0,
         confidence_score: 0,
-        decision_protocol_notes: [
-          "> Protocol initialized in active test stream.",
+        decision_STRATEGY_notes: [
+          "> STRATEGY initialized in active test stream.",
           "> Monitoring statistical divergence across primary vectors."
         ],
         target_confidence: 95,
@@ -89,10 +89,10 @@ function NewExperimentContent() {
         creative_id: null,
       })
 
-      toast.success("🧪 PROTOCOL INITIALIZED AND DEPLOYED")
+      toast.success("🧪 STRATEGY INITIALIZED AND DEPLOYED")
       router.push(`/experiments/${newExp.id}`)
     } catch (err: any) {
-      toast.error(`ERROR INITIALIZING PROTOCOL: ${err.message}`)
+      toast.error(`ERROR INITIALIZING STRATEGY: ${err.message}`)
       setLoading(false)
     }
   }
@@ -110,10 +110,10 @@ function NewExperimentContent() {
           </Link>
           <div>
             <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">
-              /// SYS.INIT: /PROTOCOLS/NEW_EXPERIMENT
+              /// SYS.INIT: /STRATEGYS/NEW_EXPERIMENT
             </div>
             <h1 className="text-xl sm:text-2xl font-black text-foreground font-sans uppercase">
-              INITIALIZE_NEW_PROTOCOL
+              INITIALIZE_NEW_STRATEGY
             </h1>
             {initialName && (
               <p className="text-xs text-primary mt-1 font-sans font-bold">
@@ -128,16 +128,16 @@ function NewExperimentContent() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Card 1: Protocol Identity */}
+        {/* Card 1: STRATEGY Identity */}
         <div className="p-6 bg-card border border-border rounded-xl space-y-6 shadow-xl">
           <div className="text-xs font-bold text-emerald-400 uppercase tracking-widest border-b border-border pb-3 flex items-center gap-2">
             <TerminalWindow weight="duotone" className="w-4 h-4" />
-            <span>01 // PROTOCOL_IDENTIFICATION</span>
+            <span>01 // STRATEGY_IDENTIFICATION</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-muted-foreground uppercase">Protocol Name</label>
+              <label className="text-xs font-bold text-muted-foreground uppercase">STRATEGY Name</label>
               <Input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -293,7 +293,7 @@ function NewExperimentContent() {
             disabled={loading}
             className="bg-emerald-600 hover:bg-emerald-500 text-primary-foreground font-sans font-bold font-bold text-xs uppercase px-8 py-2.5 transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]"
           >
-            {loading ? "DEPLOYING PROTOCOL..." : "DEPLOY_PROTOCOL"}
+            {loading ? "DEPLOYING STRATEGY..." : "DEPLOY_STRATEGY"}
           </Button>
         </div>
       </form>
@@ -303,7 +303,7 @@ function NewExperimentContent() {
 
 export default function NewExperimentPage() {
   return (
-    <Suspense fallback={<div className="p-12 text-center text-xs text-muted-foreground font-sans font-bold">[ INITIALIZING LAB PROTOCOL BUILDER... ]</div>}>
+    <Suspense fallback={<div className="p-12 text-center text-xs text-muted-foreground font-sans font-bold">[ INITIALIZING LAB STRATEGY BUILDER... ]</div>}>
       <NewExperimentContent />
     </Suspense>
   )

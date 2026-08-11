@@ -1,7 +1,6 @@
 // ==============================================================================
 // MIOS Unlumen UI — AnimatedList (@/components/ui/unlumen/animated-list.tsx)
 // Inspired by Unlumen UI Animated List, powered by anime.js v4 stagger
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';

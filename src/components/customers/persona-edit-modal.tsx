@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Persona Executive Edit Modal (@/components/customers/persona-edit-modal.tsx)
-// Governed by ADR-001 (ISO/IEC 25010 Reliability, Explicit Input Validation)
 // ==============================================================================
 
 'use client';

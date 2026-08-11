@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Dashboard Header Component (@/components/dashboard/dashboard-header.tsx)
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';
@@ -26,7 +25,7 @@ interface DashboardHeaderProps {
 }
 
 const DATE_OPTIONS: { value: DateFilter; label: string }[] = [
-  { value: 'ALL', label: 'ALL TIME TELEMETRY' },
+  { value: 'ALL', label: 'ALL TIME DATA' },
   { value: '30D', label: 'LAST 30 DAYS' },
   { value: '7D', label: 'LAST 7 DAYS' },
   { value: 'MTD', label: 'MONTH TO DATE' },
@@ -55,15 +54,15 @@ export function DashboardHeader({
             variant="outline"
             className="rounded-none font-sans font-bold text-[10px] uppercase tracking-wider border-primary/50 text-primary bg-primary/10"
           >
-            [ SYSTEM ONLINE • REALTIME TELEMETRY SYNCED ]
+            [ SYSTEM ONLINE • REALTIME DATA SYNCED ]
           </Badge>
           <span className="font-bold text-xs text-muted-foreground uppercase">
-            ISO/IEC 25010 EXECUTIVE SUITE
+             
           </span>
         </div>
 
         <TextReveal
-          text="[ MIOS EXECUTIVE COMMAND CENTER ]"
+          text="[ MIOS DASHBOARD ]"
           mode="word"
           staggerDelay={40}
           className="text-2xl md:text-3xl font-bold uppercase tracking-tight text-foreground"

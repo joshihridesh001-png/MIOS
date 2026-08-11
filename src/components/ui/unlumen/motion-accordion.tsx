@@ -1,7 +1,6 @@
 // ==============================================================================
 // MIOS Unlumen UI — MotionAccordion (@/components/ui/unlumen/motion-accordion.tsx)
 // Inspired by Unlumen UI Motion FAQs Accordion, powered by anime.js v4
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';

@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Active Buyer Persona & Creative Collaborator Card (@/components/customers/persona-card.tsx)
-// Governed by ADR-001 (ISO/IEC 25010 Maintainability, Single Responsibility)
 // ==============================================================================
 
 'use client';

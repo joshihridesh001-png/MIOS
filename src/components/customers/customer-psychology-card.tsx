@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Customer Psychology & CX Feedback Card (@/components/customers/customer-psychology-card.tsx)
-// Governed by ADR-001 (ISO/IEC 25010 Maintainability, Single Responsibility)
 // ==============================================================================
 
 'use client';
@@ -69,7 +68,7 @@ export function CustomerPsychologyCard({ customer }: CustomerPsychologyCardProps
             [ PRE-SALE CONSUMER PSYCHOLOGY & POST-JOB CX ]
           </h3>
           <p className="text-xs text-muted-foreground mt-1">
-            Buyer trigger analysis, objection handling & quality improvement telemetry
+            Buyer trigger analysis, objection handling & quality improvement DATA
           </p>
         </div>
         <Button
@@ -121,7 +120,7 @@ export function CustomerPsychologyCard({ customer }: CustomerPsychologyCardProps
         <div className="space-y-4 border border-border/30 p-4 bg-secondary-fixed/10">
           <div className="flex items-center justify-between border-b border-border/30 pb-2">
             <span className="text-xs font-bold uppercase text-on-background">
-              Post-Job CX Telemetry
+              Post-Job CX DATA
             </span>
             <span className={`px-2 py-0.5 text-xs font-bold ${
               customer.cx_rating && customer.cx_rating >= 4 ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' :

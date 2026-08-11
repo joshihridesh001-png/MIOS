@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Master Executive Dashboard Page (@/app/(dashboard)/dashboard/page.tsx)
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';
@@ -31,7 +30,7 @@ const EXECUTIVE_DIAGNOSTICS: DiagnosticItem[] = [
           Blended Customer Acquisition Cost (CAC) is heavily influenced by first-touch conversion speed. According to institutional rule <strong className="text-primary">#MKT-001</strong>, calling residential WhatsApp leads within 5 minutes increases quote booking by 38%.
         </p>
         <p>
-          <strong className="text-foreground font-bold">Action Mandate:</strong> Enforce 5-minute SLA on all Meta Ads WhatsApp click-to-chat campaigns to reduce blended CAC by an estimated 15-22%.
+          <strong className="text-foreground font-bold">RECOMMENDATION:</strong> Enforce 5-minute SLA on all Meta Ads WhatsApp click-to-chat campaigns to reduce blended CAC by an estimated 15-22%.
         </p>
       </div>
     ),
@@ -42,10 +41,10 @@ const EXECUTIVE_DIAGNOSTICS: DiagnosticItem[] = [
     content: (
       <div className="space-y-2 text-xs font-sans text-foreground leading-relaxed">
         <p>
-          Across enterprise residential and B2B commercial marketing telemetry, <strong className="text-emerald-400">&quot;100% Performance Guarantee&quot;</strong> and <strong className="text-emerald-400">&quot;180-Day Retention Warranty&quot;</strong> convert at 2.3× higher ROAS than generic price-discount offers.
+          Across enterprise residential and B2B commercial marketing DATA, <strong className="text-emerald-400">&quot;100% Performance Guarantee&quot;</strong> and <strong className="text-emerald-400">&quot;180-Day Retention Warranty&quot;</strong> convert at 2.3× higher ROAS than generic price-discount offers.
         </p>
         <p>
-          <strong className="text-foreground font-bold">Action Mandate:</strong> Rotate out all price-discount creatives in favor of trust-verification and guarantee-led hooks in the Creative Library.
+          <strong className="text-foreground font-bold">RECOMMENDATION:</strong> Rotate out all price-discount creatives in favor of trust-verification and guarantee-led hooks in the Creative Library.
         </p>
       </div>
     ),
@@ -59,7 +58,7 @@ const EXECUTIVE_DIAGNOSTICS: DiagnosticItem[] = [
           Whenever an A/B test in <strong className="text-purple-400">LABS</strong> or an ad campaign fails, its root cause is permanently logged in the Knowledge Base (`/knowledge`). Rules with over 80% confidence automatically flag conflicting campaign proposals before spend is committed.
         </p>
         <p>
-          <strong className="text-foreground font-bold">Action Mandate:</strong> Review high-confidence rules monthly during executive debriefs to ensure media buyers obey proven historical constraints.
+          <strong className="text-foreground font-bold">RECOMMENDATION:</strong> Review high-confidence rules monthly during executive debriefs to ensure media buyers obey proven historical constraints.
         </p>
       </div>
     ),
@@ -73,7 +72,7 @@ const EXECUTIVE_DIAGNOSTICS: DiagnosticItem[] = [
           Enterprise annual marketing intelligence contracts generate an average ticket size of ₹45,000 with 78% annual renewal. Scaling Google Ads search intent campaigns for high-intent enterprise keywords offers the highest net profit potential.
         </p>
         <p>
-          <strong className="text-foreground font-bold">Action Mandate:</strong> Reallocate 25% of top-of-funnel display budget into high-intent enterprise search campaigns.
+          <strong className="text-foreground font-bold">RECOMMENDATION:</strong> Reallocate 25% of top-of-funnel display budget into high-intent enterprise search campaigns.
         </p>
       </div>
     ),
@@ -112,7 +111,7 @@ export default function DashboardPage() {
       {loading ? (
         <div className="p-12 text-center neo-flat border-none">
           <div className="font-sans font-bold text-xs uppercase text-primary animate-pulse">
-            [ SYNCHRONIZING REALTIME MARKETING TELEMETRY... ]
+            [ SYNCHRONIZING REALTIME MARKETING DATA... ]
           </div>
         </div>
       ) : (
@@ -149,7 +148,7 @@ export default function DashboardPage() {
         <div className="flex items-center gap-2">
           <TerminalWindow weight="duotone" className="w-4 h-4 text-primary" />
           <span className="text-xs font-bold text-foreground">
-            [ EXECUTIVE DIAGNOSTICS & TELEMETRY SYNTHESIS ]
+            [ EXECUTIVE DIAGNOSTICS & DATA SYNTHESIS ]
           </span>
         </div>
 

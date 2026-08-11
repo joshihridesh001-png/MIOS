@@ -1,7 +1,6 @@
 // ==============================================================================
 // MIOS Unlumen UI — MatrixBackground (@/components/ui/unlumen/matrix-background.tsx)
 // Inspired by Unlumen UI Matrix / Cyber Grid, powered by canvas & requestAnimationFrame
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';

@@ -8,7 +8,6 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Broadcast } from "@phosphor-icons/react"
-import { AnimatePresence, motion } from "framer-motion"
 
 interface AppShellProps {
   user: any
@@ -94,18 +93,9 @@ export function AppShell({ user, children }: AppShellProps) {
         {/* Main Content Workspace */}
         <main className="flex-1 flex flex-col h-[calc(100vh-5rem)] overflow-hidden">
           <div className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={pathname}
-                initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -15, filter: "blur(4px)" }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="mx-auto max-w-7xl h-full"
-              >
-                {children}
-              </motion.div>
-            </AnimatePresence>
+            <div className="h-full">
+              {children}
+            </div>
           </div>
         </main>
       </div>

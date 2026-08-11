@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS New Creative Route (@/app/(dashboard)/creatives/new/page.tsx)
-// Governed by ADR-001 (ISO/IEC 25010 Maintainability, Query Param Hydration)
 // ==============================================================================
 
 "use client"

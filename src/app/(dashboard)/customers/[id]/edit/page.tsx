@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Edit Customer Route (@/app/(dashboard)/customers/[id]/edit/page.tsx)
-// Governed by ADR-001 (ISO/IEC 25010 Maintainability)
 // ==============================================================================
 
 'use client';
@@ -30,7 +29,7 @@ export default function EditCustomerPage() {
       const res = await updateCustomer(customer.id, data);
       if (res) {
         toast.success('Customer Record Updated!', {
-          description: 'Psychology and CX telemetry synchronized.',
+          description: 'Psychology and CX DATA synchronized.',
         });
         router.push(`/customers/${customer.id}`);
       } else {

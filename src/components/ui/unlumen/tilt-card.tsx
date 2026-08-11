@@ -1,7 +1,6 @@
 // ==============================================================================
 // MIOS Unlumen UI — TiltCard & HoverFeatureCard (@/components/ui/unlumen/tilt-card.tsx)
 // Inspired by Unlumen UI Tilt Card / Hover Feature Cards, powered by anime.js v4
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';

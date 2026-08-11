@@ -25,8 +25,8 @@ export function CampaignTable({ campaigns }: CampaignTableProps) {
   if (campaigns.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center p-12 text-center bg-card/50 backdrop-blur border border-border/40 rounded-xl border-dashed">
-        <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-1">[ NO PROTOCOLS LOGGED ]</h3>
-        <p className="text-xs text-muted-foreground">Initialize a new campaign protocol to start tracking telemetry.</p>
+        <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-1">[ NO STRATEGYS LOGGED ]</h3>
+        <p className="text-xs text-muted-foreground">Initialize a new campaign STRATEGY to start tracking DATA.</p>
       </div>
     )
   }

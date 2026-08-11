@@ -1,6 +1,5 @@
 // ==============================================================================
-// MIOS Customer Detail & Psychology Telemetry Route (@/app/(dashboard)/customers/[id]/page.tsx)
-// Governed by ADR-001 (PestControl OS Aesthetic: #000000, rounded-none)
+// MIOS Customer Detail & Psychology DATA Route (@/app/(dashboard)/customers/[id]/page.tsx)
 // ==============================================================================
 
 'use client';
@@ -37,7 +36,7 @@ export default function CustomerDetailPage() {
   if (loading) {
     return (
       <div className="p-12 text-center font-sans font-bold text-xs text-muted-foreground">
-        [ LOADING CUSTOMER TELEMETRY & PSYCHOLOGY DATA... ]
+        [ LOADING CUSTOMER DATA & PSYCHOLOGY DATA... ]
       </div>
     );
   }

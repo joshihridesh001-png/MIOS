@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Dashboard KPIs Component (@/components/dashboard/dashboard-kpis.tsx)
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';
@@ -9,7 +8,7 @@ import React from 'react';
 import { AnimateCount } from '@/components/ui/unlumen/animate-count';
 import { TiltCard } from '@/components/ui/unlumen/tilt-card';
 import { TrendUp, CurrencyDollar, Pulse, Users, Flask, BookOpen, Trophy, ShieldCheck } from "@phosphor-icons/react";
-import { motion, Variants } from "framer-motion";
+
 
 interface DashboardKPIsProps {
   kpis: {
@@ -36,28 +35,12 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
   const isNetProfitPositive = kpis.netProfit >= 0;
   const isRoasHealthy = kpis.blendedRoas >= 2.0;
 
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 }
-    }
-  };
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
-  };
 
   return (
-    <motion.div 
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-      variants={containerVariants}
-      initial="hidden"
-      animate="show"
-    >
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {/* 1. Total Revenue Generated */}
-      <motion.div variants={itemVariants} className="h-full">
+      <div className="h-full">
         <TiltCard className="h-full">
         <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
@@ -79,10 +62,10 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
           </div>
         </div>
         </TiltCard>
-      </motion.div>
+      </div>
 
       {/* 2. Net Profit */}
-      <motion.div variants={itemVariants} className="h-full">
+      <div className="h-full">
         <TiltCard className="h-full">
         <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
@@ -119,10 +102,10 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
           </div>
         </div>
         </TiltCard>
-      </motion.div>
+      </div>
 
       {/* 3. Blended ROAS */}
-      <motion.div variants={itemVariants} className="h-full">
+      <div className="h-full">
         <TiltCard className="h-full">
         <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
@@ -155,10 +138,10 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
           </div>
         </div>
         </TiltCard>
-      </motion.div>
+      </div>
 
       {/* 4. Total Marketing Spend */}
-      <motion.div variants={itemVariants} className="h-full">
+      <div className="h-full">
         <TiltCard className="h-full">
         <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
@@ -180,10 +163,10 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
           </div>
         </div>
         </TiltCard>
-      </motion.div>
+      </div>
 
       {/* 5. Customers Won & Conversion Rate */}
-      <motion.div variants={itemVariants} className="h-full">
+      <div className="h-full">
         <TiltCard className="h-full">
         <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
@@ -210,10 +193,10 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
           </div>
         </div>
         </TiltCard>
-      </motion.div>
+      </div>
 
       {/* 6. Active Experiments (LABS) */}
-      <motion.div variants={itemVariants} className="h-full">
+      <div className="h-full">
         <TiltCard className="h-full">
         <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
@@ -235,10 +218,10 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
           </div>
         </div>
         </TiltCard>
-      </motion.div>
+      </div>
 
       {/* 7. Verified Institutional Rules (/knowledge) */}
-      <motion.div variants={itemVariants} className="h-full">
+      <div className="h-full">
         <TiltCard className="h-full">
         <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
@@ -263,16 +246,16 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
           </div>
         </div>
         </TiltCard>
-      </motion.div>
+      </div>
 
       {/* 8. Post-Job CX Rating Score */}
-      <motion.div variants={itemVariants} className="h-full">
+      <div className="h-full">
         <TiltCard className="h-full">
         <div className="p-5 neo-flat border-none rounded-3xl hover:border-border transition-colors h-full flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-muted-foreground font-bold">
-                POST-JOB CX TELEMETRY
+                POST-JOB CX DATA
               </span>
               <BookOpen className="w-4 h-4 text-amber-400" />
             </div>
@@ -293,7 +276,7 @@ export function DashboardKPIs({ kpis }: DashboardKPIsProps) {
           </div>
         </div>
         </TiltCard>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }

@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Acquire New Customer Route (@/app/(dashboard)/customers/new/page.tsx)
-// Governed by ADR-001 (ISO/IEC 25010 Maintainability)
 // ==============================================================================
 
 'use client';
@@ -25,7 +24,7 @@ export default function NewCustomerPage() {
       const res = await createCustomer(data);
       if (res) {
         toast.success('Customer Recorded Successfully!', {
-          description: 'Psychology triggers and CX telemetry indexed.',
+          description: 'Psychology triggers and CX DATA indexed.',
         });
         router.push(`/customers/${res.id}`);
       } else {

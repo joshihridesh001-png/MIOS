@@ -18,10 +18,10 @@ export default async function CampaignsPage() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border/50 pb-4">
         <div>
           <h1 className="text-xl font-bold tracking-wider uppercase text-foreground">
-            <TextReveal text="[ CAMPAIGN TELEMETRY & OPERATIONS ]" />
+            <TextReveal text="[ CAMPAIGN DATA & OPERATIONS ]" />
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
-            Manage, execute, and monitor real-time marketing protocol performance.
+            Manage, execute, and monitor real-time marketing STRATEGY performance.
           </p>
         </div>
         <Button asChild className="rounded-xl bg-primary text-primary-foreground font-bold uppercase tracking-wider hover:bg-primary/80 text-xs px-4">

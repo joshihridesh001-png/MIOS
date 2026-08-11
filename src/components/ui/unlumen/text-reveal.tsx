@@ -1,7 +1,6 @@
 // ==============================================================================
 // MIOS Unlumen UI — TextReveal (@/components/ui/unlumen/text-reveal.tsx)
 // Inspired by Unlumen UI Dia Text Reveal / Smart Animate Text, powered by anime.js v4
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';

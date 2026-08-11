@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Dashboard Benchmark Alerts (@/components/dashboard/benchmark-alerts.tsx)
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';
@@ -23,7 +22,7 @@ export function BenchmarkAlerts({ alerts }: BenchmarkAlertsProps) {
       <div className="p-4 neo-flat border-none rounded-2xl flex items-center justify-between text-xs font-bold uppercase text-muted-foreground">
         <div className="flex items-center gap-2">
           <Trophy weight="duotone" className="w-4 h-4 text-primary" />
-          <span>[ ALL CAMPAIGN TELEMETRY COMPLIANT WITH EXECUTIVE BENCHMARKS ]</span>
+          <span>[ ALL CAMPAIGN DATA COMPLIANT WITH EXECUTIVE BENCHMARKS ]</span>
         </div>
         <span className="text-primary">[ ZERO ALERTS ]</span>
       </div>

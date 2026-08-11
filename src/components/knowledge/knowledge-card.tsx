@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Knowledge Base — Knowledge Card Component (@/components/knowledge/knowledge-card.tsx)
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';

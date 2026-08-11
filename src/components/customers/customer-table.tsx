@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Customer Directory Table (@/components/customers/customer-table.tsx)
-// Governed by ADR-001 (PestControl OS Aesthetic: #000000, rounded-none)
 // Powered by Unlumen UI AnimatedList and AnimateCount
 // ==============================================================================
 

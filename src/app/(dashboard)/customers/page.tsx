@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Customers & Buyer Personas Directory Route (@/app/(dashboard)/customers/page.tsx)
-// Governed by ADR-001 (PestControl OS Aesthetic: #000000, rounded-none)
 // ==============================================================================
 
 'use client';
@@ -40,7 +39,7 @@ export default function CustomersPage() {
             <TextReveal text="[ CONSUMER PSYCHOLOGY & BUYER RESEARCH ENGINE ]" />
           </h1>
           <p className="text-xs text-muted-foreground mt-1">
-            Customer attribution, post-job CX telemetry & active growth experiment collaborator (LABS)
+            Customer attribution, post-job CX DATA & active growth experiment collaborator (LABS)
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -84,7 +83,7 @@ export default function CustomersPage() {
         <div className="space-y-4">
           {loadingCust ? (
             <div className="p-12 text-center text-muted-foreground text-xs">
-              [ LOADING CUSTOMER TELEMETRY... ]
+              [ LOADING CUSTOMER DATA... ]
             </div>
           ) : (
             <CustomerTable customers={customers} onDelete={handleDelete} />

@@ -371,9 +371,9 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
             <div className="text-sm font-semibold text-foreground border-b border-border pb-3 mb-4">
               Decision Log
             </div>
-            {experiment.decision_protocol_notes && experiment.decision_protocol_notes.length > 0 ? (
+            {experiment.decision_STRATEGY_notes && experiment.decision_STRATEGY_notes.length > 0 ? (
               <div className="space-y-3">
-                {experiment.decision_protocol_notes.map((note, idx) => {
+                {experiment.decision_STRATEGY_notes.map((note, idx) => {
                   const isAlert = note.startsWith("!") || note.includes("degradation") || note.includes("WARN")
                   const isSuccess = note.includes("[SUCCESS]") || note.includes("WIN")
                   return (
@@ -438,7 +438,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
             </div>
           </div>
 
-          {/* Telemetry Summary Card */}
+          {/* DATA Summary Card */}
           <div className="p-5 neo-flat border-none rounded-xl">
             <div className="text-sm font-semibold text-foreground border-b border-border pb-3 mb-4">
               Experiment Data

@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Knowledge Base — Knowledge Form Modal (@/components/knowledge/knowledge-form-modal.tsx)
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';
@@ -41,7 +40,7 @@ interface KnowledgeFormModalProps {
 
 const CATEGORIES: { value: LearningCategory; label: string }[] = [
   { value: 'marketing', label: 'MARKETING PRINCIPLE' },
-  { value: 'sales', label: 'SALES & CLOSING PROTOCOL' },
+  { value: 'sales', label: 'SALES & CLOSING STRATEGY' },
   { value: 'customer_psychology', label: 'BUYER PSYCHOLOGY & TRUST' },
   { value: 'operations', label: 'FIELD OPERATIONS & CX' },
   { value: 'pricing', label: 'PRICING & AMC OFFERS' },
@@ -102,7 +101,7 @@ export function KnowledgeFormModal({
             [ + LOG INSTITUTIONAL INSIGHT / RULE ]
           </DialogTitle>
           <DialogDescription className="text-xs text-muted-foreground font-sans">
-            Permanently record verified marketing rules, buyer psychology triggers, or operational protocols.
+            Permanently record verified marketing rules, buyer psychology triggers, or operational STRATEGYs.
           </DialogDescription>
         </DialogHeader>
 

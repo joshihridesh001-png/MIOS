@@ -172,10 +172,10 @@ export function RecordResultsModal({
         winner = variantBName || "Variant B"
       }
 
-      // Append new telemetry log to decision protocol stream
+      // Append new DATA log to decision STRATEGY stream
       const timestamp = new Date().toISOString().slice(0, 16).replace("T", " ")
       const logEntry = `> [SYNC ${timestamp}] Recorded metrics — Control (${cMetrics.cvr}% CVR, ${cMetrics.conversions} conv) | Variant A (${aMetrics.cvr}% CVR, ${aMetrics.conversions} conv) | Variant B (${bMetrics.cvr}% CVR, ${bMetrics.conversions} conv). Lift: +${liftNum}% [Confidence: ${confNum}%]`
-      const updatedNotes = [logEntry, ...(experiment.decision_protocol_notes || [])]
+      const updatedNotes = [logEntry, ...(experiment.decision_STRATEGY_notes || [])]
 
       await updateExperiment(experiment.id, {
         control_name: controlName,
@@ -187,10 +187,10 @@ export function RecordResultsModal({
         actual_lift: liftNum,
         confidence_score: confNum,
         winner_variant: winner,
-        decision_protocol_notes: updatedNotes,
+        decision_STRATEGY_notes: updatedNotes,
       })
 
-      toast.success("Protocol data recorded and synchronized")
+      toast.success("STRATEGY data recorded and synchronized")
       onSuccess()
       onOpenChange(false)
     } catch (err: any) {
@@ -210,7 +210,7 @@ export function RecordResultsModal({
             </div>
             <div>
               <DialogTitle className="text-base font-black uppercase tracking-wider text-foreground">
-                RECORD PROTOCOL DATA // ID: {experiment.test_code}
+                RECORD STRATEGY DATA // ID: {experiment.test_code}
               </DialogTitle>
               <DialogDescription className="text-sm text-muted-foreground mt-1">
                 Input real-time performance metrics for Control and Variants to update statistical lift and confidence.
@@ -419,7 +419,7 @@ export function RecordResultsModal({
               className="h-10 px-8 text-xs !bg-[#00dbe9] hover:!bg-[#00c5d2] !text-black font-sans font-bold font-black uppercase tracking-wider rounded-xl shadow-[0_0_15px_rgba(0,219,233,0.4)] border border-primary cursor-pointer"
             >
               <Check weight="duotone" className="w-4 h-4 mr-2 stroke-[2.5]" />
-              <span>SAVE PROTOCOL DATA</span>
+              <span>SAVE STRATEGY DATA</span>
             </Button>
           </DialogFooter>
         </form>

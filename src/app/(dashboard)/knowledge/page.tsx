@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Knowledge Base — Master Vault Page (@/app/(dashboard)/knowledge/page.tsx)
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';
@@ -83,7 +82,7 @@ export default function KnowledgeBasePage() {
               [ KNOWLEDGE VAULT • COMPOUNDING INTEL ]
             </Badge>
             <span className="font-sans font-bold text-xs text-muted-foreground">
-              ISO/IEC 25010 INSTITUTIONAL MEMORY
+               INSTITUTIONAL MEMORY
             </span>
           </div>
 
@@ -213,7 +212,7 @@ export default function KnowledgeBasePage() {
             [ NO RULES MATCHING SPECIFIED FILTER IN VAULT ]
           </div>
           <p className="text-xs text-zinc-600 font-sans max-w-md mx-auto">
-            Log your first marketing rule, customer psychology trigger, or operational protocol to start compounding institutional intelligence.
+            Log your first marketing rule, customer psychology trigger, or operational STRATEGY to start compounding institutional intelligence.
           </p>
           <Button
             onClick={() => setIsModalOpen(true)}

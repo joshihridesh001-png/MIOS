@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Dashboard Pipeline Grid (@/components/dashboard/pipeline-grid.tsx)
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';
@@ -271,7 +270,7 @@ export function PipelineGrid({
             >
               {recentCustomers.length === 0 ? (
                 <p className="text-xs font-sans font-bold text-zinc-600 uppercase py-4 text-center">
-                  [ NO CUSTOMER TELEMETRY ]
+                  [ NO CUSTOMER DATA ]
                 </p>
               ) : (
                 recentCustomers.map((cust) => (
@@ -304,7 +303,7 @@ export function PipelineGrid({
               href="/customers/new"
               className="text-[10px] font-sans font-bold uppercase text-amber-400 hover:underline"
             >
-              [ + LOG CUSTOMER TELEMETRY ]
+              [ + LOG CUSTOMER DATA ]
             </Link>
           </div>
         </div>

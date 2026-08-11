@@ -1,7 +1,6 @@
 // ==============================================================================
 // MIOS Unlumen UI — AnimateCount (@/components/ui/unlumen/animate-count.tsx)
 // Inspired by Unlumen UI Animate Digits / Animate Count, powered by anime.js v4
-// Governed by ADR-001 (PestControl OS Executive Suite aesthetic)
 // ==============================================================================
 
 'use client';

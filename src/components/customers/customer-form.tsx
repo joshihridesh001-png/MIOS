@@ -1,6 +1,5 @@
 // ==============================================================================
 // MIOS Customer Acquisition & CX Form (@/components/customers/customer-form.tsx)
-// Governed by ADR-001 (ISO/IEC 25010 Reliability, Explicit Input Validation)
 // ==============================================================================
 
 'use client';
@@ -78,7 +77,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
         has_referral: parsed.has_referral || prev.has_referral,
       }));
       toast.success('AI Quick-Paste Parsed Successfully!', {
-        description: 'Pre-sale psychology and post-job CX telemetry auto-populated.',
+        description: 'Pre-sale psychology and post-job CX DATA auto-populated.',
       });
     } catch (err: unknown) {
       toast.error('Parser encountered an unexpected format.');
@@ -209,7 +208,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
       {/* 4. Pre-Sale Psychology & Post-Job CX Matrix */}
       <div className="border border-border/50 bg-card/80 p-6 rounded-xl space-y-4">
         <h4 className="text-xs font-bold uppercase text-primary tracking-wider border-b border-border/40 pb-2">
-          3. Pre-Sale Consumer Psychology & Post-Job CX Telemetry
+          3. Pre-Sale Consumer Psychology & Post-Job CX DATA
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
