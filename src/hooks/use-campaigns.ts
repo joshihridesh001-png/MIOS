@@ -73,7 +73,7 @@ export async function createCampaign(data: Partial<CampaignRow>) {
     .from('campaigns')
     .insert([data])
     .select()
-    .single()
+    .maybeSingle()
   
   if (error) throw error
   return result
@@ -86,7 +86,7 @@ export async function updateCampaign(id: string, data: Partial<CampaignRow>) {
     .update(data)
     .eq('id', id)
     .select()
-    .single()
+    .maybeSingle()
   
   if (error) throw error
   return result

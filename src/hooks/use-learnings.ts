@@ -48,7 +48,7 @@ export function useLearnings(sourceId?: string, sourceType: string = 'campaign')
       .from('learnings')
       .insert([data])
       .select()
-      .single();
+      .maybeSingle();
 
     if (err) throw err;
     setLearnings(prev => [newLearning as LearningRow, ...prev]);
@@ -62,7 +62,7 @@ export function useLearnings(sourceId?: string, sourceType: string = 'campaign')
       .update(data)
       .eq('id', id)
       .select()
-      .single();
+      .maybeSingle();
 
     if (err) throw err;
     setLearnings(prev => prev.map(l => l.id === id ? updatedLearning as LearningRow : l));
@@ -144,7 +144,7 @@ export function useAllLearnings(categoryFilter?: string) {
       .from('learnings')
       .insert([defaultData])
       .select()
-      .single();
+      .maybeSingle();
 
     if (err) throw err;
     setLearnings(prev => [newLearning as LearningRow, ...prev]);
@@ -158,7 +158,7 @@ export function useAllLearnings(categoryFilter?: string) {
       .update(data)
       .eq('id', id)
       .select()
-      .single();
+      .maybeSingle();
 
     if (err) throw err;
     setLearnings(prev => prev.map(l => l.id === id ? updatedLearning as LearningRow : l));

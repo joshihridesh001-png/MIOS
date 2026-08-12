@@ -77,7 +77,7 @@ export async function createCreative(data: Partial<CreativeRow>) {
     .from('creatives')
     .insert([data])
     .select()
-    .single()
+    .maybeSingle()
   
   if (error) throw error
   return result
@@ -90,7 +90,7 @@ export async function updateCreative(id: string, data: Partial<CreativeRow>) {
     .update(data)
     .eq('id', id)
     .select()
-    .single()
+    .maybeSingle()
   
   if (error) throw error
   return result

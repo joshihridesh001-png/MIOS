@@ -75,7 +75,7 @@ export function useCustomers() {
         .update({ ...input, updated_at: new Date().toISOString() })
         .eq('id', id)
         .select()
-        .single();
+        .maybeSingle();
 
       if (updateErr) {
         throw updateErr;
@@ -199,7 +199,7 @@ export function useBuyerPersonas() {
         .update({ ...input, updated_at: new Date().toISOString() })
         .eq('id', id)
         .select()
-        .single();
+        .maybeSingle();
 
       if (updateErr) {
         throw updateErr;

@@ -84,7 +84,7 @@ export async function createExperiment(data: ExperimentInsert): Promise<Experime
     .from('experiments')
     .insert([data])
     .select()
-    .single();
+    .maybeSingle();
 
   if (error) throw error;
   return newExp as ExperimentRow;
@@ -97,7 +97,7 @@ export async function updateExperiment(id: string, data: ExperimentUpdate): Prom
     .update(data)
     .eq('id', id)
     .select()
-    .single();
+    .maybeSingle();
 
   if (error) throw error;
   return updated as ExperimentRow;
