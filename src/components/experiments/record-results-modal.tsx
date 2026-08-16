@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
 import { FileCsv, ArrowsClockwise, Check, WarningCircle } from "@phosphor-icons/react"
+import { calculateLift } from "@/lib/utils/statistical-lift"
 
 interface RecordResultsModalProps {
   experiment: ExperimentRow
@@ -114,10 +115,8 @@ export function RecordResultsModal({
 
     // Find best variant CVR against Control
     const maxVariantCvr = Math.max(aCvr, bCvr)
-    let calculatedLift = 0
-    if (cCvr > 0) {
-      calculatedLift = ((maxVariantCvr - cCvr) / cCvr) * 100
-    }
+    const liftResult = calculateLift(cCvr, maxVariantCvr)
+    const calculatedLift = liftResult.liftPercent ?? 0
 
     // Auto-estimate confidence score based on total conversions and lift
     const totalConv = cConv + aConv + bConv
