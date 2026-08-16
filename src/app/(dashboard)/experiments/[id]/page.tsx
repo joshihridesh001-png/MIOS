@@ -93,16 +93,32 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
   const conf = experiment.confidence_score || 0
   const isRunning = experiment.status === "running"
 
-  // Aggregate metrics to check sample size sufficiency across all variants
-  const totalImpressions = (experiment.control_impressions || 0) + (experiment.variant_a_impressions || 0) + (experiment.variant_b_impressions || 0)
-  const totalConversions = (experiment.control_conversions || 0) + (experiment.variant_a_conversions || 0) + (experiment.variant_b_conversions || 0)
-  const totalCustomers = (experiment.control_customers || 0) + (experiment.variant_a_customers || 0) + (experiment.variant_b_customers || 0)
-  
+  const controlSamples = {
+    impressions: experiment.control_impressions || 0,
+    conversions: experiment.control_conversions || 0,
+    customers: experiment.control_customers || 0,
+  }
+
+  const activeVariants = []
+  if (experiment.variant_a_name) {
+    activeVariants.push({
+      impressions: experiment.variant_a_impressions || 0,
+      conversions: experiment.variant_a_conversions || 0,
+      customers: experiment.variant_a_customers || 0,
+    })
+  }
+  if (experiment.variant_b_name) {
+    activeVariants.push({
+      impressions: experiment.variant_b_impressions || 0,
+      conversions: experiment.variant_b_conversions || 0,
+      customers: experiment.variant_b_customers || 0,
+    })
+  }
+
   const sampleCheck = checkSampleSizeSufficiency(
     (experiment.primary_metric as PrimaryMetric) || 'ctr',
-    totalImpressions,
-    totalConversions,
-    totalCustomers
+    controlSamples,
+    activeVariants
   )
 
   const hasVariants = !!experiment.variant_a_name || !!experiment.variant_b_name;
@@ -191,12 +207,25 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
           
           {/* Sample Size Warning */}
           {!sampleCheck.isSufficient && isRunning && (
-            <div className="p-4 bg-amber-950/30 border border-amber-900 rounded-xl flex items-start gap-3">
-              <Warning weight="duotone" className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
+            <div className={cn(
+              "p-4 border rounded-xl flex items-start gap-3",
+              sampleCheck.warningLevel === 'high' 
+                ? "bg-red-950/30 border-red-900" 
+                : "bg-amber-950/30 border-amber-900"
+            )}>
+              <Warning weight="duotone" className={cn(
+                "w-5 h-5 shrink-0 mt-0.5",
+                sampleCheck.warningLevel === 'high' ? "text-red-500" : "text-amber-500"
+              )} />
               <div>
-                <h4 className="text-sm font-semibold text-amber-500">Insufficient Sample Size</h4>
+                <h4 className={cn(
+                  "text-sm font-semibold",
+                  sampleCheck.warningLevel === 'high' ? "text-red-500" : "text-amber-500"
+                )}>
+                  Insufficient Sample Size
+                </h4>
                 <p className="text-sm text-muted-foreground mt-1">
-                  This experiment has {sampleCheck.current.toLocaleString()} {sampleCheck.metricType.toLowerCase()}, which is below the minimum threshold of {sampleCheck.required.toLocaleString()} required for statistical significance on this metric. Wait before drawing conclusions.
+                  {sampleCheck.message}
                 </p>
               </div>
             </div>

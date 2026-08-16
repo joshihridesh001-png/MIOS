@@ -1,76 +1,120 @@
-/**
- * Utility functions for determining statistical sample size sufficiency
- * Based on MIOS Experiments Upgrade Specification.
- */
+export type PrimaryMetric = 'ctr' | 'cvr' | 'cac' | 'cpm' | 'roi' | 'roas' | 'other' | string;
 
-export type PrimaryMetric = 'ctr' | 'cvr' | 'cac' | 'cpm' | 'roi' | 'other';
+export interface VariantSamples {
+  impressions: number;
+  conversions: number;
+  customers: number;
+}
 
-export interface SampleSizeCheck {
+export interface SampleSizeGuidance {
   isSufficient: boolean;
   current: number;
-  required: number;
-  metricType: string;
+  recommended: number;
+  metricLabel: string;
+  warningLevel: 'none' | 'low' | 'high';
+  message: string;
 }
 
 /**
  * Validates if the given sample size meets the required threshold for the metric.
- * 
- * Thresholds:
- * - CTR differences: 1500 impressions
- * - CVR / Lead differences: 60 conversions
- * - CAC / Customer differences: 75 customers
- * 
- * @param primaryMetric The metric being tested
- * @param impressions Number of impressions gathered
- * @param conversions Number of conversions gathered 
- * @param customers Number of customers won
- * @returns SampleSizeCheck result
+ * Uses the minimum sample size across all active variants (including control)
+ * as the limiting factor for statistical significance.
  */
 export function checkSampleSizeSufficiency(
   primaryMetric: PrimaryMetric,
-  impressions: number,
-  conversions: number,
-  customers: number
-): SampleSizeCheck {
-  // Normalize custom metric inputs
+  control: VariantSamples,
+  variants: VariantSamples[]
+): SampleSizeGuidance {
   const metric = (primaryMetric || 'other').toLowerCase();
+
+  const allActiveGroups = [control, ...variants];
+
+  // Find the minimum sample sizes across all groups (weakest link)
+  const minImpressions = Math.min(...allActiveGroups.map(g => g.impressions));
+  const minConversions = Math.min(...allActiveGroups.map(g => g.conversions));
+  const minCustomers = Math.min(...allActiveGroups.map(g => g.customers));
 
   switch (metric) {
     case 'ctr':
-      // 1000 - 2000 impressions required. We use 1500 as the baseline minimum.
+    case 'cpm': {
+      const recommended = 1500;
+      const isSufficient = minImpressions >= recommended;
       return {
-        isSufficient: impressions >= 1500,
-        current: impressions,
-        required: 1500,
-        metricType: 'Impressions'
+        isSufficient,
+        current: minImpressions,
+        recommended,
+        metricLabel: 'impressions',
+        warningLevel: isSufficient ? 'none' : (minImpressions < 500 ? 'high' : 'low'),
+        message: isSufficient
+          ? 'Sufficient impressions collected for CTR/CPM analysis.'
+          : `Need more impressions. Aim for ${recommended.toLocaleString()} per variant to trust the difference (current lowest: ${minImpressions.toLocaleString()}).`
       };
-      
+    }
     case 'cvr':
-      // 40 - 80 conversions required. We use 60 as the baseline minimum.
+    case 'leads': {
+      const recommended = 60;
+      const isSufficient = minConversions >= recommended;
       return {
-        isSufficient: conversions >= 60,
-        current: conversions,
-        required: 60,
-        metricType: 'Conversions'
+        isSufficient,
+        current: minConversions,
+        recommended,
+        metricLabel: 'conversions',
+        warningLevel: isSufficient ? 'none' : (minConversions < 20 ? 'high' : 'low'),
+        message: isSufficient
+          ? 'Sufficient conversions collected for CVR analysis.'
+          : `Need more conversions. Aim for ${recommended} per variant to trust the conversion rate difference (current lowest: ${minConversions}).`
       };
-      
+    }
     case 'cac':
     case 'roi':
-      // 50 - 100 customers required. We use 75 as the baseline minimum.
+    case 'roas': {
+      const recommended = 75;
+      const isSufficient = minCustomers >= recommended;
       return {
-        isSufficient: customers >= 75,
-        current: customers,
-        required: 75,
-        metricType: 'Customers'
+        isSufficient,
+        current: minCustomers,
+        recommended,
+        metricLabel: 'customers',
+        warningLevel: isSufficient ? 'none' : (minCustomers < 25 ? 'high' : 'low'),
+        message: isSufficient
+          ? 'Sufficient customers acquired for financial analysis.'
+          : `Need more customers. Aim for ${recommended} per variant to trust the financial metrics (current lowest: ${minCustomers}).`
       };
-      
+    }
+    default: {
+      const recommended = 1500;
+      const isSufficient = minImpressions >= recommended;
+      return {
+        isSufficient,
+        current: minImpressions,
+        recommended,
+        metricLabel: 'impressions',
+        warningLevel: isSufficient ? 'none' : (minImpressions < 500 ? 'high' : 'low'),
+        message: isSufficient
+          ? 'Sufficient baseline sample collected.'
+          : `Need more data. Aim for at least ${recommended.toLocaleString()} impressions per variant for general analysis (current lowest: ${minImpressions.toLocaleString()}).`
+      };
+    }
+  }
+}
+
+/**
+ * Returns a practical planning-time suggestion for the given metric.
+ */
+export function getPlanningSuggestion(primaryMetric: PrimaryMetric): string {
+  const metric = (primaryMetric || 'other').toLowerCase();
+  switch (metric) {
+    case 'ctr':
+    case 'cpm':
+      return 'Target: 1,000–2,000 impressions per variant to measure click differences reliably.';
+    case 'cvr':
+    case 'leads':
+      return 'Target: 40–80 conversions per variant to measure conversion rate differences reliably.';
+    case 'cac':
+    case 'roi':
+    case 'roas':
+      return 'Target: 50–100 customers per variant to measure financial impact and CAC reliably.';
     default:
-      // Fallback relies on impressions
-      return {
-        isSufficient: impressions >= 1500,
-        current: impressions,
-        required: 1500,
-        metricType: 'Impressions'
-      };
+      return 'Target: At least 1,500 impressions per variant for a reliable general test.';
   }
 }

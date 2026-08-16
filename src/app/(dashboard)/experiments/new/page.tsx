@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ArrowLeft, Flask, TerminalWindow, CheckCircle } from "@phosphor-icons/react"
 import { toast } from "sonner"
 import type { ExperimentType, ExperimentImpact } from "@/lib/types/database"
+import { getPlanningSuggestion, PrimaryMetric } from "@/lib/utils/sample-size-calculator"
 
 function NewExperimentContent() {
   const router = useRouter()
