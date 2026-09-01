@@ -31,7 +31,15 @@ export function RecordResultsModal({
   onOpenChange,
   onSuccess,
 }: RecordResultsModalProps) {
+  const [submitting, setSubmitting] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const isOutbound = ['open_rate', 'reply_rate', 'meeting_rate', 'acceptance_rate'].includes(experiment?.primary_metric || '')
+  const uiLabels = {
+    ctr: isOutbound ? "Open Rate (%)" : "CTR (%)",
+    cvr: isOutbound ? "Reply Rate (%)" : "CVR (%)",
+    conversions: isOutbound ? "Replies" : "Conversions",
+  }
 
   // Control state
   const [controlName, setControlName] = useState(experiment.control_name || "Control")
@@ -236,7 +244,7 @@ export function RecordResultsModal({
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">CTR (%)</Label>
+                  <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{uiLabels.ctr}</Label>
                   <Input
                     type="number"
                     step="0.01"
@@ -246,7 +254,7 @@ export function RecordResultsModal({
                   />
                 </div>
                 <div>
-                  <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">CVR (%)</Label>
+                  <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{uiLabels.cvr}</Label>
                   <Input
                     type="number"
                     step="0.01"
@@ -257,7 +265,7 @@ export function RecordResultsModal({
                 </div>
               </div>
               <div>
-                <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Conversions</Label>
+                <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{uiLabels.conversions}</Label>
                 <Input
                   type="number"
                   value={controlConversions}
@@ -282,7 +290,7 @@ export function RecordResultsModal({
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">CTR (%)</Label>
+                  <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{uiLabels.ctr}</Label>
                   <Input
                     type="number"
                     step="0.01"
@@ -292,7 +300,7 @@ export function RecordResultsModal({
                   />
                 </div>
                 <div>
-                  <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">CVR (%)</Label>
+                  <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{uiLabels.cvr}</Label>
                   <Input
                     type="number"
                     step="0.01"
@@ -303,7 +311,7 @@ export function RecordResultsModal({
                 </div>
               </div>
               <div>
-                <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Conversions</Label>
+                <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{uiLabels.conversions}</Label>
                 <Input
                   type="number"
                   value={variantAConversions}
@@ -328,7 +336,7 @@ export function RecordResultsModal({
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">CTR (%)</Label>
+                  <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{uiLabels.ctr}</Label>
                   <Input
                     type="number"
                     step="0.01"
@@ -338,7 +346,7 @@ export function RecordResultsModal({
                   />
                 </div>
                 <div>
-                  <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">CVR (%)</Label>
+                  <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{uiLabels.cvr}</Label>
                   <Input
                     type="number"
                     step="0.01"
@@ -349,7 +357,7 @@ export function RecordResultsModal({
                 </div>
               </div>
               <div>
-                <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Conversions</Label>
+                <Label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{uiLabels.conversions}</Label>
                 <Input
                   type="number"
                   value={variantBConversions}

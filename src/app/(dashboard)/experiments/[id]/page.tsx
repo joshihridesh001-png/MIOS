@@ -123,6 +123,17 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
 
   const hasVariants = !!experiment.variant_a_name || !!experiment.variant_b_name;
 
+  const isOutbound = ['open_rate', 'reply_rate', 'meeting_rate', 'acceptance_rate'].includes(experiment.primary_metric || '')
+  const uiLabels = {
+    spend: "Spend",
+    impressions: isOutbound ? "Sent" : "Impressions",
+    clicks: isOutbound ? "Opens" : "Clicks",
+    conversions: isOutbound ? "Replies" : "Conversions",
+    ctr: isOutbound ? "Open Rate" : "CTR",
+    cvr: isOutbound ? "Reply Rate" : "CVR",
+    cpa: isOutbound ? "Cost per Reply" : "CPA"
+  }
+
   return (
     <div className="space-y-6 max-w-7xl mx-auto text-foreground pb-12">
       {/* Header */}
@@ -295,7 +306,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                   
                   {/* Base Metrics */}
                   <tr className="hover:bg-card border border-border shadow-sm/30">
-                    <td className="py-3 px-4 font-medium text-muted-foreground">Spend</td>
+                    <td className="py-3 px-4 font-medium text-muted-foreground">{uiLabels.spend}</td>
                     <td className="py-3 px-4 text-emerald-400 bg-emerald-950/10 border-r border-border font-sans font-bold">
                       {baseline ? `$${baseline.spend.toLocaleString()}` : '-'}
                     </td>
@@ -306,7 +317,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                     )}
                   </tr>
                   <tr className="hover:bg-card border border-border shadow-sm/30">
-                    <td className="py-3 px-4 font-medium text-muted-foreground">Impressions</td>
+                    <td className="py-3 px-4 font-medium text-muted-foreground">{uiLabels.impressions}</td>
                     <td className="py-3 px-4 text-emerald-400 bg-emerald-950/10 border-r border-border font-sans font-bold">
                       {baseline ? baseline.impressions.toLocaleString() : '-'}
                     </td>
@@ -317,7 +328,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                     )}
                   </tr>
                   <tr className="hover:bg-card border border-border shadow-sm/30">
-                    <td className="py-3 px-4 font-medium text-muted-foreground">Conversions</td>
+                    <td className="py-3 px-4 font-medium text-muted-foreground">{uiLabels.conversions}</td>
                     <td className="py-3 px-4 text-emerald-400 bg-emerald-950/10 border-r border-border font-sans font-bold">
                       {baseline ? Math.round((baseline.cvr / 100) * (baseline.impressions * (baseline.ctr / 100))).toLocaleString() || '-' : '-'}
                     </td>
@@ -335,7 +346,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                     </td>
                   </tr>
                   <tr className="hover:bg-card border border-border shadow-sm/30">
-                    <td className="py-3 px-4 font-medium text-foreground">CTR</td>
+                    <td className="py-3 px-4 font-medium text-foreground">{uiLabels.ctr}</td>
                     <td className="py-3 px-4 text-emerald-400 font-bold bg-emerald-950/20 border-r border-border">
                       {baseline ? `${baseline.ctr}%` : '-'}
                     </td>
@@ -352,7 +363,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                     )}
                   </tr>
                   <tr className="hover:bg-card border border-border shadow-sm/30">
-                    <td className="py-3 px-4 font-medium text-foreground">CVR</td>
+                    <td className="py-3 px-4 font-medium text-foreground">{uiLabels.cvr}</td>
                     <td className="py-3 px-4 text-emerald-400 font-bold bg-emerald-950/20 border-r border-border">
                       {baseline ? `${baseline.cvr}%` : '-'}
                     </td>
@@ -369,7 +380,7 @@ export default function ExperimentDetailPage({ params }: ExperimentDetailPagePro
                     )}
                   </tr>
                   <tr className="hover:bg-card border border-border shadow-sm/30">
-                    <td className="py-3 px-4 font-medium text-foreground">CPA</td>
+                    <td className="py-3 px-4 font-medium text-foreground">{uiLabels.cpa}</td>
                     <td className="py-3 px-4 text-emerald-400 font-bold bg-emerald-950/20 border-r border-border">
                       {baseline ? `$${baseline.cpa}` : '-'}
                     </td>

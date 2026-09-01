@@ -29,6 +29,7 @@ function NewExperimentContent() {
   const [impact, setImpact] = useState<ExperimentImpact>("high")
   const [hypothesisQuery, setHypothesisQuery] = useState(initialHypothesis)
   const [primaryMetric, setPrimaryMetric] = useState("ctr")
+  const [channel, setChannel] = useState<"inbound" | "outbound">("inbound")
   const [targetLift, setTargetLift] = useState(15.0)
   const [trafficSplit, setTrafficSplit] = useState("50/50")
   const [controlName, setControlName] = useState("Control")
@@ -169,6 +170,52 @@ function NewExperimentContent() {
                   ))}
                 </SelectContent>
               </Select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-muted-foreground uppercase">Marketing Channel</label>
+              <Select value={channel} onValueChange={(val: "inbound" | "outbound") => {
+                setChannel(val)
+                setPrimaryMetric(val === "inbound" ? "ctr" : "open_rate")
+              }}>
+                <SelectTrigger className="bg-muted/80 border-border text-foreground font-sans font-bold uppercase font-bold">
+                  <SelectValue placeholder="Select channel" />
+                </SelectTrigger>
+                <SelectContent className="bg-card border border-border">
+                  <SelectItem value="inbound" className="font-sans font-bold text-foreground">Inbound (Paid Ads)</SelectItem>
+                  <SelectItem value="outbound" className="font-sans font-bold text-foreground">Outbound (Email / LinkedIn)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-muted-foreground uppercase">Primary Metric</label>
+              <Select value={primaryMetric} onValueChange={setPrimaryMetric}>
+                <SelectTrigger className="bg-muted/80 border-border text-foreground font-sans font-bold uppercase font-bold">
+                  <SelectValue placeholder="Select metric" />
+                </SelectTrigger>
+                <SelectContent className="bg-card border border-border">
+                  {channel === "inbound" ? (
+                    <>
+                      <SelectItem value="ctr" className="font-sans font-bold text-foreground">Click-Through Rate (CTR)</SelectItem>
+                      <SelectItem value="cvr" className="font-sans font-bold text-foreground">Conversion Rate (CVR)</SelectItem>
+                      <SelectItem value="cac" className="font-sans font-bold text-foreground">Cost per Acquisition (CAC)</SelectItem>
+                      <SelectItem value="cpm" className="font-sans font-bold text-foreground">Cost per Mille (CPM)</SelectItem>
+                      <SelectItem value="roas" className="font-sans font-bold text-foreground">Return on Ad Spend (ROAS)</SelectItem>
+                    </>
+                  ) : (
+                    <>
+                      <SelectItem value="open_rate" className="font-sans font-bold text-foreground">Open Rate</SelectItem>
+                      <SelectItem value="reply_rate" className="font-sans font-bold text-foreground">Reply Rate</SelectItem>
+                      <SelectItem value="meeting_rate" className="font-sans font-bold text-foreground">Meeting Booked Rate</SelectItem>
+                      <SelectItem value="acceptance_rate" className="font-sans font-bold text-foreground">LinkedIn Acceptance Rate</SelectItem>
+                    </>
+                  )}
+                </SelectContent>
+              </Select>
+              <p className="text-[11px] text-emerald-500 font-medium pt-1">
+                {getPlanningSuggestion(primaryMetric as PrimaryMetric)}
+              </p>
             </div>
 
             <div className="space-y-2">
