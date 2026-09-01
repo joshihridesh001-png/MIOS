@@ -174,8 +174,8 @@ function NewExperimentContent() {
 
             <div className="space-y-2">
               <label className="text-xs font-bold text-muted-foreground uppercase">Marketing Channel</label>
-              <Select value={channel} onValueChange={(val: "inbound" | "outbound") => {
-                setChannel(val)
+              <Select value={channel} onValueChange={(val: string) => {
+                setChannel(val as "inbound" | "outbound")
                 setPrimaryMetric(val === "inbound" ? "ctr" : "open_rate")
               }}>
                 <SelectTrigger className="bg-muted/80 border-border text-foreground font-sans font-bold uppercase font-bold">
