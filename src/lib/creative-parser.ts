@@ -182,3 +182,228 @@ export function parseCreativeText(text: string): ParsedCreativeResult {
 
   return { data, extractedKeys }
 }
+
+/**
+ * Determines whether an asset URL or creative format represents a video asset.
+ */
+export function isVideoAssetUrl(
+  url?: string | null,
+  format?: string | null
+): boolean {
+  if (format === 'video') {
+    return true
+  }
+  if (!url || typeof url !== 'string') {
+    return false
+  }
+  const cleanUrl = url.split('?')[0].split('#')[0].trim().toLowerCase()
+  return (
+    cleanUrl.endsWith('.mp4') ||
+    cleanUrl.endsWith('.webm') ||
+    cleanUrl.endsWith('.mov')
+  )
+}
+
+/**
+ * Zero-effort creative metadata inference from an uploaded filename and MIME type.
+ * Infers human-readable title, format, psychological angle, ad platform, and keyword tags.
+ */
+export function inferCreativeMetadataFromFilename(
+  fileName: string,
+  mimeType?: string
+): Partial<CreativeRow> {
+  if (!fileName || typeof fileName !== 'string') {
+    return {}
+  }
+
+  const trimmed = fileName.trim()
+  const lowerFile = trimmed.toLowerCase()
+
+  // 1. Detect format from mimeType, extension, or filename keywords
+  let format: CreativeFormat = 'image'
+  if (
+    mimeType?.toLowerCase().startsWith('video/') ||
+    /\.(mp4|webm|mov)$/i.test(lowerFile)
+  ) {
+    format = 'video'
+  } else if (lowerFile.includes('carousel')) {
+    format = 'carousel'
+  }
+
+  // 2. Strip file extension and leading/trailing raw epoch timestamps
+  const withoutExt = trimmed.replace(/\.[a-z0-9]{2,5}$/i, '')
+  const withoutTimestamps = withoutExt
+    .replace(/^(?:\d{8,14}[_-]+)+/, '')
+    .replace(/(?:[_-]+\d{8,14})+$/, '')
+
+  const rawTokens = withoutTimestamps
+    .split(/[_-\s.]+/)
+    .map((t) => t.trim())
+    .filter(Boolean)
+
+  const name = rawTokens
+    .map((token) => {
+      if (/^(?:q[1-4]|v\d+|b2b|b2c|roi|sla|cfo|ceo|smb|amc|fb|ig|yt)$/i.test(token)) {
+        return token.toUpperCase()
+      }
+      return token.charAt(0).toUpperCase() + token.slice(1).toLowerCase()
+    })
+    .join(' ')
+
+  const lowerTokens = rawTokens.map((t) => t.toLowerCase())
+  const hasAny = (keywords: string[]) =>
+    keywords.some(
+      (kw) =>
+        lowerTokens.includes(kw) ||
+        new RegExp(`(?:^|[_\\-\\s])${kw}(?:s|ed|ing)?(?:$|[_\\-\\s])`, 'i').test(
+          withoutTimestamps
+        )
+    )
+
+  // 3. Detect CreativeAngle
+  let angle: CreativeAngle = 'authority_guarantee'
+  if (hasAny(['fear', 'urgent', 'urgency', 'risk', 'penalty', 'warning', 'mistake'])) {
+    angle = 'fear_urgency'
+  } else if (hasAny(['proof', 'review', 'case', 'testimonial', 'client'])) {
+    angle = 'social_proof_reviews'
+  } else if (hasAny(['authority', 'guarantee', 'sla', 'certified', 'audit'])) {
+    angle = 'authority_guarantee'
+  } else if (hasAny(['before', 'after', 'transform'])) {
+    angle = 'before_after'
+  } else if (hasAny(['edu', 'guide', 'how', 'framework', 'tip'])) {
+    angle = 'educational'
+  } else if (hasAny(['discount', 'offer', 'free', 'promo', 'off'])) {
+    angle = 'discount_offer'
+  }
+
+  // 4. Detect PlatformType
+  let platform: PlatformType | null = null
+  if (hasAny(['meta', 'fb', 'ig', 'insta', 'instagram', 'facebook'])) {
+    platform = 'meta_ads'
+  } else if (hasAny(['google', 'search', 'yt', 'youtube', 'ppc'])) {
+    platform = 'google_ads'
+  } else if (hasAny(['wa', 'whatsapp'])) {
+    platform = 'whatsapp'
+  } else if (hasAny(['linkedin', 'organic'])) {
+    platform = 'organic_social'
+  }
+
+  // 5. Extract 2-4 clean lowercase keyword tags (excluding stop words & version markers)
+  const stopWords = new Set([
+    'the',
+    'and',
+    'for',
+    'with',
+    'from',
+    'into',
+    'final',
+    'draft',
+    'copy',
+    'new',
+    'edit',
+    'file',
+    'asset',
+  ])
+  const tags: string[] = []
+  for (const tok of lowerTokens) {
+    if (
+      tok.length >= 3 &&
+      !stopWords.has(tok) &&
+      !/^v\d+$/i.test(tok) &&
+      !/^\d+$/.test(tok) &&
+      !tags.includes(tok)
+    ) {
+      tags.push(tok)
+      if (tags.length === 4) break
+    }
+  }
+
+  const inferred: Partial<CreativeRow> = {
+    name: name || 'Untitled Creative Asset',
+    format,
+    angle,
+    tags,
+  }
+  if (platform) {
+    inferred.platform = platform
+  }
+
+  return inferred
+}
+
+/**
+ * Generates an industry-agnostic, high-converting 1-click creative draft
+ * (headline, primary_text, cta_text, hook_hypothesis) tailored to the selected angle.
+ */
+export function generateSmartCreativeDraft(
+  angle: CreativeAngle,
+  assetName?: string,
+  campaignName?: string
+): Partial<CreativeRow> {
+  const contextLabel = (campaignName || assetName || 'Core Service Engagement').trim()
+
+  switch (angle) {
+    case 'fear_urgency':
+      return {
+        angle,
+        headline: `Eliminate Operational Risk Before It Costs You 3x in Rework`,
+        primary_text: `Delayed execution and compliance blind spots silently erode margin. For ${contextLabel}, our SLA-backed specialists identify and resolve critical bottlenecks in the first 14 days—with zero workflow disruption.`,
+        cta_text: 'Book Risk Audit',
+        hook_hypothesis: `High-urgency loss-aversion hook addressing hidden cost of inaction for ${contextLabel} will lift qualified CTR above 1.8%.`,
+      }
+
+    case 'social_proof_reviews':
+      return {
+        angle,
+        headline: `Why 200+ Growth Leaders Trust Our Proven Execution Framework`,
+        primary_text: `See how organizations scaling ${contextLabel} cut turnaround times by 40% and achieved predictable ROI within a single cycle. Verified client outcomes with full reporting transparency.`,
+        cta_text: 'See Case Studies',
+        hook_hypothesis: `Peer validation and quantified outcome proof for ${contextLabel} will reduce buyer skepticism and increase landing page CVR.`,
+      }
+
+    case 'authority_guarantee':
+      return {
+        angle,
+        headline: `100% SLA Performance Guarantee — Predictable Delivery or We Cover the Gap`,
+        primary_text: `Stop gambling on unverified vendors. Our certified specialists execute ${contextLabel} under a strict contractual SLA, dedicated account roadmap, and milestone accountability.`,
+        cta_text: 'Claim SLA Consultation',
+        hook_hypothesis: `Explicit contractual risk-reversal and authority credentials for ${contextLabel} will overcome price objections among high-LTV buyers.`,
+      }
+
+    case 'before_after':
+      return {
+        angle,
+        headline: `From Fragmented Bottlenecks to Predictable, Audit-Ready Execution`,
+        primary_text: `Before: missed deadlines, unclear reporting, and costly firefighting. After implementing our ${contextLabel} system: automated milestone tracking, dedicated specialist execution, and measurable net margin lift.`,
+        cta_text: 'See the Transformation',
+        hook_hypothesis: `Contrasting chaotic status-quo state against structured post-onboarding outcomes for ${contextLabel} will drive higher thumb-stop engagement.`,
+      }
+
+    case 'educational':
+      return {
+        angle,
+        headline: `The 3-Step Executive Checklist for High-ROI ${contextLabel}`,
+        primary_text: `Most service engagements leak 30% of their value during onboarding. Here is the exact diagnostic framework our senior team uses to lock in unit-economic efficiency from Day 1.`,
+        cta_text: 'Download Framework',
+        hook_hypothesis: `Value-first educational framing for ${contextLabel} will capture mid-funnel evaluators at a 25% lower CPL.`,
+      }
+
+    case 'discount_offer':
+      return {
+        angle,
+        headline: `Priority Onboarding + Complimentary Diagnostic Audit This Month`,
+        primary_text: `Lock in preferred annual retainer economics for ${contextLabel} and receive a full baseline diagnostic audit at zero cost when you schedule your discovery call this week.`,
+        cta_text: 'Claim Priority Offer',
+        hook_hypothesis: `Time-bounded diagnostic bonus offer for ${contextLabel} will accelerate lead-to-proposal velocity inside the current sales cycle.`,
+      }
+
+    default:
+      return {
+        angle: 'other',
+        headline: `Engineered for Predictable ROI: ${contextLabel}`,
+        primary_text: `Partner with dedicated specialists delivering measurable outcomes, transparent reporting, and contractual SLA reliability for ${contextLabel}.`,
+        cta_text: 'Schedule Consultation',
+        hook_hypothesis: `Direct value proposition for ${contextLabel} establishes baseline CTR and conversion rate benchmark.`,
+      }
+  }
+}
