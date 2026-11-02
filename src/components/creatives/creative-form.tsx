@@ -1,13 +1,12 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import {
   CreativeRow,
   CreativeFormat,
   CreativeAngle,
   CreativeStatus,
   PlatformType,
-  CampaignWithMetrics,
 } from '@/lib/types/database'
 import {
   creativeFormatLabels,
@@ -17,14 +16,27 @@ import {
   platformLabels,
   platformIcons,
 } from '@/lib/constants'
+import {
+  inferCreativeMetadataFromFilename,
+  generateSmartCreativeDraft,
+  isVideoAssetUrl,
+} from '@/lib/creative-parser'
 import { useCampaigns } from '@/hooks/use-campaigns'
 import { CreativeQuickPaste } from './creative-quick-paste'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Sparkle, Fire, Warning, Stack, Target, CurrencyDollar, Lightbulb } from "@phosphor-icons/react"
+import { toast } from 'sonner'
+import {
+  Sparkle,
+  Fire,
+  Stack,
+  CurrencyDollar,
+  Lightbulb,
+  UploadSimple,
+  CheckCircle,
+} from "@phosphor-icons/react"
 
 interface CreativeFormProps {
   initialData?: Partial<CreativeRow>
@@ -34,6 +46,9 @@ interface CreativeFormProps {
 
 export function CreativeForm({ initialData = {}, onSubmit, loading = false }: CreativeFormProps) {
   const { campaigns } = useCampaigns()
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const [uploading, setUploading] = useState(false)
+  const [dragActive, setDragActive] = useState(false)
 
   const [formData, setFormData] = useState<Partial<CreativeRow>>({
     name: initialData.name || '',
@@ -59,6 +74,8 @@ export function CreativeForm({ initialData = {}, onSubmit, loading = false }: Cr
     tags: initialData.tags || [],
   })
 
+  const selectedCampaign = campaigns.find((c) => c.id === formData.campaign_id)
+
   // Apply data from Quick-Paste
   const handleApplyParsedData = (parsed: Partial<CreativeRow>) => {
     setFormData((prev) => ({
@@ -71,10 +88,115 @@ export function CreativeForm({ initialData = {}, onSubmit, loading = false }: Cr
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
+  const handleSmartAutoDraft = () => {
+    const draft = generateSmartCreativeDraft(
+      formData.angle || 'authority_guarantee',
+      formData.name || undefined,
+      selectedCampaign?.name
+    )
+    const draftData: Partial<CreativeRow> = (draft as any)?.data ? (draft as any).data : draft
+    setFormData((prev) => ({
+      ...prev,
+      name: prev.name || draftData.name || 'Executive Growth Audit Creative',
+      headline: draftData.headline || prev.headline,
+      primary_text: draftData.primary_text || prev.primary_text,
+      cta_text: draftData.cta_text || prev.cta_text || 'Learn More',
+      hook_hypothesis: draftData.hook_hypothesis || prev.hook_hypothesis,
+      tags: prev.tags && prev.tags.length > 0 ? prev.tags : draftData.tags || [],
+    }))
+    toast.success('Auto-drafted executive copy & hypothesis from psychological angle!')
+  }
+
+  const handleFileUpload = async (file: File) => {
+    if (!file) return
+    if (file.size > 50 * 1024 * 1024) {
+      toast.error('File exceeds 50MB limit.')
+      return
+    }
+
+    setUploading(true)
+    try {
+      const uploadForm = new FormData()
+      uploadForm.append('file', file)
+
+      const res = await fetch('/api/upload-creative', {
+        method: 'POST',
+        body: uploadForm,
+      })
+      const json = await res.json()
+
+      if (!res.ok || !json.url) {
+        throw new Error(json.error || 'Upload failed')
+      }
+
+      const inferredRaw = inferCreativeMetadataFromFilename(file.name, file.type)
+      const inferred: Partial<CreativeRow> = (inferredRaw as any)?.data
+        ? (inferredRaw as any).data
+        : inferredRaw
+
+      setFormData((prev) => {
+        const nextAngle =
+          (!prev.angle || prev.angle === 'discount_offer') && inferred.angle
+            ? inferred.angle
+            : prev.angle || 'authority_guarantee'
+        const nextName = prev.name ? prev.name : inferred.name || file.name.replace(/\.[^.]+$/, '')
+
+        const needsAutoDraft = !prev.headline && !prev.primary_text && !prev.hook_hypothesis
+        const draftRaw = needsAutoDraft
+          ? generateSmartCreativeDraft(nextAngle, nextName, selectedCampaign?.name)
+          : null
+        const draft: Partial<CreativeRow> | null = draftRaw
+          ? (draftRaw as any).data || draftRaw
+          : null
+
+        return {
+          ...prev,
+          asset_url: json.url,
+          format: inferred.format || prev.format || 'image',
+          name: nextName,
+          angle: nextAngle,
+          platform:
+            (!prev.platform || prev.platform === 'meta_ads') && inferred.platform
+              ? inferred.platform
+              : prev.platform,
+          tags:
+            prev.tags && prev.tags.length > 0
+              ? prev.tags
+              : inferred.tags || draft?.tags || [],
+          headline: prev.headline || draft?.headline || '',
+          primary_text: prev.primary_text || draft?.primary_text || '',
+          cta_text:
+            prev.cta_text && prev.cta_text !== 'Learn More'
+              ? prev.cta_text
+              : draft?.cta_text || prev.cta_text || 'Learn More',
+          hook_hypothesis: prev.hook_hypothesis || draft?.hook_hypothesis || '',
+        }
+      })
+
+      toast.success('Creative asset uploaded & metadata auto-populated!')
+    } catch (err: any) {
+      toast.error(err?.message || 'Failed to upload creative asset')
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setDragActive(false)
+    const file = e.dataTransfer.files?.[0]
+    if (file) {
+      void handleFileUpload(file)
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     await onSubmit(formData)
   }
+
+  const isVideoPreview = isVideoAssetUrl(formData.asset_url, formData.format)
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl mx-auto">
@@ -86,10 +208,83 @@ export function CreativeForm({ initialData = {}, onSubmit, loading = false }: Cr
         <CardHeader className="pb-4 border-b border-border/40">
           <CardTitle className="text-base font-semibold flex items-center gap-2 text-foreground">
             <Stack weight="duotone" className="w-4 h-4 text-emerald-400" />
-            Creative Identity & Ad Copy
+            Creative Identity &amp; Ad Copy
           </CardTitle>
         </CardHeader>
         <CardContent className="p-5 space-y-4">
+          {/* Drag & Drop Creative Asset Dropzone */}
+          <div
+            onDragOver={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              setDragActive(true)
+            }}
+            onDragLeave={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              setDragActive(false)
+            }}
+            onDrop={handleDrop}
+            onClick={() => fileInputRef.current?.click()}
+            className={`cursor-pointer rounded-2xl border-2 border-dashed p-5 transition-colors flex flex-col sm:flex-row items-center justify-between gap-4 ${
+              dragActive
+                ? 'border-emerald-400 bg-emerald-500/10'
+                : 'border-border/70 bg-muted/25 hover:border-emerald-500/50'
+            }`}
+          >
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".png,.jpg,.jpeg,.webp,.gif,.mp4,.webm,.mov,image/*,video/*"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0]
+                if (file) void handleFileUpload(file)
+              }}
+            />
+
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shrink-0">
+                {formData.asset_url ? (
+                  <CheckCircle weight="duotone" className="w-5 h-5 text-emerald-400" />
+                ) : (
+                  <UploadSimple weight="duotone" className="w-5 h-5 text-emerald-400" />
+                )}
+              </div>
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-foreground">
+                  {uploading
+                    ? 'Uploading & Extracting Metadata...'
+                    : formData.asset_url
+                    ? 'Creative Asset Attached — Click or Drop to Replace'
+                    : 'Zero-Effort Creative Dropzone (Image or Video up to 50MB)'}
+                </div>
+                <p className="text-[11px] text-muted-foreground mt-0.5">
+                  Drop `.png`, `.jpg`, `.webp`, `.gif`, `.mp4`, `.webm`, or `.mov` — automatically detects format, angle, name &amp; drafts copy.
+                </p>
+              </div>
+            </div>
+
+            {formData.asset_url && (
+              <div className="w-20 h-14 rounded-lg overflow-hidden border border-border shrink-0 bg-background">
+                {isVideoPreview ? (
+                  <video
+                    src={formData.asset_url}
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <img
+                    src={formData.asset_url}
+                    alt="Uploaded preview"
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </div>
+            )}
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label className="text-xs font-medium text-muted-foreground">Creative Asset Name *</Label>
@@ -181,7 +376,19 @@ export function CreativeForm({ initialData = {}, onSubmit, loading = false }: Cr
 
           <div className="space-y-3 pt-2">
             <div>
-              <Label className="text-xs font-medium text-muted-foreground">Ad Headline (Hook) *</Label>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-1">
+                <Label className="text-xs font-medium text-muted-foreground">Ad Headline (Hook) *</Label>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleSmartAutoDraft}
+                  className="h-7 rounded-xl border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-[11px] font-sans font-bold px-2.5 gap-1.5"
+                >
+                  <Sparkle weight="duotone" className="w-3.5 h-3.5" />
+                  <span>[ 1-Click Auto-Draft Copy &amp; Hypothesis ]</span>
+                </Button>
+              </div>
               <Input
                 required
                 value={formData.headline || ''}
@@ -218,7 +425,7 @@ export function CreativeForm({ initialData = {}, onSubmit, loading = false }: Cr
                 <Input
                   value={formData.asset_url || ''}
                   onChange={(e) => handleChange('asset_url', e.target.value)}
-                  placeholder="https://..."
+                  placeholder="https://... or /uploads/creatives/..."
                   className="mt-1"
                 />
               </div>
@@ -232,7 +439,7 @@ export function CreativeForm({ initialData = {}, onSubmit, loading = false }: Cr
         <CardHeader className="pb-4 border-b border-border/40">
           <CardTitle className="text-base font-semibold flex items-center gap-2 text-foreground">
             <CurrencyDollar weight="duotone" className="w-4 h-4 text-emerald-400" />
-            Performance Metrics & Ad Fatigue Meter
+            Performance Metrics &amp; Ad Fatigue Meter
           </CardTitle>
         </CardHeader>
         <CardContent className="p-5 space-y-4">
@@ -334,7 +541,7 @@ export function CreativeForm({ initialData = {}, onSubmit, loading = false }: Cr
         <CardHeader className="pb-4 border-b border-border/40">
           <CardTitle className="text-base font-semibold flex items-center gap-2 text-foreground">
             <Lightbulb weight="duotone" className="w-4 h-4 text-emerald-400" />
-            Hook Hypothesis & Creative Reflection
+            Hook Hypothesis &amp; Creative Reflection
           </CardTitle>
         </CardHeader>
         <CardContent className="p-5 space-y-4">
