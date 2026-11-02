@@ -16,7 +16,7 @@ interface QuickPasteCardProps {
 const EXAMPLE_META_ADS_TEXT = `Campaign Name: Q3 Enterprise Growth Special
 Platform: Meta Ads
 Location: Bangalore
-Pest Type: Enterprise B2B
+Market Segment: Enterprise B2B
 Spend: Rs. 45,000
 Revenue: Rs. 3,50,000
 COGS: Rs. 70,000

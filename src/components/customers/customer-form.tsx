@@ -5,7 +5,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { CustomerInsert, CustomerPropertyType, CustomerStatus } from '@/lib/types/database';
+import { CustomerInsert, CustomerSegmentType, CustomerStatus } from '@/lib/types/database';
 import { parseCustomerNotes } from '@/lib/customer-parser';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -32,7 +32,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
     name: initialData?.name || '',
     phone: initialData?.phone || '',
     location: initialData?.location || '',
-    property_type: initialData?.property_type || 'residential',
+    client_segment: initialData?.client_segment || 'b2b_smb',
     lead_source: initialData?.lead_source || 'Meta Ads',
     campaign_id: initialData?.campaign_id || null,
     campaign_creative_id: initialData?.campaign_creative_id || null,
@@ -50,7 +50,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
     improvement_opportunities: initialData?.improvement_opportunities || [],
     has_review: initialData?.has_review || false,
     has_referral: initialData?.has_referral || false,
-    amc_opportunity: initialData?.amc_opportunity || false,
+    retainer_opportunity: initialData?.retainer_opportunity || false,
     status: initialData?.status || 'won',
   });
 
@@ -72,7 +72,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
         improvement_opportunities: parsed.improvement_opportunities?.length
           ? parsed.improvement_opportunities
           : prev.improvement_opportunities,
-        amc_opportunity: parsed.amc_opportunity || prev.amc_opportunity,
+        retainer_opportunity: parsed.retainer_opportunity || prev.retainer_opportunity,
         has_review: parsed.has_review || prev.has_review,
         has_referral: parsed.has_referral || prev.has_referral,
       }));
@@ -104,7 +104,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
               AI QUICK-PASTE: RAW WHATSAPP / CALL / CX SURVEY NOTE PARSER
             </h3>
             <p className="text-xs text-muted-foreground mt-1">
-              Paste customer WhatsApp chat logs, sales call transcripts, or technician survey notes to auto-extract psychology & CX metrics.
+              Paste customer WhatsApp chat logs, sales call transcripts, or specialist onboarding feedback to auto-extract psychology & CX metrics.
             </p>
           </div>
           <Button
@@ -119,7 +119,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
           rows={3}
           value={pasteText}
           onChange={(e) => setPasteText(e.target.value)}
-          placeholder="e.g., 'Client worried about chemical toxicity for pet dog. Overcame objection on quote pricing via 180-day botanical guarantee. Rating: 5/5. Technician was punctual, recommended offering AMC discount...'"
+          placeholder="e.g., 'Client worried about compliance/delivery risk and transition downtime. Overcame objection on retainer pricing via SLA & case-study guarantee. Rating: 5/5. Account lead was responsive, recommended offering annual retainer package...'"
           className="rounded-xl bg-secondary-fixed/30 border-border/50 text-xs text-on-background font-sans font-bold"
         />
       </div>
@@ -136,23 +136,25 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="e.g. Acme Warehouse Logistics"
+              placeholder="e.g. Acme Cloud Logistics Pvt Ltd"
               className="rounded-xl text-xs"
             />
           </div>
           <div className="space-y-2">
-            <Label className="text-xs uppercase text-muted-foreground">Property Type</Label>
+            <Label className="text-xs uppercase text-muted-foreground">Client Segment</Label>
             <Select
-              value={formData.property_type}
-              onValueChange={(val) => setFormData({ ...formData, property_type: val as CustomerPropertyType })}
+              value={formData.client_segment}
+              onValueChange={(val) => setFormData({ ...formData, client_segment: val as CustomerSegmentType })}
             >
               <SelectTrigger className="rounded-xl text-xs">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="rounded-xl font-sans font-bold">
-                <SelectItem value="residential">Residential</SelectItem>
-                <SelectItem value="commercial">Commercial</SelectItem>
-                <SelectItem value="industrial">Industrial</SelectItem>
+                <SelectItem value="b2c">B2C Consumer</SelectItem>
+                <SelectItem value="b2b_smb">B2B SMB</SelectItem>
+                <SelectItem value="b2b_mid_market">B2B Mid-Market</SelectItem>
+                <SelectItem value="b2b_enterprise">B2B Enterprise</SelectItem>
+                <SelectItem value="local_service">Local Service</SelectItem>
                 <SelectItem value="other">Other</SelectItem>
               </SelectContent>
             </Select>
@@ -162,7 +164,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
             <Input
               value={formData.lead_source || ''}
               onChange={(e) => setFormData({ ...formData, lead_source: e.target.value })}
-              placeholder="e.g. Meta Ads — Botanical Video Ad"
+              placeholder="e.g. Meta Ads — Case Study Video Ad"
               className="rounded-xl text-xs"
             />
           </div>
@@ -216,7 +218,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
             <Input
               value={formData.biggest_fear || ''}
               onChange={(e) => setFormData({ ...formData, biggest_fear: e.target.value })}
-              placeholder="e.g. Chemical toxicity for children and pets"
+              placeholder="e.g. Compliance/delivery risk and operational disruption"
               className="rounded-xl text-xs"
             />
           </div>
@@ -225,7 +227,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
             <Input
               value={formData.biggest_objection || ''}
               onChange={(e) => setFormData({ ...formData, biggest_objection: e.target.value })}
-              placeholder="e.g. High pricing compared to local DIY sprays"
+              placeholder="e.g. Retainer pricing objection vs. in-house or freelancer alternatives"
               className="rounded-xl text-xs"
             />
           </div>
@@ -234,7 +236,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
             <Input
               value={formData.what_built_trust || ''}
               onChange={(e) => setFormData({ ...formData, what_built_trust: e.target.value })}
-              placeholder="e.g. 100% Botanical Certification & 180-Day Guarantee"
+              placeholder="e.g. SLA & case-study guarantee with transparent milestone reporting"
               className="rounded-xl text-xs"
             />
           </div>
@@ -256,7 +258,7 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
               rows={2}
               value={formData.job_quality_feedback || ''}
               onChange={(e) => setFormData({ ...formData, job_quality_feedback: e.target.value })}
-              placeholder="e.g. Technician arrived on time; client suggested better odor control instructions."
+              placeholder="e.g. Specialist onboarding feedback was positive; client suggested faster weekly KPI reporting."
               className="rounded-xl text-xs"
             />
           </div>
@@ -266,11 +268,11 @@ export function CustomerForm({ initialData, onSubmit, loading }: CustomerFormPro
           <label className="flex items-center gap-2 cursor-pointer text-xs uppercase text-on-background">
             <input
               type="checkbox"
-              checked={formData.amc_opportunity}
-              onChange={(e) => setFormData({ ...formData, amc_opportunity: e.target.checked })}
+              checked={formData.retainer_opportunity}
+              onChange={(e) => setFormData({ ...formData, retainer_opportunity: e.target.checked })}
               className="rounded-xl accent-[#00dbe9]"
             />
-            AMC Opportunity Flagged
+            Retainer / Recurring Contract Opportunity
           </label>
           <label className="flex items-center gap-2 cursor-pointer text-xs uppercase text-on-background">
             <input

@@ -39,7 +39,7 @@ export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
         <thead>
           <tr className="border-b border-border/50 bg-secondary-fixed/30 text-foreground font-bold uppercase text-xs tracking-wider">
             <th className="py-3 px-4">Customer Name</th>
-            <th className="py-3 px-4">Property</th>
+            <th className="py-3 px-4">Segment</th>
             <th className="py-3 px-4">Attribution</th>
             <th className="py-3 px-4 text-right">Revenue</th>
             <th className="py-3 px-4 text-right">Profit</th>
@@ -51,7 +51,7 @@ export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
         </thead>
         <AnimatedList as="tbody" className="divide-y divide-border/30" staggerDelay={35} distance={12}>
           {customers.map((cust) => {
-            const isAmc = cust.amc_opportunity;
+            const isRetainer = cust.retainer_opportunity;
             const cxScore = cust.cx_rating || '-';
 
             return (
@@ -60,14 +60,14 @@ export function CustomerTable({ customers, onDelete }: CustomerTableProps) {
                   <Link href={`/customers/${cust.id}`} className="hover:text-[#00dbe9] underline decoration-[#00dbe9]/50">
                     {cust.name}
                   </Link>
-                  {isAmc && (
+                  {isRetainer && (
                     <Badge variant="outline" className="ml-2 rounded-xl border-primary text-primary text-[10px] px-1 py-0">
-                      AMC OPP
+                      RETAINER
                     </Badge>
                   )}
                 </td>
                 <td className="py-3 px-4 uppercase text-xs text-muted-foreground">
-                  {cust.property_type}
+                  {cust.client_segment}
                 </td>
                 <td className="py-3 px-4 text-xs text-muted-foreground">
                   {cust.lead_source || 'Direct / Organic'}

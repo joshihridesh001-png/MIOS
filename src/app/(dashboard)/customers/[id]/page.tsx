@@ -63,14 +63,14 @@ export default function CustomerDetailPage() {
         <div>
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="rounded-xl border-primary text-primary uppercase text-xs">
-              {customer.property_type}
+              {customer.client_segment}
             </Badge>
             <Badge variant="outline" className="rounded-xl border-border text-on-background uppercase text-xs">
               STATUS: {customer.status}
             </Badge>
-            {customer.amc_opportunity && (
+            {customer.retainer_opportunity && (
               <Badge variant="outline" className="rounded-xl border-amber-500 text-amber-400 text-xs">
-                AMC POTENTIAL
+                RETAINER POTENTIAL
               </Badge>
             )}
           </div>

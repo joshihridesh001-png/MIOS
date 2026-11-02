@@ -174,7 +174,7 @@ function NewExperimentContent() {
 
             <div className="space-y-2">
               <label className="text-xs font-bold text-muted-foreground uppercase">Marketing Channel</label>
-              <Select value={channel} onValueChange={(val: string) => {
+              <Select value={channel} onValueChange={(val: string | null) => { if (!val) return;
                 setChannel(val as "inbound" | "outbound")
                 setPrimaryMetric(val === "inbound" ? "ctr" : "open_rate")
               }}>
@@ -190,7 +190,7 @@ function NewExperimentContent() {
 
             <div className="space-y-2">
               <label className="text-xs font-bold text-muted-foreground uppercase">Primary Metric</label>
-              <Select value={primaryMetric} onValueChange={setPrimaryMetric}>
+              <Select value={primaryMetric} onValueChange={(val: string | null) => { if (val) setPrimaryMetric(val) }}>
                 <SelectTrigger className="bg-muted/80 border-border text-foreground font-sans font-bold uppercase font-bold">
                   <SelectValue placeholder="Select metric" />
                 </SelectTrigger>

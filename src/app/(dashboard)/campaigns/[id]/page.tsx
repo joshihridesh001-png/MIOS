@@ -68,7 +68,7 @@ export default async function CampaignDetailPage({ params }: PageProps) {
             </div>
             <div className="flex justify-between py-1 border-b border-border/50">
               <span className="text-muted-foreground">Segment / Vertical</span>
-              <span className="font-medium text-right">{campaign.pest_type || '—'}</span>
+              <span className="font-medium text-right">{campaign.market_segment || '—'}</span>
             </div>
           </CardContent>
         </Card>

@@ -13,12 +13,12 @@ interface CreativeQuickPasteProps {
   onApplyParsedData: (data: Partial<CreativeRow>) => void
 }
 
-const EXAMPLE_CREATIVE_TEXT = `Creative Name: Termite 15% OFF Carousel
+const EXAMPLE_CREATIVE_TEXT = `Creative Name: Q4 Tax & CFO Advisory Audit Carousel
 Format: Carousel
-Angle: Discount Offer
-Headline: 15% OFF Annual Termite Protection
-Primary Text: Don't let termites destroy your Bangalore home this summer. Our certified experts offer 100% odorless drilling with a 5-year warranty. Book an inspection now!
-CTA: Get Offer
+Angle: Authority & Proof
+Headline: Free 30-Minute Financial & Compliance Audit — Zero Obligation
+Primary Text: Most growing service businesses lose 14% margin to unoptimized operations and compliance blindspots. Book a diagnostic review with our senior specialists.
+CTA: Book Audit
 Spend: Rs. 15,000
 Impressions: 1,20,000
 Clicks: 3,400
@@ -28,7 +28,7 @@ Revenue: Rs. 2,40,000
 Fatigue Score: 30
 What worked: High contrast pricing overlay in card 1 caught attention
 What failed: Card 4 with technical diagram had low retention
-Hypothesis: Leading with a clear 15% financial incentive will convert price-sensitive homeowners`
+Hypothesis: Leading with a quantified margin-recovery diagnostic will convert high-intent B2B operators`
 
 export function CreativeQuickPaste({ onApplyParsedData }: CreativeQuickPasteProps) {
   const [text, setText] = useState('')
@@ -42,7 +42,7 @@ export function CreativeQuickPaste({ onApplyParsedData }: CreativeQuickPasteProp
 
     const result = parseCreativeText(text)
     if (result.extractedKeys.length === 0) {
-      toast.error('No matching creative metrics or fields found. Try using labels like "Headline: ...", "Spend: 15000", "Angle: Discount Offer", etc.')
+      toast.error('No matching creative metrics or fields found. Try using labels like "Headline: ...", "Spend: 15000", "Angle: Authority & Proof", etc.')
       return
     }
 

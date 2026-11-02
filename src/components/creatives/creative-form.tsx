@@ -97,7 +97,7 @@ export function CreativeForm({ initialData = {}, onSubmit, loading = false }: Cr
                 required
                 value={formData.name || ''}
                 onChange={(e) => handleChange('name', e.target.value)}
-                placeholder="e.g. Summer Termite 15% OFF Carousel"
+                placeholder="e.g. Q4 Tax & CFO Advisory Audit Carousel"
                 className="mt-1"
               />
             </div>
@@ -186,7 +186,7 @@ export function CreativeForm({ initialData = {}, onSubmit, loading = false }: Cr
                 required
                 value={formData.headline || ''}
                 onChange={(e) => handleChange('headline', e.target.value)}
-                placeholder="e.g. 15% OFF Annual Termite Protection — Odorless Treatment"
+                placeholder="e.g. Free 30-Minute Financial & Compliance Audit — Zero Obligation"
                 className="mt-1 font-medium"
               />
             </div>
@@ -197,7 +197,7 @@ export function CreativeForm({ initialData = {}, onSubmit, loading = false }: Cr
                 rows={3}
                 value={formData.primary_text || ''}
                 onChange={(e) => handleChange('primary_text', e.target.value)}
-                placeholder="Don't let termites destroy your Bangalore home..."
+                placeholder="Most growing service businesses lose 14% margin to unoptimized operations and compliance blindspots. Book a diagnostic review with our senior specialists."
                 className="mt-1 w-full p-2.5 rounded-2xl border border-input bg-background text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500"
               />
             </div>
@@ -344,7 +344,7 @@ export function CreativeForm({ initialData = {}, onSubmit, loading = false }: Cr
               rows={2}
               value={formData.hook_hypothesis || ''}
               onChange={(e) => handleChange('hook_hypothesis', e.target.value)}
-              placeholder="e.g. Leading with a clear 15% financial discount will convert price-sensitive homeowners..."
+              placeholder="e.g. Leading with a quantified 14% margin recovery audit will convert ROI-focused B2B founders..."
               className="mt-1 w-full p-2.5 rounded-2xl border border-input bg-background text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-emerald-500"
             />
           </div>

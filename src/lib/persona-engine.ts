@@ -27,35 +27,35 @@ export function synthesizeCreativeAngles(
 ): RecommendedCreativeAngle[] {
   const angles: RecommendedCreativeAngle[] = [];
 
-  const topFear = fears.length > 0 ? fears[0] : 'Chemical toxicity for children and pets';
-  const topObjection = objections.length > 0 ? objections[0] : 'High price compared to local DIY sprays';
-  const topTrust = trustBuilders.length > 0 ? trustBuilders[0] : '100% Botanical Non-Toxic Certification';
+  const topFear = fears.length > 0 ? fears[0] : 'Costly compliance errors or service delivery failure';
+  const topObjection = objections.length > 0 ? objections[0] : 'Higher retainer fee compared to low-cost providers';
+  const topTrust = trustBuilders.length > 0 ? trustBuilders[0] : 'Verified Case Studies & SLA Performance Guarantee';
 
-  // Angle 1: Fear-Driven Protection Hook
+  // Angle 1: Fear / Cost of Inaction Hook
   angles.push({
-    hook: `Worried about ${topFear.toLowerCase()}? Never spray harsh toxic chemicals in your home again.`,
-    headline: `100% Kid & Pet Safe Botanical Eradication — ${topTrust}.`,
+    hook: `Worried about ${topFear.toLowerCase()}? Eliminate operational risk before it impacts your bottom line.`,
+    headline: `Guaranteed Precision & Accountability — Backed by ${topTrust}.`,
     emotion: 'fear',
-    psych_principle: 'Loss Aversion & Protection Instinct',
+    psych_principle: 'Loss Aversion & Cost of Inaction',
     rationale: `Directly targets the primary buyer fear (${topFear}) while offering immediate psychological relief via ${topTrust}.`,
   });
 
   // Angle 2: Authority & Objection Overcome
   angles.push({
-    hook: `Why cheap pest sprays fail in 2 weeks (and how to fix it permanently).`,
-    headline: `Professional Pest Protection — Guaranteed or Your Next Treatment is Free.`,
+    hook: `Why cut-rate providers cost 3x more in rework and missed deadlines (and how structured methodology fixes it).`,
+    headline: `Predictable Execution & Transparent ROI — Engineered for Zero Friction.`,
     emotion: 'authority',
-    psych_principle: 'Education & Price Comparison Framing',
-    rationale: `Deconstructs ${topObjection.toLowerCase()} by contrasting DIY failure against professional reliability.`,
+    psych_principle: 'Authority & Total Cost of Ownership Framing',
+    rationale: `Deconstructs ${topObjection.toLowerCase()} by contrasting unreliable low-cost alternatives against structured, guaranteed service delivery.`,
   });
 
-  // Angle 3: Social Proof & Guarantee
+  // Angle 3: Social Proof & Risk Reversal
   angles.push({
-    hook: `Over 500 local properties trust our ${topTrust} every month.`,
-    headline: `Zero Odor. Zero Mess. 180-Day Permanent Elimination Shield.`,
+    hook: `Why leading clients rely on our ${topTrust} for predictable, repeatable results.`,
+    headline: `Seamless Onboarding. Dedicated Specialists. 100% SLA Risk Reversal.`,
     emotion: 'trust',
-    psych_principle: 'Social Proof & Risk Elimination',
-    rationale: `Builds executive confidence and eliminates purchase friction for cautious buyers.`,
+    psych_principle: 'Social Proof & SLA Risk Reversal',
+    rationale: `Builds executive confidence and eliminates purchase friction through proven client outcomes and transparent onboarding.`,
   });
 
   return angles;
@@ -102,7 +102,7 @@ export function rateCreativeForPersona(
   // Check if creative angle matches fear_urgency or authority_guarantee
   if (creative.angle === 'fear_urgency' && persona.dominant_fears.length > 0) {
     score += 10;
-    matchReasons.push('Creative angle "Fear & Urgency" aligns with high-anxiety pest buyer');
+    matchReasons.push('Creative angle "Fear & Urgency" aligns with high-urgency buyer risk profile');
   } else if (creative.angle === 'authority_guarantee' && persona.trust_builders.length > 0) {
     score += 10;
     matchReasons.push('Creative angle "Authority & Guarantee" supports executive trust requirements');

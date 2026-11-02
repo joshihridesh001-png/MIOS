@@ -12,16 +12,16 @@
 - **Rationale:** Minimum viable set that supports the full intelligence chain (Campaign → Creative → Customer → Revenue → Learning → Knowledge)
 - **Status:** ✅ Locked
 
-### DEC-002: Pest / Service Fields — Free Text
+### DEC-002: Market Segment / Service Fields — Free Text
 - **Date:** 2026-07-30
-- **Decision:** `pest_type` and `service` are free-text fields, not lookup tables
-- **Rationale:** Faster to ship, avoids premature normalization. Can promote to reference tables later if filtering/grouping demands it.
+- **Decision:** `market_segment`, `service_category`, and `service` are free-text fields, not lookup tables
+- **Rationale:** Faster to ship, avoids premature normalization across diverse service businesses. Can promote to reference tables later if filtering/grouping demands it.
 - **Status:** ✅ Locked
 
 ### DEC-003: Campaign Revenue vs Customer Revenue — Independent
 - **Date:** 2026-07-30
 - **Decision:** `campaigns.revenue` and `customers.revenue` are entered independently, no enforced sum constraint
-- **Rationale:** Attribution is rarely perfect in real-world pest control marketing. Not all revenue maps cleanly to individual customers (e.g., bulk commercial contracts).
+- **Rationale:** Attribution is rarely perfect in real-world service business marketing. Not all revenue maps cleanly to individual customers (e.g., multi-stakeholder B2B retainers).
 - **Status:** ✅ Locked
 
 ### DEC-004: Per-Creative Metrics — Optional
@@ -42,10 +42,10 @@
 - **Rationale:** Flexibility over structure in early days. A tag taxonomy can emerge organically and be formalized later.
 - **Status:** ✅ Locked
 
-### DEC-007: Currency — INR Only
+### DEC-007: Currency — INR Default
 - **Date:** 2026-07-30
-- **Decision:** All monetary fields assume INR. No multi-currency support.
-- **Rationale:** Eradicant operates in India. Avoid unnecessary abstraction.
+- **Decision:** All monetary fields default to INR formatting in the MVP.
+- **Rationale:** Primary operating market is India. Avoid unnecessary multi-currency conversion complexity in MVP.
 - **Status:** ✅ Locked
 
 ### DEC-008: Learning Confidence — Numeric Score (0–100) with Breakdown
@@ -103,3 +103,10 @@ _None at this time._
 - **Decision:** Removed all theatrical command-center styling (neumorphism, gradients, dramatic text) and enforced ANTI_VIBECODING_STANDARDS.md as the active standard.
 - **Visuals:** Gradients are strictly prohibited. Solid accent colors are allowed for status indicators. Glows and glass effects are minimized for a calm, professional appearance.
 - **Tone:** Labels and UI text must use standard SaaS terminology (e.g. Dashboard, Alerts, Recommendations) instead of faux-military/hacker jargon.
+
+### DEC-015: Industry-Agnostic Service Business Ontology
+- **Date:** 2026-11-02
+- **Decision:** Replaced all vertical-specific schema columns, enums, and seed records with universal service-business equivalents (`campaigns.market_segment`, `customers.client_segment`, `customers.retainer_opportunity`, `buyer_personas.client_segment`, `buyer_personas.service_category`, and `CustomerSegmentType` covering `'b2c' | 'b2b_smb' | 'b2b_mid_market' | 'b2b_enterprise' | 'local_service' | 'other'`).
+- **Rationale:** MIOS is a Marketing Intelligence & Capital Allocation OS for any service business (advisory firms, clinics, B2B agencies, and local operators). Domain-specific fields restricted adoption and coupled the data model to a single vertical.
+- **Status:** ✅ Locked
+

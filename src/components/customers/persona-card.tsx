@@ -27,11 +27,11 @@ export function PersonaCard({ persona, onEdit }: PersonaCardProps) {
         <div>
           <div className="flex items-center gap-2">
             <Badge variant="outline" className="rounded-xl border-primary text-primary uppercase text-xs">
-              {persona.property_type}
+              {persona.client_segment}
             </Badge>
-            {persona.pest_type && (
+            {persona.service_category && (
               <Badge variant="outline" className="rounded-xl border-gray-300 text-muted-foreground uppercase text-xs">
-                {persona.pest_type}
+                {persona.service_category}
               </Badge>
             )}
             {persona.is_custom && (

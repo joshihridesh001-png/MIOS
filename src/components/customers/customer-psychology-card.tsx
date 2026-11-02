@@ -22,11 +22,11 @@ export function CustomerPsychologyCard({ customer }: CustomerPsychologyCardProps
   const handlePromoteToLearning = async () => {
     try {
       setPromoting(true);
-      const insightText = `Buyer Psychology (${customer.property_type.toUpperCase()}): Contacted due to "${
-        customer.why_contacted || 'Infestation trigger'
-      }". Biggest fear was "${customer.biggest_fear || 'Chemical toxicity'}". Overcame objection "${
-        customer.biggest_objection || 'Price'
-      }" via "${customer.what_built_trust || 'Botanical guarantee'}".`;
+      const insightText = `Buyer Psychology (${customer.client_segment.toUpperCase()}): Contacted due to "${
+        customer.why_contacted || 'Urgent operational bottleneck'
+      }". Biggest fear was "${customer.biggest_fear || 'Compliance/delivery risk'}". Overcame objection "${
+        customer.biggest_objection || 'Retainer pricing objection'
+      }" via "${customer.what_built_trust || 'SLA & case-study guarantee'}".`;
 
       const newLearning = await createLearning({
         insight: insightText,
@@ -40,7 +40,7 @@ export function CustomerPsychologyCard({ customer }: CustomerPsychologyCardProps
         contradiction_count: 0,
         avg_improvement: 15,
         is_active: true,
-        tags: ['customer_psychology', customer.property_type, 'verified_buyer'],
+        tags: ['customer_psychology', customer.client_segment, 'verified_buyer'],
       });
 
       if (newLearning) {
@@ -134,7 +134,7 @@ export function CustomerPsychologyCard({ customer }: CustomerPsychologyCardProps
           <div>
             <span className="text-[10px] text-muted-foreground uppercase block">Job Quality Feedback</span>
             <p className="text-xs text-on-background mt-1 font-sans italic">
-              {customer.job_quality_feedback ? `"${customer.job_quality_feedback}"` : 'No technician survey debrief recorded.'}
+              {customer.job_quality_feedback ? `"${customer.job_quality_feedback}"` : 'No specialist onboarding feedback recorded.'}
             </p>
           </div>
 
@@ -158,9 +158,9 @@ export function CustomerPsychologyCard({ customer }: CustomerPsychologyCardProps
           </div>
 
           <div className="pt-2 border-t border-border/20 flex flex-wrap gap-3">
-            {customer.amc_opportunity && (
+            {customer.retainer_opportunity && (
               <Badge variant="outline" className="rounded-xl border-primary text-primary text-xs">
-                AMC CONTRACT POTENTIAL
+                RECURRING RETAINER POTENTIAL
               </Badge>
             )}
             {customer.has_review && (

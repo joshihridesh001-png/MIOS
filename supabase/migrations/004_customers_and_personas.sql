@@ -3,9 +3,9 @@
 -- Governed by ADR-001 (ISO/IEC 25010 Quality Model, SOLID, RLS Enforcement)
 -- ==============================================================================
 
--- 1. Create Property Type and Customer Status Types if they don't exist
+-- 1. Create Client Segment and Customer Status Types if they don't exist
 DO $$ BEGIN
-  CREATE TYPE public.customer_property_type AS ENUM ('residential', 'commercial', 'industrial', 'other');
+  CREATE TYPE public.customer_segment_type AS ENUM ('b2c', 'b2b_smb', 'b2b_mid_market', 'b2b_enterprise', 'local_service', 'other');
 EXCEPTION
   WHEN duplicate_object THEN null;
 END $$;
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS public.customers (
   name TEXT NOT NULL,
   phone TEXT,
   location TEXT,
-  property_type TEXT NOT NULL DEFAULT 'residential',
+  client_segment TEXT NOT NULL DEFAULT 'b2c',
   
   -- Attribution Chain
   lead_source TEXT,
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS public.customers (
   profit DECIMAL(12, 2) NOT NULL DEFAULT 0,
   ltv DECIMAL(12, 2) NOT NULL DEFAULT 0,
   
-  -- Pre-Sale Consumer Psychology (The Gold Mine)
+  -- Pre-Sale Consumer Psychology
   why_contacted TEXT,
   biggest_fear TEXT,
   biggest_objection TEXT,
@@ -42,13 +42,13 @@ CREATE TABLE IF NOT EXISTS public.customers (
   what_built_trust TEXT,
   questions_asked TEXT,
   
-  -- Post-Job CX & Operational Feedback
+  -- Post-Engagement CX & Operational Feedback
   cx_rating INTEGER CHECK (cx_rating >= 1 AND cx_rating <= 5),
   job_quality_feedback TEXT,
   improvement_opportunities TEXT[] DEFAULT '{}',
   has_review BOOLEAN NOT NULL DEFAULT false,
   has_referral BOOLEAN NOT NULL DEFAULT false,
-  amc_opportunity BOOLEAN NOT NULL DEFAULT false,
+  retainer_opportunity BOOLEAN NOT NULL DEFAULT false,
   status TEXT NOT NULL DEFAULT 'won',
   
   -- Audit Trail
@@ -62,8 +62,8 @@ CREATE TABLE IF NOT EXISTS public.customers (
 CREATE TABLE IF NOT EXISTS public.buyer_personas (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
-  property_type TEXT NOT NULL DEFAULT 'residential',
-  pest_type TEXT,
+  client_segment TEXT NOT NULL DEFAULT 'b2c',
+  service_category TEXT,
   
   -- Aggregated & Editable Psychological Clusters
   dominant_fears TEXT[] DEFAULT '{}',
@@ -90,9 +90,9 @@ CREATE TABLE IF NOT EXISTS public.buyer_personas (
 
 -- 4. Create Performance Indexes for Executive Dashboards
 CREATE INDEX IF NOT EXISTS idx_customers_campaign ON public.customers(campaign_id);
-CREATE INDEX IF NOT EXISTS idx_customers_property_type ON public.customers(property_type);
+CREATE INDEX IF NOT EXISTS idx_customers_client_segment ON public.customers(client_segment);
 CREATE INDEX IF NOT EXISTS idx_customers_status ON public.customers(status);
-CREATE INDEX IF NOT EXISTS idx_buyer_personas_property ON public.buyer_personas(property_type);
+CREATE INDEX IF NOT EXISTS idx_buyer_personas_segment ON public.buyer_personas(client_segment);
 
 -- 5. Enable Row Level Security (RLS) on Both Tables
 ALTER TABLE public.customers ENABLE ROW LEVEL SECURITY;
@@ -121,68 +121,68 @@ EXCEPTION
   WHEN duplicate_object THEN null;
 END $$;
 
--- 7. Seed Initial Baseline Buyer Personas (Residential vs Commercial)
+-- 7. Seed Initial Baseline Buyer Personas (Industry-Agnostic Service Businesses)
 INSERT INTO public.buyer_personas (
-  name, property_type, pest_type, dominant_fears, dominant_objections, trust_builders, 
+  name, client_segment, service_category, dominant_fears, dominant_objections, trust_builders, 
   recommended_creative_angles, avg_cx_rating, top_improvement_opportunities, avg_ltv, sample_size, is_custom
 )
 SELECT
-  'The Frantic Residential Bedbug Buyer',
-  'residential',
-  'bed_bugs',
-  ARRAY['Chemical toxicity for children and pets', 'Infestation returning after treatment', 'Social stigma of neighbors knowing'],
-  ARRAY['High price compared to local DIY sprays', 'Will we have to vacate the house for days?'],
-  ARRAY['100% Botanical / Non-Toxic Certification', '180-Day Re-Infestation Guarantee', 'Unmarked Service Vehicles'],
+  'High-Intent B2B Retainer Decision Maker',
+  'b2b_smb',
+  'Advisory & Accounting',
+  ARRAY['Compliance penalties and missed regulatory deadlines', 'Cashflow blindspots during quarterly expansion', 'Disruptive or disorganized onboarding process'],
+  ARRAY['High switching cost from existing provider', 'Unclear retainer ROI in the first 90 days'],
+  ARRAY['Contractual SLA & response-time guarantees', 'Audited client case studies with quantified ROI', 'Dedicated senior account partner'],
   '[
     {
-      "hook": "Bedbugs hiding in your child''s mattress? Don''t use toxic chemical sprays.",
-      "headline": "100% Kid & Pet Safe Botanical Bedbug Eradication — Guaranteed in 24 Hours.",
-      "emotion": "fear",
-      "psych_principle": "Loss Aversion & Protection Instinct",
-      "rationale": "Directly addresses the dominant fear of chemical toxicity while triggering immediate action."
+      "hook": "Outgrowing your current advisory firm? Don''t wait for a compliance penalty to expose blindspots.",
+      "headline": "Audit-Ready Financial Advisory & Monthly Forecasting — Zero Onboarding Disruption.",
+      "emotion": "authority",
+      "psych_principle": "Risk Mitigation & Authority Positioning",
+      "rationale": "Addresses the executive fear of compliance and cashflow blindspots while removing onboarding friction."
     },
     {
-      "hook": "Tried DIY sprays and they came back 2 weeks later?",
-      "headline": "Why Bedbug Sprays Fail (And The Heat Technology That Ends Them Permanently).",
-      "emotion": "authority",
-      "psych_principle": "Education & Authority Positioning",
-      "rationale": "Overcomes the objection to professional pricing by demonstrating why cheap DIY fails."
+      "hook": "Paying a monthly retainer without clear visibility into margin improvement?",
+      "headline": "How SMB Leaders Recover 3x Their Retainer Cost in 90 Days Through Structured Advisory.",
+      "emotion": "trust",
+      "psych_principle": "Quantified Proof & ROI Clarity",
+      "rationale": "Directly resolves the retainer ROI and switching-cost objection with concrete value framing."
     }
   ]'::jsonb,
   4.80,
-  ARRAY['Ensure technicians explain post-job ventilation timing clearly', 'Offer protective mattress encasements at checkout'],
-  12500.00,
-  142,
+  ARRAY['Standardize 14-day onboarding checklist milestones', 'Include quarterly executive KPI summary in monthly reporting'],
+  85000.00,
+  64,
   true
 WHERE NOT EXISTS (
-  SELECT 1 FROM public.buyer_personas WHERE name = 'The Frantic Residential Bedbug Buyer'
+  SELECT 1 FROM public.buyer_personas WHERE name = 'High-Intent B2B Retainer Decision Maker'
 );
 
 INSERT INTO public.buyer_personas (
-  name, property_type, pest_type, dominant_fears, dominant_objections, trust_builders, 
+  name, client_segment, service_category, dominant_fears, dominant_objections, trust_builders, 
   recommended_creative_angles, avg_cx_rating, top_improvement_opportunities, avg_ltv, sample_size, is_custom
 )
 SELECT
-  'The Commercial Warehouse Facilities Manager',
-  'commercial',
-  'rodents',
-  ARRAY['Health inspection failure & warehouse closure', 'Rodent damage to stored inventory & wiring', 'Disruption to active loading dock operations'],
-  ARRAY['Can your team work overnight without disrupting forklift traffic?', 'Is your AMC reporting compliant with audit standards?'],
-  ARRAY['ISO/HACCP Digital Compliance Reports', 'Overnight & Sunday Service Teams', 'Dedicated Account Manager'],
+  'Local Brick-and-Mortar High-LTV Client',
+  'b2c',
+  'Local Clinic & Specialist Services',
+  ARRAY['Hidden post-visit fees and surprise billing', 'Inconsistent service quality or rushed appointments', 'Wasted time in waiting rooms despite booking'],
+  ARRAY['Higher upfront pricing compared to budget clinics', 'Uncertainty whether specialist care is necessary now'],
+  ARRAY['Verified local client reviews and video testimonials', 'Transparent upfront pricing schedule', 'Written service satisfaction guarantee'],
   '[
     {
-      "hook": "One rodent in your food warehouse can cost Rs 5 Lakhs in inspection fines.",
-      "headline": "Audit-Ready Commercial Rodent Shield — Zero Operational Disruption.",
-      "emotion": "authority",
-      "psych_principle": "Risk Mitigation & Compliance Proof",
-      "rationale": "Speaks to the facilities manager''s KPI: passing audits and avoiding downtime."
+      "hook": "Tired of rushed 5-minute appointments and surprise charges after your visit?",
+      "headline": "Specialist Care With Transparent Upfront Pricing — On-Time Appointments Guaranteed.",
+      "emotion": "trust",
+      "psych_principle": "Transparency & Certainty",
+      "rationale": "Eliminates anxiety around hidden fees and wasted time while differentiating from high-volume budget alternatives."
     }
   ]'::jsonb,
-  4.65,
-  ARRAY['Automate monthly digital audit PDF emails to warehouse managers', 'Introduce Annual Maintenance Contract (AMC) renewal discount tiers'],
-  75000.00,
-  38,
+  4.75,
+  ARRAY['Send automated pre-visit pricing and preparation summary via WhatsApp', 'Introduce annual preventive care membership packages'],
+  24000.00,
+  142,
   true
 WHERE NOT EXISTS (
-  SELECT 1 FROM public.buyer_personas WHERE name = 'The Commercial Warehouse Facilities Manager'
+  SELECT 1 FROM public.buyer_personas WHERE name = 'Local Brick-and-Mortar High-LTV Client'
 );

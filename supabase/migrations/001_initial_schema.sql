@@ -59,7 +59,7 @@ CREATE TABLE campaigns (
   -- Targeting & Offer
   target_audience     text,
   service             text,
-  pest_type           text,
+  market_segment      text,
   location            text,
   offer               text,
   cta                 text,

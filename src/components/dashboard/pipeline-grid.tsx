@@ -283,7 +283,7 @@ export function PipelineGrid({
                         {cust.name}
                       </p>
                       <p className="text-[10px] font-sans font-bold text-muted-foreground font-bold uppercase">
-                        {cust.property_type} • {cust.location}
+                        {cust.client_segment} • {cust.location}
                       </p>
                     </div>
                     <Badge

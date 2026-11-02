@@ -15,7 +15,7 @@ export interface CampaignRow {
     owner_id: string | null; 
     target_audience: string | null; 
     service: string | null; 
-    pest_type: string | null; 
+    market_segment: string | null; 
     location: string | null; 
     offer: string | null; 
     cta: string | null; 
@@ -200,7 +200,8 @@ export type ExperimentUpdate = Partial<ExperimentInsert>;
 // 4. CUSTOMER & BUYER PERSONA TYPES (Governed by ADR-001)
 // ==========================================================
 
-export type CustomerPropertyType = 'residential' | 'commercial' | 'industrial' | 'other';
+export type CustomerSegmentType = 'b2c' | 'b2b_smb' | 'b2b_mid_market' | 'b2b_enterprise' | 'local_service' | 'other';
+export type CustomerPropertyType = CustomerSegmentType;
 export type CustomerStatus = 'lead' | 'quoted' | 'won' | 'lost' | 'churned';
 
 export interface CustomerRow {
@@ -208,7 +209,7 @@ export interface CustomerRow {
   name: string;
   phone: string | null;
   location: string | null;
-  property_type: CustomerPropertyType;
+  client_segment: CustomerSegmentType;
   lead_source: string | null;
   campaign_id: string | null;
   campaign_creative_id: string | null;
@@ -226,7 +227,7 @@ export interface CustomerRow {
   improvement_opportunities: string[];
   has_review: boolean;
   has_referral: boolean;
-  amc_opportunity: boolean;
+  retainer_opportunity: boolean;
   status: CustomerStatus;
   created_at: string;
   updated_at: string;
@@ -253,8 +254,8 @@ export interface RecommendedCreativeAngle {
 export interface BuyerPersonaRow {
   id: string;
   name: string;
-  property_type: CustomerPropertyType;
-  pest_type: string | null;
+  client_segment: CustomerSegmentType;
+  service_category: string | null;
   dominant_fears: string[];
   dominant_objections: string[];
   trust_builders: string[];

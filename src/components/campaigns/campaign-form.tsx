@@ -34,7 +34,7 @@ export function CampaignForm({ initialData = {}, onSubmit, loading }: CampaignFo
     end_date: initialData.end_date || '',
     target_audience: initialData.target_audience || '',
     service: initialData.service || '',
-    pest_type: initialData.pest_type || '',
+    market_segment: initialData.market_segment || '',
     location: initialData.location || '',
     offer: initialData.offer || '',
     cta: initialData.cta || '',
@@ -177,12 +177,12 @@ export function CampaignForm({ initialData = {}, onSubmit, loading }: CampaignFo
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="pest_type">Market Segment / Category</Label>
+            <Label htmlFor="market_segment">Market Segment / Category</Label>
             <Input 
-              id="pest_type" 
+              id="market_segment" 
               placeholder="e.g. Enterprise B2B, SaaS, D2C Growth"
-              value={formData.pest_type || ''} 
-              onChange={(e) => handleChange('pest_type', e.target.value)} 
+              value={formData.market_segment || ''} 
+              onChange={(e) => handleChange('market_segment', e.target.value)} 
             />
           </div>
           <div className="space-y-2">
@@ -235,7 +235,7 @@ export function CampaignForm({ initialData = {}, onSubmit, loading }: CampaignFo
             { id: 'clicks', label: 'Clicks' },
             { id: 'messages', label: 'Messages' },
             { id: 'calls', label: 'Calls' },
-            { id: 'site_visits', label: 'Site Visits' },
+            { id: 'site_visits', label: 'Site / Location Visits' },
             { id: 'inquiries', label: 'Inquiries' },
             { id: 'qualified_leads', label: 'Qualified Leads' },
             { id: 'quotes_sent', label: 'Quotes Sent' },
