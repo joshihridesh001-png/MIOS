@@ -10,6 +10,7 @@ import {
   evaluateCampaignUnitEconomics,
   type CampaignEconomicAlert,
 } from '@/lib/utils/unit-economics';
+import { buildPortfolioAllocationSummary } from '@/lib/utils/capital-allocator';
 import type {
   CampaignWithMetrics,
   ExperimentRow,
@@ -146,6 +147,12 @@ export function useDashboard(
     );
   }, [filteredCampaigns, unitEconomicsProfile]);
 
+  // Portfolio Capital Allocation & Explore / Exploit Matrix
+  const portfolioAllocation = useMemo(
+    () => buildPortfolioAllocationSummary(filteredCampaigns, creatives, unitEconomicsProfile),
+    [filteredCampaigns, creatives, unitEconomicsProfile]
+  );
+
   return {
     campaigns: filteredCampaigns,
     allCampaigns: campaigns,
@@ -157,6 +164,7 @@ export function useDashboard(
     error,
     kpis,
     alerts,
+    portfolioAllocation,
     refetch: fetchDashboardData,
   };
 }

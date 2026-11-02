@@ -292,3 +292,46 @@ export interface UnitEconomicsProfile {
   min_spend_for_evaluation: number;
 }
 
+// ==========================================================
+// 6. CAPITAL ALLOCATOR (EXPLORE VS. EXPLOIT & IMPACT SCORING)
+// ==========================================================
+
+export type AllocationRegime = 'exploit' | 'explore' | 'hold_pipeline' | 'reallocate_kill';
+
+export interface ImpactScoreBreakdown {
+  outcomeImpact: number;        // 0-10
+  statisticalConfidence: number;// 0-1
+  relevance: number;            // 0-1
+  urgency: number;              // 0-1
+  compositeScore: number;       // 0-100 normalized
+}
+
+export interface CapitalAllocationDecision {
+  entityId: string;
+  entityName: string;
+  entityType: 'campaign' | 'creative';
+  platform: PlatformType | null;
+  regime: AllocationRegime;
+  currentSpend: number;
+  recommendedSpendDeltaPct: number;
+  recommendedSpendAmount: number;
+  impactScore: ImpactScoreBreakdown;
+  primarySignal: string;
+  causalHypothesis: string;
+  counterfactualAction: string;
+}
+
+export interface PortfolioAllocationSummary {
+  totalCurrentSpend: number;
+  exploitSpend: number;
+  exploreSpend: number;
+  holdSpend: number;
+  atRiskSpend: number;
+  redeployableCapital: number;
+  targetExploitRatioPct: number;
+  targetExploreRatioPct: number;
+  portfolioRegimeNote: string;
+  decisions: CapitalAllocationDecision[];
+}
+
+

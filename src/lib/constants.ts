@@ -9,7 +9,8 @@ import {
   CreativeAngle,
   CustomerSegmentType,
   IndustryPresetKey,
-  UnitEconomicsProfile
+  UnitEconomicsProfile,
+  AllocationRegime
 } from './types/database';
 
 export const platformLabels: Record<string, string> = {
@@ -259,6 +260,22 @@ export const INDUSTRY_UNIT_ECONOMICS_PRESETS: Record<IndustryPresetKey, UnitEcon
     min_spend_for_evaluation: 5000,
   },
 };
+
+// Capital Allocator (Explore vs. Exploit & Impact Scoring)
+export const allocationRegimeLabels: Record<AllocationRegime, string> = {
+  exploit: 'Exploit (Scale Winner)',
+  explore: 'Explore (Test New Angle)',
+  hold_pipeline: 'Hold (In Pipeline Window)',
+  reallocate_kill: 'Reallocate / Pause',
+};
+
+export const allocationRegimeColors: Record<AllocationRegime, string> = {
+  exploit: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/40',
+  explore: 'bg-purple-500/15 text-purple-400 border-purple-500/40',
+  hold_pipeline: 'bg-amber-500/15 text-amber-400 border-amber-500/40',
+  reallocate_kill: 'bg-rose-500/15 text-rose-400 border-rose-500/40',
+};
+
 
 
 

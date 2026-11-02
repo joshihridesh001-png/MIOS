@@ -10,6 +10,7 @@ import { useUnitEconomics } from '@/hooks/use-unit-economics';
 import { DashboardHeader } from '@/components/dashboard/dashboard-header';
 import { UnitEconomicsBar } from '@/components/dashboard/unit-economics-bar';
 import { DashboardKPIs } from '@/components/dashboard/dashboard-kpis';
+import { CapitalAllocatorPanel } from '@/components/dashboard/capital-allocator-panel';
 import { BenchmarkAlerts } from '@/components/dashboard/benchmark-alerts';
 import { PipelineGrid } from '@/components/dashboard/pipeline-grid';
 import { MotionAccordion } from '@/components/ui/unlumen/motion-accordion';
@@ -37,6 +38,7 @@ export default function DashboardPage() {
     loading,
     kpis,
     alerts,
+    portfolioAllocation,
   } = useDashboard(dateFilter, platformFilter, profile);
 
   const EXECUTIVE_DIAGNOSTICS: DiagnosticItem[] = useMemo(
@@ -150,6 +152,9 @@ export default function DashboardPage() {
       ) : (
         <DashboardKPIs kpis={kpis} />
       )}
+
+      {/* 3B. Executive Capital Allocator & Explore / Exploit Engine */}
+      <CapitalAllocatorPanel summary={portfolioAllocation} />
 
       {/* 4. Cross-Module Intelligence Cockpit (4 Pillars) */}
       <div className="space-y-3 pt-4">
