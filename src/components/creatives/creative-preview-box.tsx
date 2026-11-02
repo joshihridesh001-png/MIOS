@@ -7,6 +7,7 @@ import {
   platformIcons,
   platformLabels,
 } from '@/lib/constants'
+import { isVideoAssetUrl } from '@/lib/creative-parser'
 import { Globe, ThumbsUp, ChatCircle, ShareNetwork, ArrowSquareOut } from "@phosphor-icons/react"
 
 interface CreativePreviewBoxProps {
@@ -16,13 +17,14 @@ interface CreativePreviewBoxProps {
 export function CreativePreviewBox({ creative }: CreativePreviewBoxProps) {
   const platformName = creative.platform ? platformLabels[creative.platform] || creative.platform : 'Meta Ads'
   const platformIcon = creative.platform ? platformIcons[creative.platform] || '📱' : '📱'
+  const isVideo = isVideoAssetUrl(creative.asset_url, creative.format)
 
   return (
     <div className="w-full max-w-md mx-auto rounded-2xl bg-muted/90 border border-border shadow-2xl overflow-hidden font-sans">
       {/* Social Feed Header */}
       <div className="p-4 flex items-center justify-between border-b border-border/80">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-card   flex items-center justify-center text-foreground font-bold text-lg shadow-md">
+          <div className="w-10 h-10 rounded-full bg-card flex items-center justify-center text-foreground font-bold text-lg shadow-md">
             M
           </div>
           <div>
@@ -50,13 +52,23 @@ export function CreativePreviewBox({ creative }: CreativePreviewBoxProps) {
       </div>
 
       {/* Visual Asset Area */}
-      <div className="relative w-full aspect-[4/3] bg-card  via-zinc-900 to-black flex flex-col items-center justify-center p-6 border-y border-border">
+      <div className="relative w-full aspect-[4/3] bg-card via-zinc-900 to-black flex flex-col items-center justify-center border-y border-border overflow-hidden">
         {creative.asset_url ? (
-          <img
-            src={creative.asset_url}
-            alt={creative.name || 'Ad Preview'}
-            className="w-full h-full object-cover"
-          />
+          isVideo ? (
+            <video
+              src={creative.asset_url}
+              controls
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <img
+              src={creative.asset_url}
+              alt={creative.name || 'Ad Preview'}
+              className="w-full h-full object-cover"
+            />
+          )
         ) : (
           <div className="text-center space-y-3 p-6 max-w-sm">
             <div className="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-2xl shadow-lg shadow-emerald-500/10">

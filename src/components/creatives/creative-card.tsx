@@ -13,9 +13,10 @@ import {
   platformIcons,
   platformLabels,
 } from '@/lib/constants'
+import { isVideoAssetUrl } from '@/lib/creative-parser'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
-import { Fire, TrendUp, Warning } from "@phosphor-icons/react"
+import { Fire, Warning } from "@phosphor-icons/react"
 import { TiltCard } from '@/components/ui/unlumen'
 
 interface CreativeCardProps {
@@ -27,6 +28,7 @@ export function CreativeCard({ creative }: CreativeCardProps) {
   const isFatigued = creative.status === 'fatigued' || (creative.fatigue_score || 0) > 70
   const roasVal = creative.roas || 0
   const ctrVal = creative.ctr || 0
+  const isVideo = isVideoAssetUrl(creative.asset_url, creative.format)
 
   return (
     <TiltCard
@@ -55,6 +57,26 @@ export function CreativeCard({ creative }: CreativeCardProps) {
         </Badge>
       </div>
 
+      {/* Visual Thumbnail Preview */}
+      {creative.asset_url && (
+        <div className="w-full h-36 bg-muted/40 overflow-hidden">
+          {isVideo ? (
+            <video
+              src={creative.asset_url}
+              muted
+              playsInline
+              className="w-full h-36 object-cover border-b border-border/40"
+            />
+          ) : (
+            <img
+              src={creative.asset_url}
+              alt={creative.name}
+              className="w-full h-36 object-cover border-b border-border/40"
+            />
+          )}
+        </div>
+      )}
+
       {/* Copy / Headline Preview */}
       <div className="p-4 flex-1 space-y-2">
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -70,7 +92,7 @@ export function CreativeCard({ creative }: CreativeCardProps) {
 
         {creative.primary_text && (
           <p className="text-xs text-muted-foreground line-clamp-2 italic">
-            "{creative.primary_text}"
+            &ldquo;{creative.primary_text}&rdquo;
           </p>
         )}
       </div>
@@ -90,9 +112,7 @@ export function CreativeCard({ creative }: CreativeCardProps) {
             <div
               className={cn(
                 'h-full rounded-full transition-all duration-500',
-                isFatigued
-                  ? 'bg-card  '
-                  : 'bg-card  '
+                isFatigued ? 'bg-rose-500' : 'bg-emerald-500'
               )}
               style={{ width: `${Math.min(creative.fatigue_score || 0, 100)}%` }}
             />

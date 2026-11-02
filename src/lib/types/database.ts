@@ -292,3 +292,98 @@ export interface UnitEconomicsProfile {
   min_spend_for_evaluation: number;
 }
 
+// ==========================================================
+// 6. CAPITAL ALLOCATOR (EXPLORE VS. EXPLOIT & IMPACT SCORING)
+// ==========================================================
+
+export type AllocationRegime = 'exploit' | 'explore' | 'hold_pipeline' | 'reallocate_kill';
+
+export interface ImpactScoreBreakdown {
+  outcomeImpact: number;        // 0-10
+  statisticalConfidence: number;// 0-1
+  relevance: number;            // 0-1
+  urgency: number;              // 0-1
+  compositeScore: number;       // 0-100 normalized
+}
+
+export interface CapitalAllocationDecision {
+  entityId: string;
+  entityName: string;
+  entityType: 'campaign' | 'creative';
+  platform: PlatformType | null;
+  regime: AllocationRegime;
+  currentSpend: number;
+  recommendedSpendDeltaPct: number;
+  recommendedSpendAmount: number;
+  impactScore: ImpactScoreBreakdown;
+  primarySignal: string;
+  causalHypothesis: string;
+  counterfactualAction: string;
+}
+
+export interface PortfolioAllocationSummary {
+  totalCurrentSpend: number;
+  exploitSpend: number;
+  exploreSpend: number;
+  holdSpend: number;
+  atRiskSpend: number;
+  redeployableCapital: number;
+  targetExploitRatioPct: number;
+  targetExploreRatioPct: number;
+  portfolioRegimeNote: string;
+  decisions: CapitalAllocationDecision[];
+}
+
+// ==========================================================
+// 7. ASSUMPTION LEDGER, KILL CRITERIA & FUNNEL DIAGNOSTICS
+// ==========================================================
+
+export type DecisionReversibility = 'reversible_two_way' | 'irreversible_one_way';
+export type AssumptionStatus = 'untested' | 'validating' | 'validated' | 'falsified';
+export type FunnelStageName =
+  | 'impression_to_click'
+  | 'click_to_inquiry'
+  | 'inquiry_to_qualified'
+  | 'qualified_to_quote'
+  | 'quote_to_won';
+
+export interface AssumptionLedgerEntry {
+  id: string;
+  entity_type: 'campaign' | 'experiment' | 'system';
+  entity_id: string | null;
+  entity_name: string;
+  assumption: string;
+  evidence: string;
+  confidence: ConfidenceLevel;
+  reversibility: DecisionReversibility;
+  consequence_if_wrong: string;
+  falsification_test: string;
+  kill_criteria: string;
+  status: AssumptionStatus;
+  created_at: string;
+}
+
+export interface FunnelStageDiagnostic {
+  stage: FunnelStageName;
+  label: string;
+  fromCount: number;
+  toCount: number;
+  actualRatePct: number;
+  benchmarkRatePct: number;
+  deltaPct: number;
+  isBottleneck: boolean;
+  brokenAssumption: string;
+  prescribedIntervention: string;
+}
+
+export interface FunnelDiagnosticReport {
+  campaignId: string;
+  campaignName: string;
+  primaryBottleneck: FunnelStageDiagnostic | null;
+  stages: FunnelStageDiagnostic[];
+  killSwitchTriggered: boolean;
+  killSwitchReason: string | null;
+}
+
+
+
