@@ -10,7 +10,10 @@ import {
   CustomerSegmentType,
   IndustryPresetKey,
   UnitEconomicsProfile,
-  AllocationRegime
+  AllocationRegime,
+  DecisionReversibility,
+  AssumptionStatus,
+  AssumptionLedgerEntry
 } from './types/database';
 
 export const platformLabels: Record<string, string> = {
@@ -275,6 +278,75 @@ export const allocationRegimeColors: Record<AllocationRegime, string> = {
   hold_pipeline: 'bg-amber-500/15 text-amber-400 border-amber-500/40',
   reallocate_kill: 'bg-rose-500/15 text-rose-400 border-rose-500/40',
 };
+
+// Assumption Ledger, Reversibility & Kill Criteria (Module 3)
+export const reversibilityLabels: Record<DecisionReversibility, string> = {
+  reversible_two_way: 'Reversible (2-Way Door — Act Fast)',
+  irreversible_one_way: 'High Commitment (1-Way Door — Verify First)',
+};
+
+export const assumptionStatusLabels: Record<AssumptionStatus, string> = {
+  untested: 'Untested',
+  validating: 'In Validation',
+  validated: 'Validated',
+  falsified: 'Falsified',
+};
+
+export const assumptionStatusColors: Record<AssumptionStatus, string> = {
+  untested: 'bg-muted text-muted-foreground border-border',
+  validating: 'bg-amber-500/15 text-amber-400 border-amber-500/40',
+  validated: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/40',
+  falsified: 'bg-rose-500/15 text-rose-400 border-rose-500/40',
+};
+
+export const DEFAULT_ASSUMPTION_LEDGER_SEED: AssumptionLedgerEntry[] = [
+  {
+    id: 'asm-001',
+    entity_type: 'experiment',
+    entity_id: null,
+    entity_name: 'B2B Advisory Free Audit Offer vs. Paid Discovery Call',
+    assumption: 'Offering a complimentary 30-minute diagnostic audit converts cold B2B traffic into qualified leads at 1.4x the rate of a direct retainer consultation pitch.',
+    evidence: 'Tested across 28,400 impressions in EXP-103; inquiry conversion rate lifted +44.2% at 96% statistical confidence.',
+    confidence: 'high',
+    reversibility: 'reversible_two_way',
+    consequence_if_wrong: 'Higher volume of low-intent diagnostic calls consuming senior advisor calendar capacity without downstream retainer conversion.',
+    falsification_test: 'Track 30-day lead-to-retainer close rate on diagnostic audit leads vs. historical baseline (15% close rate).',
+    kill_criteria: 'Pause offer if qualified-to-won conversion drops below 10% after 25 completed diagnostic audits.',
+    status: 'validated',
+    created_at: '2026-10-15T09:00:00Z',
+  },
+  {
+    id: 'asm-002',
+    entity_type: 'system',
+    entity_id: null,
+    entity_name: 'Inbound Speed-to-Lead SLA (< 5 Minutes)',
+    assumption: 'Responding to inbound WhatsApp and web form inquiries within 5 minutes doubles the inquiry-to-qualified rate compared to >30-minute response times.',
+    evidence: 'Initial cohort of 42 inbound inquiries shows 58% qualification rate under 5 minutes vs. 27% when contacted after 30 minutes.',
+    confidence: 'medium',
+    reversibility: 'reversible_two_way',
+    consequence_if_wrong: 'Unnecessary operational overhead routing instant alerts to intake specialists during off-peak hours.',
+    falsification_test: 'Compare inquiry-to-qualified conversion across <5 min vs. 5–30 min response cohorts over 100 consecutive inquiries.',
+    kill_criteria: 'Relax instant routing requirement if qualification lift is <15% after 100 tracked inquiries.',
+    status: 'validating',
+    created_at: '2026-10-22T11:30:00Z',
+  },
+  {
+    id: 'asm-003',
+    entity_type: 'campaign',
+    entity_id: null,
+    entity_name: 'High-LTV Retainer Pricing & Case Study Proof',
+    assumption: 'Audited client ROI case studies in follow-up proposals overcome switching-cost and upfront retainer pricing objections for B2B SMB decision-makers.',
+    evidence: 'Qualitative interviews with 14 won B2B clients cited quantified peer case studies as the primary trust builder prior to signing.',
+    confidence: 'medium',
+    reversibility: 'irreversible_one_way',
+    consequence_if_wrong: 'Publishing higher anchor pricing without sufficient perceived proof depresses quote-to-won rate and lengthens the sales cycle beyond 45 days.',
+    falsification_test: 'Measure quote-to-won rate on proposals sent with vertical-matched ROI case studies vs. standard service scope proposals.',
+    kill_criteria: 'Revert to tiered starter package if quote-to-won rate falls below 20% across 15 consecutive proposals.',
+    status: 'validating',
+    created_at: '2026-10-28T14:15:00Z',
+  },
+];
+
 
 
 
