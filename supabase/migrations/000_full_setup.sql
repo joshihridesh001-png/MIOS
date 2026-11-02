@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS campaigns (
   -- Target & Offer Context
   target_audience text,
   service text,
-  pest_type text,
+  market_segment text,
   location text,
   offer text,
   cta text,

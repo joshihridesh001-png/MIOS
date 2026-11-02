@@ -7,7 +7,7 @@ export interface ParsedCampaignResult {
 
 /**
  * Robust natural language and key-value parser for Meta Ads / marketing reports.
- * Extracts campaign name, platform, location, pest type, metrics, and reflection notes.
+ * Extracts campaign name, platform, location, market segment, metrics, and reflection notes.
  */
 export function parseCampaignText(text: string): ParsedCampaignResult {
   if (!text || !text.trim()) {
@@ -155,17 +155,17 @@ export function parseCampaignText(text: string): ParsedCampaignResult {
     }
   }
 
-  // 6. Extract Pest Type / Service
-  const pestMatch = text.match(/(?:pest type|pest|service|treatment)[\s:_=-]+([^\r\n,.]+)/i)
-  if (pestMatch && pestMatch[1]) {
-    data.pest_type = pestMatch[1].trim()
-    extractedKeys.push('Pest Type')
+  // 6. Extract Market Segment / Service Category
+  const segmentMatch = text.match(/(?:market segment|segment|category|vertical|industry|service)[\s:_=-]+([^\r\n,.]+)/i)
+  if (segmentMatch && segmentMatch[1]) {
+    data.market_segment = segmentMatch[1].trim()
+    extractedKeys.push('Market Segment')
   } else {
-    const knownPests = ['Termite', 'Cockroach', 'Bed bug', 'Mosquito', 'Rodent', 'Ant', 'Woodborer', 'General Pest']
-    for (const pest of knownPests) {
-      if (new RegExp(`\\b${pest}\\b`, 'i').test(text)) {
-        data.pest_type = pest
-        extractedKeys.push('Pest Type')
+    const knownSegments = ['Enterprise B2B', 'SMB', 'Accounting', 'Legal', 'Clinic', 'Healthcare', 'Real Estate', 'Home Services', 'SaaS', 'Local Retail', 'Consulting']
+    for (const segment of knownSegments) {
+      if (new RegExp(`\\b${segment}\\b`, 'i').test(text)) {
+        data.market_segment = segment
+        extractedKeys.push('Market Segment')
         break
       }
     }

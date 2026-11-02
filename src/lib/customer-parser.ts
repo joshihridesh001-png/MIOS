@@ -14,14 +14,14 @@ export interface ParsedCustomerIntelligence {
   cx_rating?: number;
   job_quality_feedback?: string;
   improvement_opportunities?: string[];
-  amc_opportunity?: boolean;
+  retainer_opportunity?: boolean;
   has_review?: boolean;
   has_referral?: boolean;
 }
 
 /**
  * Heuristic natural language parser for unstructured customer chat logs,
- * sales call transcripts, and post-job technician survey notes.
+ * sales call transcripts, and post-engagement client survey notes.
  * Cyclomatic complexity <= 10.
  */
 export function parseCustomerNotes(rawText: string): ParsedCustomerIntelligence {
@@ -46,65 +46,70 @@ export function parseCustomerNotes(rawText: string): ParsedCustomerIntelligence 
   }
 
   // 2. Extract Biggest Fear
-  if (lower.includes('toxic') || lower.includes('chemical') || lower.includes('pet') || lower.includes('child')) {
-    result.biggest_fear = 'Chemical toxicity for children and pets';
-  } else if (lower.includes('return') || lower.includes('came back') || lower.includes('re-infest')) {
-    result.biggest_fear = 'Pest infestation returning after treatment';
-  } else if (lower.includes('audit') || lower.includes('inspection') || lower.includes('fine') || lower.includes('close')) {
-    result.biggest_fear = 'Health inspection failure and warehouse fine';
+  if (lower.includes('compliance') || lower.includes('audit') || lower.includes('tax') || lower.includes('penalty') || lower.includes('fine') || lower.includes('regulatory')) {
+    result.biggest_fear = 'Regulatory compliance failure, audit risk, or financial penalties';
+  } else if (lower.includes('deadline') || lower.includes('delay') || lower.includes('downtime') || lower.includes('quality') || lower.includes('unreliable') || lower.includes('mistake')) {
+    result.biggest_fear = 'Service delivery delays, operational downtime, or subpar execution quality';
+  } else if (lower.includes('hidden fee') || lower.includes('lock-in') || lower.includes('overcharge') || lower.includes('scope creep') || lower.includes('contract trap')) {
+    result.biggest_fear = 'Hidden fees, scope creep, or inflexible contract lock-in';
   }
 
   // 3. Extract Biggest Objection
-  if (lower.includes('price') || lower.includes('cost') || lower.includes('expensive') || lower.includes('quote')) {
-    result.biggest_objection = 'High pricing compared to local DIY solutions';
-  } else if (lower.includes('vacate') || lower.includes('leave the house') || lower.includes('how long')) {
-    result.biggest_objection = 'Will we have to vacate the property for multiple days?';
-  } else if (lower.includes('disrupt') || lower.includes('forklift') || lower.includes('downtime')) {
-    result.biggest_objection = 'Operational downtime during warehouse working hours';
+  if (lower.includes('price') || lower.includes('cost') || lower.includes('expensive') || lower.includes('quote') || lower.includes('budget') || lower.includes('roi') || lower.includes('fee')) {
+    result.biggest_objection = 'Higher retainer or project pricing compared to low-cost alternatives';
+  } else if (lower.includes('switch') || lower.includes('onboarding') || lower.includes('transition') || lower.includes('migration') || lower.includes('how long') || lower.includes('setup time')) {
+    result.biggest_objection = 'Switching costs and onboarding time required to transition providers';
+  } else if (lower.includes('approval') || lower.includes('partner') || lower.includes('board') || lower.includes('next quarter') || lower.includes('timing')) {
+    result.biggest_objection = 'Internal stakeholder approval and budget timing alignment';
   }
 
   // 4. Extract What Built Trust
-  if (lower.includes('botanical') || lower.includes('non-toxic') || lower.includes('safe') || lower.includes('certified')) {
-    result.what_built_trust = '100% Botanical Non-Toxic Safe Certification';
-  } else if (lower.includes('guarantee') || lower.includes('warranty') || lower.includes('180-day')) {
-    result.what_built_trust = '180-Day Re-Infestation Guarantee';
-  } else if (lower.includes('overnight') || lower.includes('sunday') || lower.includes('haccp') || lower.includes('iso')) {
-    result.what_built_trust = 'Overnight Service & Digital Audit Compliance Reports';
+  if (lower.includes('sla') || lower.includes('guarantee') || lower.includes('warranty') || lower.includes('money-back') || lower.includes('risk-free')) {
+    result.what_built_trust = 'Contractual SLA & Performance Guarantee';
+  } else if (lower.includes('case study') || lower.includes('case studies') || lower.includes('credential') || lower.includes('certified') || lower.includes('iso') || lower.includes('track record') || lower.includes('portfolio')) {
+    result.what_built_trust = 'Verified Industry Case Studies & Professional Certifications';
+  } else if (lower.includes('roadmap') || lower.includes('transparent') || lower.includes('dedicated') || lower.includes('specialist') || lower.includes('audit report') || lower.includes('walkthrough')) {
+    result.what_built_trust = 'Transparent Execution Roadmap & Dedicated Account Specialist';
   }
 
   // 5. Extract Why Contacted
-  if (lower.includes('saw ad') || lower.includes('facebook ad') || lower.includes('meta ad') || lower.includes('instagram')) {
-    result.why_contacted = 'Saw Meta video ad demonstrating botanical treatment';
-  } else if (lower.includes('referral') || lower.includes('neighbor') || lower.includes('friend')) {
-    result.why_contacted = 'Referred by neighbor / word-of-mouth recommendation';
-  } else if (lower.includes('emergency') || lower.includes('bite') || lower.includes('found bedbug') || lower.includes('rat')) {
-    result.why_contacted = 'Emergency infestation outbreak requiring immediate same-day response';
+  if (lower.includes('saw ad') || lower.includes('facebook ad') || lower.includes('meta ad') || lower.includes('instagram') || lower.includes('google ad') || lower.includes('linkedin')) {
+    result.why_contacted = 'Inbound from targeted digital ad campaign';
+  } else if (lower.includes('referral') || lower.includes('colleague') || lower.includes('friend') || lower.includes('recommended') || lower.includes('word of mouth')) {
+    result.why_contacted = 'Referred by industry peer or existing client recommendation';
+  } else if (lower.includes('urgent') || lower.includes('emergency') || lower.includes('deadline') || lower.includes('bottleneck') || lower.includes('scaling') || lower.includes('immediate')) {
+    result.why_contacted = 'Urgent compliance deadline or operational growth bottleneck requiring immediate intervention';
   }
 
-  // 6. Detect Opportunities & Future Ratios
-  if (lower.includes('amc') || lower.includes('annual') || lower.includes('contract') || lower.includes('maintenance')) {
-    result.amc_opportunity = true;
+  // 6. Detect Retainer Opportunities & Advocacy Signals
+  if (
+    lower.includes('retainer') ||
+    lower.includes('annual') ||
+    lower.includes('recurring') ||
+    lower.includes('monthly') ||
+    lower.includes('contract') ||
+    lower.includes('amc') ||
+    lower.includes('subscription')
+  ) {
+    result.retainer_opportunity = true;
   }
-  if (lower.includes('review') || lower.includes('google review') || lower.includes('left 5 stars')) {
+  if (lower.includes('review') || lower.includes('google review') || lower.includes('left 5 stars') || lower.includes('testimonial')) {
     result.has_review = true;
   }
-  if (lower.includes('refer') || lower.includes('referred friend') || lower.includes('referral discount')) {
+  if (lower.includes('refer') || lower.includes('referred') || lower.includes('referral')) {
     result.has_referral = true;
   }
 
-  // 7. Detect Job Quality & CX Improvement Opportunities
+  // 7. Detect Service Delivery & CX Improvement Opportunities
   const opps: string[] = [];
-  if (lower.includes('late') || lower.includes('delayed') || lower.includes('punctual') || lower.includes('waited')) {
-    opps.push('Technician punctuality: provide real-time GPS arrival window notifications');
+  if (lower.includes('late') || lower.includes('delayed') || lower.includes('slow') || lower.includes('turnaround') || lower.includes('waited') || lower.includes('onboarding')) {
+    opps.push('Onboarding & turnaround speed: streamline client intake and set milestone alerts');
   }
-  if (lower.includes('smell') || lower.includes('odor') || lower.includes('ventilat')) {
-    opps.push('Odor control: equip technicians with clearer post-treatment ventilation checklists');
+  if (lower.includes('communicat') || lower.includes('update') || lower.includes('report') || lower.includes('clarity') || lower.includes('dashboard') || lower.includes('status')) {
+    opps.push('Communication & reporting clarity: provide automated weekly progress summaries');
   }
-  if (lower.includes('price') && lower.includes('discount')) {
-    opps.push('Pricing strategy: offer instant 10% AMC renewal discount at checkout');
-  }
-  if (lower.includes('clean') || lower.includes('mess') || lower.includes('residue')) {
-    opps.push('Job quality: enforce mandatory 5-minute post-job surface wipe-down protocol');
+  if (lower.includes('price') || lower.includes('discount') || lower.includes('package') || lower.includes('tier') || lower.includes('retainer')) {
+    opps.push('Recurring package pricing: introduce tiered annual retainer incentives at renewal');
   }
   if (opps.length > 0) {
     result.improvement_opportunities = opps;

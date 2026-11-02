@@ -43,7 +43,7 @@ const CATEGORIES: { value: LearningCategory; label: string }[] = [
   { value: 'sales', label: 'SALES & CLOSING STRATEGY' },
   { value: 'customer_psychology', label: 'BUYER PSYCHOLOGY & TRUST' },
   { value: 'operations', label: 'FIELD OPERATIONS & CX' },
-  { value: 'pricing', label: 'PRICING & AMC OFFERS' },
+  { value: 'pricing', label: 'PRICING & RETAINER OFFERS' },
   { value: 'competitor', label: 'COMPETITOR COUNTER-TACTIC' },
 ];
 
@@ -186,7 +186,7 @@ export function KnowledgeFormModal({
             <Input
               value={tagsInput}
               onChange={(e) => setTagsInput(e.target.value)}
-              placeholder="META, URGENCY, COCKROACH, AMC, INR"
+              placeholder="META, URGENCY, B2B, RETAINER, LTV"
               className="rounded-xl bg-background border-border font-sans font-bold text-xs uppercase"
             />
           </div>

@@ -106,15 +106,12 @@ INSERT INTO public.experiments (
 )
 VALUES
 (
-  'CONVERSION_OVERRIDE',
-  'A/B-0x88F',
+  'Landing Page Intake Structure',
+  'EXP-101',
   'a_b_test',
   'running',
   'high',
-  '$ IF user_intent == "high" THEN
-  inject(urgency_module)
-  WILL increase(ctr) BY
-  15%',
+  'Replacing the single-page intake form with a 2-step qualification modal will increase lead conversion rate by 15%.',
   'ctr',
   15.0,
   18.4,
@@ -123,25 +120,25 @@ VALUES
   48.2,
   88,
   ARRAY[
-    '> Variant B outperforming Control across all primary conversion vectors.',
-    '> Statistical significance threshold (95%) not yet met. Projected time to conclusion: 12H:45M',
-    '! Secondary metric (Bounce Rate) shows elevated degradation. Monitor closely.'
+    'Variant B outperforming Control across primary conversion metrics.',
+    'Statistical significance threshold (95%) not yet reached. Estimated remaining runtime: 13 hours.',
+    'Secondary metric (Bounce Rate) remains within acceptable variance.'
   ],
   'Control (Standard Form)',
   '{"ctr": 2.1, "cvr": 8.4, "conversions": 120}'::jsonb,
-  'Variant A (Urgency Badge)',
+  'Variant A (Social Proof Header)',
   '{"ctr": 2.4, "cvr": 9.6, "conversions": 142}'::jsonb,
-  'Variant B (2-Step Modal)',
+  'Variant B (2-Step Qualification Modal)',
   '{"ctr": 2.8, "cvr": 11.2, "conversions": 168}'::jsonb,
   NULL
 ),
 (
-  'SUBJECT_LINE_SYNTAX',
-  'MVT-0x92C',
+  'Outbound Executive Subject Line Test',
+  'EXP-102',
   'multivariate',
   'queued',
   'high',
-  '$ IF header == "Pest Alert" THEN open_rate WILL increase BY 25%',
+  'Framing the subject line around Q3 benchmark findings will increase executive open and response rates by 25%.',
   'cvr',
   25.0,
   0.0,
@@ -150,24 +147,24 @@ VALUES
   0.0,
   0,
   ARRAY[
-    '> Queued for allocation after current running protocol concludes.',
-    '> Target audience segment: Residential 30-day non-converters.'
+    'Queued for launch after the current landing page intake test concludes.',
+    'Target audience segment: B2B SMB decision-makers with 30-day inactivity.'
   ],
-  'Control',
+  'Control (Standard Introduction)',
   '{"ctr": 1.8, "cvr": 7.0, "conversions": 0}'::jsonb,
-  'Variant A',
+  'Variant A (Benchmark Report Hook)',
   '{"ctr": 0.0, "cvr": 0.0, "conversions": 0}'::jsonb,
-  'Variant B',
+  'Variant B (ROI Case Study Hook)',
   '{"ctr": 0.0, "cvr": 0.0, "conversions": 0}'::jsonb,
   NULL
 ),
 (
-  'Q3_TERMITE_RUSH',
-  'A/B-0x44A',
+  'B2B Advisory Free Audit Offer vs. Paid Discovery Call',
+  'EXP-103',
   'offer',
   'completed',
   'high',
-  '$ IF termite_inspection == "Free Same-Day" THEN inquiries WILL increase BY 40%',
+  'Offering a complimentary 30-minute diagnostic audit instead of a paid consultation will increase qualified inquiries by 40%.',
   'cvr',
   40.0,
   44.2,
@@ -176,16 +173,16 @@ VALUES
   168.0,
   96,
   ARRAY[
-    '> [SUCCESS] Same-Day guarantee increased inquiry conversion rate by 44.2%.',
-    '> Protocol completed with 96% statistical confidence.',
-    '> Recommended Action: Make "Free Same-Day Inspection" standard evergreen copy.'
+    'Complimentary diagnostic audit increased qualified inquiry conversion rate by 44.2%.',
+    'Test concluded at 96% statistical confidence.',
+    'Recommended Action: Adopt "Complimentary Diagnostic Audit" as the standard evergreen offer.'
   ],
-  'Control ($49 Inspection)',
+  'Control (Paid Discovery Call)',
   '{"ctr": 2.2, "cvr": 6.8, "conversions": 180}'::jsonb,
-  'Variant A ($0 Inspection)',
+  'Variant A (Discounted Consultation)',
   '{"ctr": 3.1, "cvr": 9.1, "conversions": 240}'::jsonb,
-  'Variant B (Free Same-Day)',
+  'Variant B (Complimentary Diagnostic Audit)',
   '{"ctr": 3.6, "cvr": 11.8, "conversions": 312}'::jsonb,
-  'Variant B (Free Same-Day)'
+  'Variant B (Complimentary Diagnostic Audit)'
 )
 ON CONFLICT DO NOTHING;

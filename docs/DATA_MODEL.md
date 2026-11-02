@@ -63,7 +63,7 @@ erDiagram
         text name
         text phone
         text location
-        text property_type
+        text client_segment
         uuid campaign_id FK
         uuid campaign_creative_id FK
         decimal revenue
@@ -133,7 +133,7 @@ The central entity. Every marketing action starts here.
 | Column | Type | Notes |
 |--------|------|-------|
 | `id` | `uuid` PK | Default `gen_random_uuid()` |
-| `name` | `text` NOT NULL | e.g. "Termite Fear Hook – Jaipur" |
+| `name` | `text` NOT NULL | e.g. "Q3 B2B Retainer Audit – Mumbai" |
 | `platform` | `enum` | `meta_ads`, `google_ads`, `whatsapp`, `organic_social`, `offline`, `other` |
 | `objective` | `text` | Free-text campaign goal |
 | `status` | `enum` | `draft`, `active`, `paused`, `completed`, `archived` |
@@ -141,12 +141,12 @@ The central entity. Every marketing action starts here.
 | `end_date` | `date` | |
 | `owner_id` | `uuid` FK → `profiles.id` | Who owns this campaign |
 | **Targeting & Offer** | | |
-| `target_audience` | `text` | e.g. "Homeowners 30-50, Jaipur" |
-| `service` | `text` | e.g. "Termite Treatment" |
-| `pest_type` | `text` | e.g. "Termites" |
+| `target_audience` | `text` | e.g. "SMB Founders & CFOs, 10–50 employees" |
+| `service` | `text` | e.g. "Financial Advisory & Accounting" |
+| `market_segment` | `text` | e.g. "B2B Mid-Market" |
 | `location` | `text` | City / area |
-| `offer` | `text` | e.g. "Free Inspection" |
-| `cta` | `text` | e.g. "WhatsApp Now" |
+| `offer` | `text` | e.g. "Complimentary Diagnostic Audit" |
+| `cta` | `text` | e.g. "Book Audit Call" |
 | `landing_destination` | `text` | URL or "WhatsApp" |
 | **Raw Metrics (manual input)** | | |
 | `spend` | `decimal(12,2)` | Total ₹ spent |
@@ -207,7 +207,7 @@ Every creative asset the company has ever produced.
 | `emotion` | `enum` | `fear`, `trust`, `urgency`, `curiosity`, `authority`, `social_proof`, `other` |
 | `psych_principle` | `text` | e.g. "Loss aversion", "Social proof" |
 | `target_audience` | `text` | |
-| `target_pest` | `text` | |
+| `target_segment` | `text` | |
 | `target_platform` | `enum` | Same as campaign platform enum |
 | `rating` | `integer` | 1-5 internal quality rating |
 | `why_worked` | `text` | |
@@ -327,7 +327,7 @@ Every customer the company acquires, attributed to the campaign/creative that br
 | `name` | `text` | |
 | `phone` | `text` | Not unique in MVP (real data is messy) |
 | `location` | `text` | |
-| `property_type` | `enum` | `residential`, `commercial`, `industrial`, `other` |
+| `client_segment` | `enum` | `b2c`, `b2b_smb`, `b2b_mid_market`, `b2b_enterprise`, `local_service`, `other` |
 | **Attribution** | | |
 | `lead_source` | `text` | "Meta Ads", "Google", "Referral", "Walk-in" |
 | `campaign_id` | `uuid` FK → `campaigns.id` | Nullable |
@@ -336,17 +336,17 @@ Every customer the company acquires, attributed to the campaign/creative that br
 | `revenue` | `decimal(12,2)` | Total revenue from this customer |
 | `profit` | `decimal(12,2)` | Total profit from this customer |
 | `ltv` | `decimal(12,2)` | Lifetime value (updated over time) |
-| **Psychology (the gold mine)** | | |
+| **Psychology** | | |
 | `why_contacted` | `text` | Their trigger |
 | `biggest_fear` | `text` | |
 | `biggest_objection` | `text` | |
 | `why_chose_us` | `text` | |
 | `what_built_trust` | `text` | |
 | `questions_asked` | `text` | |
-| **Future** | | |
+| **Future & Retention** | | |
 | `has_review` | `boolean` | Default false |
 | `has_referral` | `boolean` | Default false |
-| `amc_opportunity` | `boolean` | Annual Maintenance Contract potential |
+| `retainer_opportunity` | `boolean` | Recurring Retainer / Subscription contract potential |
 | `status` | `enum` | `lead`, `quoted`, `won`, `lost`, `churned` |
 | **Audit** | | |
 | `created_at` | `timestamptz` | |
@@ -377,7 +377,7 @@ The **most important table**. Every insight the company captures.
 | `last_confirmed_at` | `timestamptz` | Date of last confirming evidence |
 | `confidence_breakdown` | `jsonb` | Stores component scores for UI transparency |
 | **Other** | | |
-| `tags` | `jsonb` | Flexible tagging: `["fear-hooks", "termites", "jaipur"]` |
+| `tags` | `jsonb` | Flexible tagging: `["roi-hooks", "b2b-smb", "mumbai"]` |
 | `is_active` | `boolean` | Default true. Set false if later disproven |
 | `superseded_by` | `uuid` FK → `learnings.id` | If a newer learning replaces this one |
 | **Audit** | | |
@@ -403,7 +403,7 @@ Curated, permanent institutional knowledge. Learnings get promoted here.
 | `id` | `uuid` PK | |
 | `title` | `text` NOT NULL | |
 | `content` | `text` NOT NULL | Rich text / markdown |
-| `category` | `enum` | `marketing`, `sales`, `operations`, `treatment_sops`, `hiring`, `pricing`, `customer_psychology`, `competitor`, `commercial`, `residential` |
+| `category` | `enum` | `marketing`, `sales`, `operations`, `delivery_sops`, `hiring`, `pricing`, `customer_psychology`, `competitor`, `b2b`, `b2c` |
 | `tags` | `jsonb` | Flexible tags |
 | `source_learning_ids` | `uuid[]` | Array of learning IDs this was derived from |
 | **Audit** | | |
@@ -489,20 +489,20 @@ When you open Campaign #27:
 
 ### 11. `buyer_personas` (Active Creative Angle Collaborator & CX Metrics)
 
-Aggregates customer acquisition triggers, dominant fears, objections, and trust builders by property type, and actively collaborates with the Creatives suite by synthesizing recommended ad angles.
+Aggregates customer acquisition triggers, dominant fears, objections, and trust builders by client segment and service category, and actively collaborates with the Creatives suite by synthesizing recommended ad angles.
 
 | Column | Type | Notes |
 |--------|------|-------|
 | `id` | `uuid` PK | |
-| `name` | `text` NOT NULL | e.g. "The Frantic Residential Bedbug Buyer" |
-| `property_type` | `enum` | `residential`, `commercial`, `industrial`, `other` |
-| `pest_type` | `text` | e.g. "bed_bugs", "rodents" |
+| `name` | `text` NOT NULL | e.g. "High-Intent B2B Retainer Decision Maker" |
+| `client_segment` | `enum` | `b2c`, `b2b_smb`, `b2b_mid_market`, `b2b_enterprise`, `local_service`, `other` |
+| `service_category` | `text` | e.g. "Advisory & Accounting", "Local Clinic & Specialist Services" |
 | `dominant_fears` | `text[]` | Array of recurring buyer anxieties |
 | `dominant_objections` | `text[]` | Array of purchase friction points |
 | `trust_builders` | `text[]` | What converts this persona |
 | `recommended_creative_angles` | `jsonb` | Structured array of `{ hook, headline, emotion, psych_principle, rationale }` |
 | `avg_cx_rating` | `decimal(3,2)` | Average 1-5 CX rating across sample |
-| `top_improvement_opportunities` | `text[]` | Operational & job quality feedback items |
+| `top_improvement_opportunities` | `text[]` | Operational & delivery quality feedback items |
 | `avg_ltv` | `decimal(12,2)` | Average Lifetime Value in INR (₹) |
 | `sample_size` | `integer` | Number of customer records clustered |
 | `is_custom` | `boolean` | True if executives applied manual overrides (Option A + B) |

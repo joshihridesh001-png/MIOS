@@ -6,7 +6,8 @@ import {
   LearningSource,
   CreativeFormat,
   CreativeStatus,
-  CreativeAngle
+  CreativeAngle,
+  CustomerSegmentType
 } from './types/database';
 
 export const platformLabels: Record<string, string> = {
@@ -195,5 +196,16 @@ export const experimentImpactColors: Record<string, string> = {
   medium: 'text-amber-400 border-amber-500/40 bg-amber-950/30',
   high: 'text-emerald-400 border-emerald-500/40 bg-emerald-950/30',
 };
+
+// Customers & Buyer Personas (Vertical Slice 4)
+export const customerSegmentLabels: Record<CustomerSegmentType | string, string> = {
+  b2c: 'B2C / Consumer',
+  b2b_smb: 'B2B — SMB',
+  b2b_mid_market: 'B2B — Mid-Market',
+  b2b_enterprise: 'B2B — Enterprise',
+  local_service: 'Local Service',
+  other: 'Other Segment',
+};
+
 
 
