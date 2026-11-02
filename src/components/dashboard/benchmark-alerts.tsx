@@ -10,7 +10,7 @@ import { AnimatedList } from '@/components/ui/unlumen/animated-list';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import type { BenchmarkAlert } from '@/hooks/use-dashboard';
-import { Warning, Trophy, ArrowRight } from "@phosphor-icons/react";
+import { Warning, Trophy, HourglassHigh, ArrowRight } from '@phosphor-icons/react';
 
 interface BenchmarkAlertsProps {
   alerts: BenchmarkAlert[];
@@ -19,12 +19,12 @@ interface BenchmarkAlertsProps {
 export function BenchmarkAlerts({ alerts }: BenchmarkAlertsProps) {
   if (alerts.length === 0) {
     return (
-      <div className="p-4 bg-card border border-border shadow-sm border-none rounded-2xl flex items-center justify-between text-xs font-bold uppercase text-muted-foreground">
+      <div className="p-4 bg-card border border-border shadow-sm rounded-2xl flex items-center justify-between text-xs font-bold uppercase text-muted-foreground">
         <div className="flex items-center gap-2">
           <Trophy weight="duotone" className="w-4 h-4 text-primary" />
-          <span>ALL CAMPAIGN DATA COMPLIANT WITH EXECUTIVE BENCHMARKS </span>
+          <span>ALL CAMPAIGN DATA COMPLIANT WITH CALIBRATED UNIT ECONOMICS</span>
         </div>
-        <span className="text-primary">ZERO ALERTS </span>
+        <span className="text-primary">ZERO ALERTS</span>
       </div>
     );
   }
@@ -33,7 +33,7 @@ export function BenchmarkAlerts({ alerts }: BenchmarkAlertsProps) {
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-          Alerts
+          Unit Economics & Pipeline Lag Signals
         </span>
         <Badge
           variant="outline"
@@ -51,28 +51,48 @@ export function BenchmarkAlerts({ alerts }: BenchmarkAlertsProps) {
       >
         {alerts.map((alert) => {
           const isWarning = alert.type === 'warning';
+          const isPipelineLag = alert.type === 'pipeline_lag';
+
+          const cardStyle = isWarning
+            ? 'bg-rose-500/10 border-rose-500/40 hover:border-rose-500'
+            : isPipelineLag
+            ? 'bg-amber-500/10 border-amber-500/40 hover:border-amber-400'
+            : 'bg-primary/10 border-primary/40 hover:border-[#00dbe9]';
+
+          const titleStyle = isWarning
+            ? 'text-rose-400'
+            : isPipelineLag
+            ? 'text-amber-400'
+            : 'text-primary';
+
+          const badgeStyle = isWarning
+            ? 'bg-rose-500/20 border-rose-500/60 text-rose-300'
+            : isPipelineLag
+            ? 'bg-amber-500/20 border-amber-500/60 text-amber-300'
+            : 'bg-primary/20 border-primary/60 text-primary';
+
+          const buttonStyle = isWarning
+            ? 'border-rose-500/50 text-rose-300 hover:bg-rose-500 hover:text-black'
+            : isPipelineLag
+            ? 'border-amber-500/50 text-amber-300 hover:bg-amber-400 hover:text-black'
+            : 'border-primary/50 text-primary hover:bg-[#00dbe9] hover:text-black font-bold';
+
           return (
             <div
               key={alert.id}
-              className={`p-4 border-none bg-card border border-border shadow-sm rounded-2xl flex flex-col justify-between ${
-                isWarning
-                  ? 'bg-rose-500/10 border-rose-500/40 hover:border-rose-500'
-                  : 'bg-primary/10 border-primary/40 hover:border-[#00dbe9]'
-              }`}
+              className={`p-4 bg-card border shadow-sm rounded-2xl flex flex-col justify-between transition-colors ${cardStyle}`}
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     {isWarning ? (
                       <Warning weight="duotone" className="w-4 h-4 text-rose-400 shrink-0" />
+                    ) : isPipelineLag ? (
+                      <HourglassHigh weight="duotone" className="w-4 h-4 text-amber-400 shrink-0" />
                     ) : (
                       <Trophy weight="duotone" className="w-4 h-4 text-primary shrink-0" />
                     )}
-                    <span
-                      className={`text-xs font-bold uppercase tracking-wider ${
-                        isWarning ? 'text-rose-400' : 'text-primary'
-                      }`}
-                    >
+                    <span className={`text-xs font-bold uppercase tracking-wider ${titleStyle}`}>
                       {alert.title}
                     </span>
                   </div>
@@ -80,31 +100,30 @@ export function BenchmarkAlerts({ alerts }: BenchmarkAlertsProps) {
                   <p className="text-xs text-foreground font-sans leading-relaxed pt-1">
                     {alert.message}
                   </p>
+
+                  {alert.recommendedAction && (
+                    <p className="text-[11px] text-muted-foreground font-sans pt-1">
+                      <strong className="text-foreground">Next Step:</strong>{' '}
+                      {alert.recommendedAction}
+                    </p>
+                  )}
                 </div>
 
                 <Badge
                   variant="outline"
-                  className={`rounded-xl font-sans font-bold text-[11px] font-bold shrink-0 ${
-                    isWarning
-                      ? 'bg-rose-500/20 border-rose-500/60 text-rose-300'
-                      : 'bg-primary/20 border-primary/60 text-primary'
-                  }`}
+                  className={`rounded-xl font-sans font-bold text-[11px] shrink-0 tabular-nums ${badgeStyle}`}
                 >
                   {alert.metricValue}
                 </Badge>
               </div>
 
               {alert.campaignId && (
-                <div className="mt-4 pt-2 border-t border-border flex items-center justify-end">
+                <div className="mt-4 pt-2 border-t border-border/60 flex items-center justify-end">
                   <Link href={`/campaigns/${alert.campaignId}`}>
                     <Button
                       variant="outline"
                       size="sm"
-                      className={`h-7 px-3 rounded-xl font-sans font-bold text-[10px] tracking-wider uppercase transition-all ${
-                        isWarning
-                          ? 'border-rose-500/50 text-rose-300 hover:bg-rose-500 hover:text-black'
-                          : 'border-primary/50 text-primary hover:bg-[#00dbe9] hover:text-black font-bold'
-                      }`}
+                      className={`h-7 px-3 rounded-xl font-sans font-bold text-[10px] tracking-wider uppercase transition-all ${buttonStyle}`}
                     >
                       <span>Review campaign</span>
                       <ArrowRight weight="duotone" className="w-3 h-3 ml-1" />
