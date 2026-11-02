@@ -9,10 +9,10 @@ import {
   experimentTypeLabels
 } from "@/lib/constants"
 import { cn } from "@/lib/utils"
-import { Flask, Plus, ArrowRight, Pulse, CheckCircle, Clock, WarningCircle } from "@phosphor-icons/react"
+import { Flask, Plus, ArrowRight, WarningCircle } from "@phosphor-icons/react"
 
 export default function ExperimentsPage() {
-  const { experiments, loading, error } = useExperiments()
+  const { experiments, loading } = useExperiments()
   const [filter, setFilter] = useState<string>("all")
 
   const filtered = (experiments || []).filter((exp) => {
@@ -199,7 +199,7 @@ export default function ExperimentsPage() {
           </div>
 
           {/* Right Column (Takes up 1/3) */}
-          <div className="space-y-4">
+          <div className="lg:col-span-1 space-y-4">
             <div className="p-5 bg-card border border-border rounded-xl">
               <h3 className="text-sm font-semibold text-foreground mb-3">Experimental Velocity</h3>
               <div className="space-y-3">
@@ -234,6 +234,30 @@ export default function ExperimentsPage() {
                 <Plus weight="duotone" className="w-4 h-4" />
                 <span>Plan New Experiment</span>
               </Link>
+            </div>
+
+            {/* Systems Thinking Gate: Kill Criteria & Reversibility */}
+            <div className="p-5 bg-card border border-border rounded-xl space-y-3">
+              <div className="flex items-center gap-2 pb-2 border-b border-border/60">
+                <WarningCircle weight="duotone" className="w-4 h-4 text-primary shrink-0" />
+                <h3 className="text-xs font-bold uppercase tracking-wider text-foreground">
+                  Systems Thinking Gate: Kill Criteria &amp; Reversibility
+                </h3>
+              </div>
+              <div className="space-y-3 text-xs font-sans text-muted-foreground leading-relaxed">
+                <div>
+                  <strong className="text-foreground block">1. Predefined Kill Criterion:</strong>
+                  Define the exact threshold where the test is aborted before spending ₹1.
+                </div>
+                <div>
+                  <strong className="text-foreground block">2. Reversibility Check:</strong>
+                  Two-way doors (ad hooks, subject lines) execute fast; one-way doors (public pricing restructures, positioning shifts) require high-confidence validation.
+                </div>
+                <div>
+                  <strong className="text-foreground block">3. Attack the Assumption:</strong>
+                  Trace every failed variant back to the underlying buyer assumption in the Assumption Ledger.
+                </div>
+              </div>
             </div>
           </div>
         </div>

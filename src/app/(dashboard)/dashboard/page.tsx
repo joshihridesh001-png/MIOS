@@ -11,6 +11,7 @@ import { DashboardHeader } from '@/components/dashboard/dashboard-header';
 import { UnitEconomicsBar } from '@/components/dashboard/unit-economics-bar';
 import { DashboardKPIs } from '@/components/dashboard/dashboard-kpis';
 import { CapitalAllocatorPanel } from '@/components/dashboard/capital-allocator-panel';
+import { AssumptionLedgerPanel } from '@/components/dashboard/assumption-ledger-panel';
 import { BenchmarkAlerts } from '@/components/dashboard/benchmark-alerts';
 import { PipelineGrid } from '@/components/dashboard/pipeline-grid';
 import { MotionAccordion } from '@/components/ui/unlumen/motion-accordion';
@@ -155,6 +156,9 @@ export default function DashboardPage() {
 
       {/* 3B. Executive Capital Allocator & Explore / Exploit Engine */}
       <CapitalAllocatorPanel summary={portfolioAllocation} />
+
+      {/* 3C. Funnel Bottleneck Diagnostics & Assumption Ledger */}
+      <AssumptionLedgerPanel campaigns={allCampaigns} profile={profile} />
 
       {/* 4. Cross-Module Intelligence Cockpit (4 Pillars) */}
       <div className="space-y-3 pt-4">
