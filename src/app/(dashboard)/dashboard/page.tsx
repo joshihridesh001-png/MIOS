@@ -4,15 +4,18 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useDashboard, type DateFilter, type PlatformFilter } from '@/hooks/use-dashboard';
+import { useUnitEconomics } from '@/hooks/use-unit-economics';
 import { DashboardHeader } from '@/components/dashboard/dashboard-header';
+import { UnitEconomicsBar } from '@/components/dashboard/unit-economics-bar';
 import { DashboardKPIs } from '@/components/dashboard/dashboard-kpis';
 import { BenchmarkAlerts } from '@/components/dashboard/benchmark-alerts';
 import { PipelineGrid } from '@/components/dashboard/pipeline-grid';
 import { MotionAccordion } from '@/components/ui/unlumen/motion-accordion';
 import { Badge } from '@/components/ui/badge';
-import { Cpu, TerminalWindow } from "@phosphor-icons/react";
+import { metricFormatters } from '@/lib/constants';
+import { Cpu, TerminalWindow } from '@phosphor-icons/react';
 
 interface DiagnosticItem {
   id: string;
@@ -20,68 +23,11 @@ interface DiagnosticItem {
   content: React.ReactNode;
 }
 
-const EXECUTIVE_DIAGNOSTICS: DiagnosticItem[] = [
-  {
-    id: 'diag-1',
-    title: 'WHY IS OUR BLENDED CAC AT THIS LEVEL AND HOW DO WE LOWER IT?',
-    content: (
-      <div className="space-y-2 text-xs font-sans text-foreground leading-relaxed">
-        <p>
-          Blended Customer Acquisition Cost (CAC) is heavily influenced by first-touch conversion speed. According to institutional rule <strong className="text-primary">#MKT-001</strong>, calling residential WhatsApp leads within 5 minutes increases quote booking by 38%.
-        </p>
-        <p>
-          <strong className="text-foreground font-bold">RECOMMENDATION:</strong> Enforce 5-minute SLA on all Meta Ads WhatsApp click-to-chat campaigns to reduce blended CAC by an estimated 15-22%.
-        </p>
-      </div>
-    ),
-  },
-  {
-    id: 'diag-2',
-    title: 'WHICH BUYER PSYCHOLOGY TRIGGERS ARE YIELDING THE HIGHEST ROAS?',
-    content: (
-      <div className="space-y-2 text-xs font-sans text-foreground leading-relaxed">
-        <p>
-          Across enterprise residential and B2B commercial marketing DATA, <strong className="text-emerald-400">&quot;100% Performance Guarantee&quot;</strong> and <strong className="text-emerald-400">&quot;180-Day Retention Warranty&quot;</strong> convert at 2.3× higher ROAS than generic price-discount offers.
-        </p>
-        <p>
-          <strong className="text-foreground font-bold">RECOMMENDATION:</strong> Rotate out all price-discount creatives in favor of trust-verification and guarantee-led hooks in the Creative Library.
-        </p>
-      </div>
-    ),
-  },
-  {
-    id: 'diag-3',
-    title: 'HOW DO INSTITUTIONAL RULES PREVENT WASTED AD SPEND?',
-    content: (
-      <div className="space-y-2 text-xs font-sans text-foreground leading-relaxed">
-        <p>
-          Whenever an A/B test in <strong className="text-purple-400">LABS</strong> or an ad campaign fails, its root cause is permanently logged in the Knowledge Base (`/knowledge`). Rules with over 80% confidence automatically flag conflicting campaign proposals before spend is committed.
-        </p>
-        <p>
-          <strong className="text-foreground font-bold">RECOMMENDATION:</strong> Review high-confidence rules monthly during executive debriefs to ensure media buyers obey proven historical constraints.
-        </p>
-      </div>
-    ),
-  },
-  {
-    id: 'diag-4',
-    title: 'WHAT ARE THE HIGH-LEVERAGE SCALE VECTORS FOR THIS QUARTER?',
-    content: (
-      <div className="space-y-2 text-xs font-sans text-foreground leading-relaxed">
-        <p>
-          Enterprise annual marketing intelligence contracts generate an average ticket size of ₹45,000 with 78% annual renewal. Scaling Google Ads search intent campaigns for high-intent enterprise keywords offers the highest net profit potential.
-        </p>
-        <p>
-          <strong className="text-foreground font-bold">RECOMMENDATION:</strong> Reallocate 25% of top-of-funnel display budget into high-intent enterprise search campaigns.
-        </p>
-      </div>
-    ),
-  },
-];
-
 export default function DashboardPage() {
   const [dateFilter, setDateFilter] = useState<DateFilter>('ALL');
   const [platformFilter, setPlatformFilter] = useState<PlatformFilter>('ALL');
+
+  const { profile, derived, selectPreset, updateProfile } = useUnitEconomics();
 
   const {
     allCampaigns,
@@ -89,10 +35,89 @@ export default function DashboardPage() {
     customers,
     learnings,
     loading,
-    error,
     kpis,
     alerts,
-  } = useDashboard(dateFilter, platformFilter);
+  } = useDashboard(dateFilter, platformFilter, profile);
+
+  const EXECUTIVE_DIAGNOSTICS: DiagnosticItem[] = useMemo(
+    () => [
+      {
+        id: 'diag-1',
+        title: 'WHY IS OUR BLENDED CAC AT THIS LEVEL AND HOW DO WE STAY BELOW OUR CEILING?',
+        content: (
+          <div className="space-y-2 text-xs font-sans text-foreground leading-relaxed">
+            <p>
+              Under your calibrated <strong className="text-primary">{profile.business_name}</strong> unit economics, your maximum allowable Customer Acquisition Cost is{' '}
+              <strong className="text-primary tabular-nums">
+                {metricFormatters.formatCurrency(derived.maxAllowableCac)}
+              </strong>{' '}
+              and your maximum allowable Cost Per Qualified Lead (CPL) is{' '}
+              <strong className="text-primary tabular-nums">
+                {metricFormatters.formatCurrency(derived.maxAllowableCpl)}
+              </strong>. First-touch speed is the primary lever for protecting these ceilings: contacting inbound leads within 5 minutes increases discovery-call and quote conversion by 38%.
+            </p>
+            <p>
+              <strong className="text-foreground font-bold">RECOMMENDATION:</strong> Enforce a 5-minute response SLA across all inbound lead channels to keep CPL below{' '}
+              {metricFormatters.formatCurrency(derived.maxAllowableCpl)} and blended CAC within{' '}
+              {metricFormatters.formatCurrency(derived.maxAllowableCac)}.
+            </p>
+          </div>
+        ),
+      },
+      {
+        id: 'diag-2',
+        title: 'HOW DOES OUR SALES CYCLE LAG (Δt) PROTECT ACTIVE CAMPAIGNS FROM PREMATURE PAUSING?',
+        content: (
+          <div className="space-y-2 text-xs font-sans text-foreground leading-relaxed">
+            <p>
+              Your calibrated sales cycle window (<strong className="text-amber-400">Δt = {profile.avg_sales_cycle_days} days</strong>) accounts for the natural delay between ad spend and closed-won revenue. Campaigns younger than {profile.avg_sales_cycle_days} days are evaluated on upstream lead efficiency (CPL ≤{' '}
+              <strong className="text-emerald-400 tabular-nums">
+                {metricFormatters.formatCurrency(derived.maxAllowableCpl)}
+              </strong>) rather than immediate closed ROAS.
+            </p>
+            <p>
+              <strong className="text-foreground font-bold">RECOMMENDATION:</strong> Do not terminate campaigns inside the {profile.avg_sales_cycle_days}-day pipeline maturation window if qualified leads are converting below {metricFormatters.formatCurrency(derived.maxAllowableCpl)}. Focus on accelerating mid-funnel follow-ups.
+            </p>
+          </div>
+        ),
+      },
+      {
+        id: 'diag-3',
+        title: 'WHICH BUYER PSYCHOLOGY TRIGGERS YIELD THE HIGHEST RETURN ABOVE BREAK-EVEN ROAS?',
+        content: (
+          <div className="space-y-2 text-xs font-sans text-foreground leading-relaxed">
+            <p>
+              With a gross margin of <strong className="text-primary tabular-nums">{profile.gross_margin_pct}%</strong>, your break-even ROAS floor is{' '}
+              <strong className="text-emerald-400 tabular-nums">{derived.breakEvenRoas.toFixed(2)}×</strong> and your target scaling ROAS is{' '}
+              <strong className="text-emerald-400 tabular-nums">{derived.targetScalingRoas.toFixed(2)}×</strong>. Across B2B and high-trust service segments, <strong className="text-emerald-400">&quot;SLA &amp; Case-Study Guarantee&quot;</strong> and quantified diagnostic hooks consistently outperform generic price-discount offers.
+            </p>
+            <p>
+              <strong className="text-foreground font-bold">RECOMMENDATION:</strong> Rotate out generic discount creatives in favor of SLA-backed proof and diagnostic audit hooks in the Creative Library.
+            </p>
+          </div>
+        ),
+      },
+      {
+        id: 'diag-4',
+        title: 'HOW DO INSTITUTIONAL RULES COMPOUND MARGIN AND LTV?',
+        content: (
+          <div className="space-y-2 text-xs font-sans text-foreground leading-relaxed">
+            <p>
+              Whenever an A/B experiment in <strong className="text-purple-400">LABS</strong> or an acquisition campaign concludes, its verified learning is logged in the Knowledge Base (`/knowledge`). High-confidence rules prevent repeat spend on underperforming angles and systematically lift your{' '}
+              <strong className="text-primary tabular-nums">
+                {metricFormatters.formatCurrency(profile.avg_ltv)}
+              </strong>{' '}
+              average client LTV through recurring retainer expansion.
+            </p>
+            <p>
+              <strong className="text-foreground font-bold">RECOMMENDATION:</strong> Review high-confidence learnings before launching new campaigns to ensure media allocation aligns with verified buyer psychology.
+            </p>
+          </div>
+        ),
+      },
+    ],
+    [profile, derived]
+  );
 
   return (
     <div className="space-y-8 p-6 max-w-7xl mx-auto">
@@ -102,6 +127,14 @@ export default function DashboardPage() {
         onDateFilterChange={setDateFilter}
         platformFilter={platformFilter}
         onPlatformFilterChange={setPlatformFilter}
+      />
+
+      {/* 1B. Executive Unit Economics Calibration Bar */}
+      <UnitEconomicsBar
+        profile={profile}
+        derived={derived}
+        onSelectPreset={selectPreset}
+        onUpdateProfile={updateProfile}
       />
 
       {/* 2. Alerts */}

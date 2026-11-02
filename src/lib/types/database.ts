@@ -273,3 +273,22 @@ export interface BuyerPersonaRow {
 
 export type BuyerPersonaInsert = Omit<BuyerPersonaRow, 'id' | 'created_at' | 'updated_at' | 'created_by' | 'updated_by'>;
 export type BuyerPersonaUpdate = Partial<BuyerPersonaInsert>;
+
+// ==========================================================
+// 5. UNIT ECONOMICS & SALES-CYCLE CALIBRATION ONTOLOGY
+// ==========================================================
+
+export type IndustryPresetKey = 'b2b_advisory' | 'local_clinic' | 'home_field_services' | 'custom';
+
+export interface UnitEconomicsProfile {
+  id?: string;
+  industry_preset: IndustryPresetKey;
+  business_name: string;
+  avg_ltv: number;
+  gross_margin_pct: number;
+  target_ltv_cac_ratio: number;
+  avg_sales_cycle_days: number;
+  target_lead_to_close_rate: number;
+  min_spend_for_evaluation: number;
+}
+

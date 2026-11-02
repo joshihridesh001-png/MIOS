@@ -5,27 +5,30 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { createClient } from '@/lib/supabase/client';
+import { INDUSTRY_UNIT_ECONOMICS_PRESETS } from '@/lib/constants';
+import {
+  evaluateCampaignUnitEconomics,
+  type CampaignEconomicAlert,
+} from '@/lib/utils/unit-economics';
 import type {
   CampaignWithMetrics,
   ExperimentRow,
   CustomerRow,
   LearningRow,
   CreativeRow,
+  UnitEconomicsProfile,
 } from '@/lib/types/database';
 
 export type DateFilter = 'ALL' | '30D' | '7D' | 'MTD';
 export type PlatformFilter = 'ALL' | 'meta_ads' | 'google_ads' | 'whatsapp' | 'offline' | 'other';
 
-export interface BenchmarkAlert {
-  id: string;
-  type: 'warning' | 'celebration';
-  title: string;
-  message: string;
-  campaignId?: string;
-  metricValue: string;
-}
+export type BenchmarkAlert = CampaignEconomicAlert;
 
-export function useDashboard(dateFilter: DateFilter = 'ALL', platformFilter: PlatformFilter = 'ALL') {
+export function useDashboard(
+  dateFilter: DateFilter = 'ALL',
+  platformFilter: PlatformFilter = 'ALL',
+  unitEconomicsProfile: UnitEconomicsProfile = INDUSTRY_UNIT_ECONOMICS_PRESETS.b2b_advisory
+) {
   const [campaigns, setCampaigns] = useState<CampaignWithMetrics[]>([]);
   const [experiments, setExperiments] = useState<ExperimentRow[]>([]);
   const [customers, setCustomers] = useState<CustomerRow[]>([]);
@@ -136,60 +139,12 @@ export function useDashboard(dateFilter: DateFilter = 'ALL', platformFilter: Pla
     };
   }, [filteredCampaigns, experiments, customers, learnings]);
 
-  // Benchmark Alerts & Telemetry Warnings
+  // Dynamic Unit Economics & Sales Cycle Lag (Δt) Telemetry Alerts
   const alerts = useMemo(() => {
-    const list: BenchmarkAlert[] = [];
-
-    filteredCampaigns.forEach((camp) => {
-      const roas = camp.roas || 0;
-      const spend = camp.spend || 0;
-      const cac = camp.cac || 0;
-
-      // Warnings
-      if (spend >= 2000 && roas < 1.5) {
-        list.push({
-          id: `warn-roas-${camp.id}`,
-          type: 'warning',
-          title: `ROAS BENCHMARK BREACH: ${camp.name}`,
-          message: `Campaign ROAS is below minimum 1.5× target. Consider pausing or testing new hook angle.`,
-          campaignId: camp.id,
-          metricValue: `${roas.toFixed(2)}× ROAS`,
-        });
-      } else if (spend >= 5000 && (camp.net_profit || 0) < 0) {
-        list.push({
-          id: `warn-profit-${camp.id}`,
-          type: 'warning',
-          title: `NEGATIVE NET PROFIT: ${camp.name}`,
-          message: `Campaign is currently operating at a net deficit after spend and COGS.`,
-          campaignId: camp.id,
-          metricValue: `₹${(camp.net_profit || 0).toLocaleString('en-IN')}`,
-        });
-      } else if (cac > 2000 && camp.customers_won > 0) {
-        list.push({
-          id: `warn-cac-${camp.id}`,
-          type: 'warning',
-          title: `ELEVATED CAC ALERT: ${camp.name}`,
-          message: `Customer Acquisition Cost exceeds ₹2,000 threshold. Check lead quality or sales conversion.`,
-          campaignId: camp.id,
-          metricValue: `₹${Math.round(cac).toLocaleString('en-IN')} CAC`,
-        });
-      }
-
-      // Celebrations
-      if (roas >= 3.0 && spend >= 1000) {
-        list.push({
-          id: `celeb-roas-${camp.id}`,
-          type: 'celebration',
-          title: `HIGH ROAS WINNER: ${camp.name}`,
-          message: `Campaign is scaling at over 3.0× ROAS. Recommend scaling budget by 20-30%.`,
-          campaignId: camp.id,
-          metricValue: `${roas.toFixed(2)}× ROAS`,
-        });
-      }
-    });
-
-    return list;
-  }, [filteredCampaigns]);
+    return filteredCampaigns.flatMap((camp) =>
+      evaluateCampaignUnitEconomics(camp, unitEconomicsProfile)
+    );
+  }, [filteredCampaigns, unitEconomicsProfile]);
 
   return {
     campaigns: filteredCampaigns,

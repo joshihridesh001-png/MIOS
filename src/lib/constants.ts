@@ -7,7 +7,9 @@ import {
   CreativeFormat,
   CreativeStatus,
   CreativeAngle,
-  CustomerSegmentType
+  CustomerSegmentType,
+  IndustryPresetKey,
+  UnitEconomicsProfile
 } from './types/database';
 
 export const platformLabels: Record<string, string> = {
@@ -206,6 +208,58 @@ export const customerSegmentLabels: Record<CustomerSegmentType | string, string>
   local_service: 'Local Service',
   other: 'Other Segment',
 };
+
+// Unit Economics & Sales-Cycle Lag Calibration Presets
+export const industryPresetLabels: Record<IndustryPresetKey, string> = {
+  b2b_advisory: 'B2B Accounting & Advisory',
+  local_clinic: 'Brick & Mortar Clinic / Studio',
+  home_field_services: 'Home & Field Services',
+  custom: 'Custom Service Business',
+};
+
+export const INDUSTRY_UNIT_ECONOMICS_PRESETS: Record<IndustryPresetKey, UnitEconomicsProfile> = {
+  b2b_advisory: {
+    industry_preset: 'b2b_advisory',
+    business_name: 'B2B Accounting & Advisory',
+    avg_ltv: 180000,
+    gross_margin_pct: 75,
+    target_ltv_cac_ratio: 3.0,
+    avg_sales_cycle_days: 30,
+    target_lead_to_close_rate: 15,
+    min_spend_for_evaluation: 15000,
+  },
+  local_clinic: {
+    industry_preset: 'local_clinic',
+    business_name: 'Brick & Mortar Clinic / Studio',
+    avg_ltv: 18000,
+    gross_margin_pct: 65,
+    target_ltv_cac_ratio: 3.0,
+    avg_sales_cycle_days: 5,
+    target_lead_to_close_rate: 25,
+    min_spend_for_evaluation: 3000,
+  },
+  home_field_services: {
+    industry_preset: 'home_field_services',
+    business_name: 'Home & Field Services',
+    avg_ltv: 12000,
+    gross_margin_pct: 60,
+    target_ltv_cac_ratio: 3.0,
+    avg_sales_cycle_days: 3,
+    target_lead_to_close_rate: 30,
+    min_spend_for_evaluation: 2000,
+  },
+  custom: {
+    industry_preset: 'custom',
+    business_name: 'Custom Service Business',
+    avg_ltv: 45000,
+    gross_margin_pct: 70,
+    target_ltv_cac_ratio: 3.0,
+    avg_sales_cycle_days: 14,
+    target_lead_to_close_rate: 20,
+    min_spend_for_evaluation: 5000,
+  },
+};
+
 
 
 
